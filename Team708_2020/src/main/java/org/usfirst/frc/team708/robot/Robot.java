@@ -1,5 +1,3 @@
-//test jnp 1/12/2019 4:38
-
 package org.usfirst.frc.team708.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
