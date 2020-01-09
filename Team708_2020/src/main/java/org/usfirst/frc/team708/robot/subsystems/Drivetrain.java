@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 
-import com.analog.adis16448.frc.ADIS16448_IMU;
+// import com.analog.adis16448.frc.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,7 +38,7 @@ public class Drivetrain extends PIDSubsystem {
 	private DifferentialDrive drivetrain;						// FRC provided drivetrain class
 	private double revPerInch;
 	private boolean gearHigh;
-	private ADIS16448_IMU gyro;
+	// private ADIS16448_IMU gyro;
 	
 	private Solenoid	gearShifter;
 	
@@ -69,8 +69,8 @@ public class Drivetrain extends PIDSubsystem {
 		
 		drivetrain = new DifferentialDrive(leftMotors, rightMotors);	// Initializes drivetrain class
 		
-		gyro = new ADIS16448_IMU();
-		gyro.reset();
+		// gyro = new ADIS16448_IMU();
+		// gyro.reset();
 		
 		encoderLeft = new CANEncoder(leftMaster);
 		encoderRight = new CANEncoder(rightMaster);
@@ -170,7 +170,8 @@ public class Drivetrain extends PIDSubsystem {
 	}
 
 	public double getAngle() {
-			return  Math708.round(gyro.getAngleZ(),0);
+			// return  Math708.round(gyro.getAngleZ(),0);
+			return 0;
 	}
 	
 	// public boolean isTiltingLeft() {
@@ -195,39 +196,39 @@ public class Drivetrain extends PIDSubsystem {
 	// 	}	
 	// }
 
-	public boolean isTiltingForward() {
-		if (gyro.getPitch() <= -Constants.PITCH_MAX) {
-			tilting = true;
-			return tilting;
-		}
-		else {
-			tilting = false;
-			return tilting;
-		}
-	}
+	// public boolean isTiltingForward() {
+	// 	if (gyro.getPitch() <= -Constants.PITCH_MAX) {
+	// 		tilting = true;
+	// 		return tilting;
+	// 	}
+	// 	else {
+	// 		tilting = false;
+	// 		return tilting;
+	// 	}
+	// }
 
-  public boolean isTiltingBack() {
-		if (gyro.getPitch() >= Constants.PITCH_MAX) {
-			tilting = true;
-			return tilting;
-		}
-		else {
-			tilting = false;
-			return tilting;
-		}
-	}
+//   public boolean isTiltingBack() {
+// 		if (gyro.getPitch() >= Constants.PITCH_MAX) {
+// 			tilting = true;
+// 			return tilting;
+// 		}
+// 		else {
+// 			tilting = false;
+// 			return tilting;
+// 		}
+// 	}
 
 	public void resetGyro() {
-		gyro.reset();
+		// gyro.reset();
   }
     
-	public double rotateByGyro(double targetAngle, double tolerance) {
-		double difference = getAngle() - targetAngle;
-		if (Math708.isWithinThreshold(gyro.getAngle(), targetAngle, tolerance)) {
-			difference = 0.0;
-		}		
-		return difference / targetAngle;
-	}
+	// public double rotateByGyro(double targetAngle, double tolerance) {
+	// 	double difference = getAngle() - targetAngle;
+	// 	if (Math708.isWithinThreshold(gyro.getAngle(), targetAngle, tolerance)) {
+	// 		difference = 0.0;
+	// 	}		
+	// 	return difference / targetAngle;
+	// }
 	
 	public double getIRDistance() {
 		return drivetrainIRSensor.getAverageDistance();
@@ -368,8 +369,8 @@ public class Drivetrain extends PIDSubsystem {
 			SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
 				
 			SmartDashboard.putNumber("Gyro turn angle", getAngle());
-			SmartDashboard.putNumber("Roll", Math708.round(gyro.getRoll(),0));
-			SmartDashboard.putNumber("Pitch", Math708.round(gyro.getPitch(),0));
+			// SmartDashboard.putNumber("Roll", Math708.round(gyro.getRoll(),0));
+			// SmartDashboard.putNumber("Pitch", Math708.round(gyro.getPitch(),0));
 			SmartDashboard.putNumber("AllianceColor", Robot.allianceColor);
 	}
 }

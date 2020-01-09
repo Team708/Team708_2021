@@ -19,26 +19,26 @@ public class ClimbStage1 extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (!((Robot.climber.frontExtend()) && (Robot.climber.rearExtend()))) {
-            if (Robot.drivetrain.isTiltingBack()) {
-                Robot.climber.moveFrontMotor(Constants.STOP_CLIMBER);
-                Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_REAR_EXTEND);
-            }
-            else if (Robot.drivetrain.isTiltingForward()) {
-                Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_FRONT_EXTEND);
-                Robot.climber.moveRearMotor(Constants.STOP_CLIMBER);
-            }
-            else {
-                Robot.climber.resetClimberRoller();
-                Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_FRONT_EXTEND);
-                Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_REAR_EXTEND);
-            } 
-        }
-        else {
-            Robot.climber.moveFrontMotor(Constants.STOP_CLIMBER);
-            Robot.climber.moveRearMotor(Constants.STOP_CLIMBER);
-            Robot.climber.stage1 = false;
-        }
+        // if (!((Robot.climber.frontExtend()) && (Robot.climber.rearExtend()))) {
+        //     // if (Robot.drivetrain.isTiltingBack()) {
+        //     //     Robot.climber.moveFrontMotor(Constants.STOP_CLIMBER);
+        //     //     Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_REAR_EXTEND);
+        //     // }
+        //     // else if (Robot.drivetrain.isTiltingForward()) {
+        //     //     Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_FRONT_EXTEND);
+        //     //     Robot.climber.moveRearMotor(Constants.STOP_CLIMBER);
+        //     // }
+        //     // else {
+        //         Robot.climber.resetClimberRoller();
+        //         Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_FRONT_EXTEND);
+        //         Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_REAR_EXTEND);
+        //     } 
+        // }
+        // else {
+        //     Robot.climber.moveFrontMotor(Constants.STOP_CLIMBER);
+        //     Robot.climber.moveRearMotor(Constants.STOP_CLIMBER);
+        //     Robot.climber.stage1 = false;
+        // }
     }
 
     // Make this return true when this Command no longer needs to run execute()
