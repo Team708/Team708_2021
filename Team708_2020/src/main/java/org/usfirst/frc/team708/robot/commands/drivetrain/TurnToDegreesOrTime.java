@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TurnToDegrees extends Command {
+public class TurnToDegreesOrTime extends Command {
 	
 	private double rotationSpeed;
 	private double goalDegrees;
@@ -17,7 +17,7 @@ public class TurnToDegrees extends Command {
 	 * @param rotationSpeed
 	 * @param goalDegrees
 	 */
-    public TurnToDegrees(double rotationSpeed, double goalDegrees) {
+    public TurnToDegreesOrTime(double rotationSpeed, double goalDegrees) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
         

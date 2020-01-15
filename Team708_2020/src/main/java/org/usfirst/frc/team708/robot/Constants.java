@@ -1,165 +1,127 @@
 package org.usfirst.frc.team708.robot;
 
-//import edu.wpi.first.wpilibj.DoubleSolenoid;
-//import edu.wpi.first.wpilibj.Relay;
-
 /**
- * Class containing all the code-related constants, so wiring and
- * gamepad controls are not included
- * @author omn0mn0m
+ * Class containing all the code-related constants
+ * Wiring controls are found in RobotMap and 
+ * gamepad controls are found in OI
  */
+
 public final class Constants {
 
-	/*
-	 * General
-	 */
+/*
+ * Drivetrain
+ */
+	public static final double	kDT_DRIVE_MOTOR_MAX_SPEED 					= 1.0; 
+	public static final double	kDT_ROTATE_MOTOR_MAX_SPEED 					= 1.0;
 
-	/*
-	 * Drivetrain
-	 */
-	public static final double	DRIVE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
-	public static final double	ROTATE_MOTOR_MAX_SPEED 					= 1.0;  // .80
-	public static final double	TANK_STICK_TOLERANCE 					= .20;
-	public static final int  	DRIVETRAIN_WHEEL_DIAMETER 				= 4; //4inch wheel * (LOW 10.44,  HIGH 4.87)
-	public static final double  DRIVETRAIN_GEAR_RATIO_LOW				= 10.44;
-	public static final double  DRIVETRAIN_GEAR_RATIO_HIGH				= 4.87;
-	public static final double  DRIVETRAIN_ENCODER_PULSES_PER_REV	 	= 42.0;
-	public static final boolean DRIVE_USE_SQUARED_INPUT 				= false;
-	public static final boolean DRIVETRAIN_USE_LEFT_ENCODER				= true; // variable to determine which side encoder is on
-	public static final double	DRIVE_MOTOR_OFF		 					= 0.0;
-	public static final double	GRAYHILL_ENCODER_PULSES_PER_REVOLUTION 	= 256.0;
-	public static final double	ENCODER_BOTTOM_POSITION 				= 0.0;
-	public static final int		DT_HIGH_GEAR							= 1;
-	public static final int		DT_LOW_GEAR								= 0;
-	public static final double	PITCH_MAX								= 3.0;
-	public static final double	ROLL_MAX								= 6.0;
+	public static final double	kDT_TANK_STICK_TOLERANCE 					= .20;
+	public static final int  	kDT_DRIVETRAIN_WHEEL_DIAMETER 				=   4; 
 
-	// PID Tuning parameters
-	public static final double Kp = 0.0;		// Proportional gain
-	public static final double Ki = 0.0;		// Integral gain
-	public static final double Kd = 0.0;		// Derivative gain
-
-	public static final double KpForward = 0.1;
-	public static final double KiForward = 0.02;
-	public static final double KdForward = 0.005;
-
-	public static final double KpBackward = 0.1;
-	public static final double KiBackward = 0.02;
-	public static final double KdBackward = 0.005;
+	//Swerve Calculations Constants
+	public static final double kDT_WHEELBASE_LENGTH = 24 / 12.0; //feet
+    public static final double kDT_WHEELBASE_WIDTH  = 24 / 12.0; //feet
+    public static final double kDT_SWERVE_DIAGONAL = Math.hypot(WHEELBASE_LENGTH, WHEELBASE_WIDTH);
 	
-	public static final double pid_tolerance = 1;
+	//Physical Robot Dimensions
+	public static final double ROBOT_WIDTH = 17.50 / 12.0;
+	public static final double ROBOT_LENGTH = 17.5 / 12.0;
+	public static final double ROBOT_HALF_WIDTH = ROBOT_WIDTH / 2.0;
+	public static final double ROBOT_HALF_LENGTH = ROBOT_LENGTH / 2.0;
+	public static final double ROBOT_INTAKE_EXTRUSION = 11.0/12.0;
+
+    //Swerve Speed Constants
+    public static final double SWERVE_ROTATION_MAX_SPEED = 1250.0;
+    public static final double SWERVE_DRIVE_MAX_SPEED    = 5432.0;
 	
-	/*
-	 * Elevator
-	 */
-	public static final double 	ELEVATOR_MOTOR_UP		 	=  .8;
-	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -.3;
-	public static final double 	ELEVATOR_STOP 				= 0.0;
-	public static final double	ELEV_DEADZONE 				=  .5; 
-		//Measured off encoder revs
-	public static final double	ELEV_MAX					= 61;
-	// public static final double	ELEV_LVL3				= 58.0; 
-	// public static final double	ELEV_LVL2				= 34.0; 
-	// public static final double	ELEV_LVL1				= 8.0;
-	public static final double	ELEV_CARGO_BALL				= 20.0; 
-	public static final double	ELEV_HATCH_LVL3				= 59.0; 
-	public static final double	ELEV_HATCH_LVL2				= 33.0; 
-	public static final double	ELEV_HATCH_LVL1				= 8.0; 
-	public static final double	ELEV_BALL_LVL1				= 9.0; 
-	public static final double	ELEV_BALL_LVL2				= 35.0; 
-	public static final double	ELEV_BALL_LVL3				= 59.0; 
-	public static final double	ELEV_LVL0					= 7.0; 
-	// public static final double	ELEV_FEEDER					= 8.0; 
-	public static final double	ELEV_GROUND					= 0.0; 
-	public static final int ELEV_ENC_STARTING_POSITION 		= 0;
-	public static final int ELEV_ENC_MIN				 	= 0;
-	public static final int	ELEV_TOLERANCE					= 1;
-	public static final int	ELEV_HOLD_TIMEOUT				= 3;
-
-	public static final double ELEV_P						= 4.0;  //.8
-	public static final double ELEV_I						= 0;    // .0001
-	public static final double ELEV_D						= 0;    // 1.0
-	public static final double ELEV_Iz						= 0;
-	public static final double ELEV_FF						= 0;
-
-	/*
-	 * Intake
-	 */
-	public static final double	HATCH_IN			= 1.0;
-	public static final double	HATCH_OUT			= -1.0;
-	public static final double 	HATCH_STOP 			= 0.0;
-
-	public static final double BALL_IN 				= -.8;
-	public static final double BALL_OUT 			= 0.6;
-	public static final double BALL_STOP 			= 0.0;
-
-	public static final int	INTAKE_HATCH_IN		=  1;
-	public static final int	INTAKE_HATCH_OUT	=  0;
+    //Swerve Module Wheel Offsets
+	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 1478+2048; // mod 0   1478 
+	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1451+2048; // mod 1   1451
+	public static final int REAR_LEFT_ENCODER_STARTING_POS   = 2600-2048; // mod 2  2600
+	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 550+2048;  // mod 3  500
 	
-	public static final int	INTAKE_BALL_IN		=  1;  //0
-	public static final int	INTAKE_BALL_OUT		=  0;  //1
-
-	/*
-	 * Cimber
-	 */
-	public static final int		REAR_CLIMBER_ROLLER_FIRST_DISTANCE	=  13;  //inches encoder value
-	public static final int		REAR_CLIMBER_ROLLER_SECOND_DISTANCE	=  14; //inches encoder value
-//  public static final int		REAR_CLIMBER_ROLLER_DISTANCE_INCHES	=  14; //inches encoder value
-	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  7; //inches encoder value
-	public static final double 	CLIMBER_ROLLER_FORWARD				=  0.4;		
-	public static final double 	CLIMBER_ROLLER_BACKWARD				=  -0.2;		
-
-	public static final int		MOVE_CLIMBER_FORWARD				=	18;
-	public static final double	MOVE_CLIMBER_TOLERANCE				=  	.5;
-	public static final double	MOVE_CLIMBER_FRONT_EXTEND			=  	-1.0;
-	public static final double	MOVE_CLIMBER_FRONT_RETRACT			=  	1.0;
-	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  	-0.69;
-	public static final double	MOVE_CLIMBER_REAR_RETRACT			=	1.0;
-	public static final double 	HAB_LVL3_ENCODER_DISTANCE		=	42500;
-	public static final double	HAB_LVL2_ENCODER_DISTANCE		=	15000;
-	public static final double	STOP_CLIMBER						= 	0.0;
-
-	public static final double ROLLER_GEAR_RATIO					= 16.0;	//16:1
-	public static final double ROLLER_DIAMETER						= 2.5;	//Diameter in inches
-	public static final int ROLLER_ENCODER_COUNTS_PER_REV			= 12;	//12 ticks, lol
-
-	/*
-	 * Vision
-	 */
-	public static final int VISION_LED_ON				= 0;
-	public static final int VISION_LED_OFF				= 1;
-	public static final int VISION_LED_BLINK			= 2;
-	public static final int VISION_PIPELINE_0			= 0;
-	public static final int VISION_PIPELINE_1			= 1;
-	public static final int VISION_TARGET_NOT_FOUND		= 0;
-	public static final int VISION_TARGET_FOUND			= 1;
-
-	public static final double TARGET_Y 				=   0.0;		
-	public static final double Y_THRESHOLD				=   1.0;	//Target angle in degrees
-	public static final double X_THRESHOLD 				=    .6;    //Target angle in degrees
-
-	public static final double AREA_THRESHOLD				= 	2.0;
-	public static final double ROCKET_HATCH_TARGET_AREA		=	10.0;
-	public static final double ROCKET_CARGO_TARGET_AREA		=	10.0;
-
-
-	public static final double VISION_MOVE			= .4;
-	public static final double VISION_ROTATE		= .2;
-
-	public static final int ALLIANCE_RED 	 		= 1;
-	public static final int ALLIANCE_BLUE 	 		= -1;
-
-	/*
-	 * Driver Assist
-	 */
-	public static final double ASSIST_DISTANCE		= 16.0;
-	public static final double ASSIST_MOVE_SPEED	= .5;
-	public static final double ASSIST_TIME			= 1.0;
+	//Swerve Module Positions
+	public static final Translation2d kVehicleToModuleOne = new Translation2d(WHEELBASE_LENGTH/2, WHEELBASE_WIDTH/2);
+	public static final Translation2d kVehicleToModuleTwo = new Translation2d(WHEELBASE_LENGTH/2, -WHEELBASE_WIDTH/2);
+	public static final Translation2d kVehicleToModuleThree = new Translation2d(-WHEELBASE_LENGTH/2, -WHEELBASE_WIDTH/2);
+	public static final Translation2d kVehicleToModuleFour = new Translation2d(-WHEELBASE_LENGTH/2, WHEELBASE_WIDTH/2);
 	
-	/*
-	 * Smart Dashboard
+	//Scrub Factors
+	public static final double[] kWheelScrubFactors = new double[]{1.0, 1.0, 1.0, /*5.0/5.15*/1.0};	
+
+	//Swerve Odometry Constants
+	public static final double SWERVE_WHEEL_DIAMETER = 3.93; //inches
+	public static final double ROTATION_ENCODER_RESOLUTION = 4096.0;
+	public static final double DRIVE_ENCODER_RESOLUTION    = 42.0;
+
+	/**
+	 * The number of rotations the swerve drive encoder undergoes for every rotation of the wheel.
 	 */
+	public static final double SWERVE_ENCODER_TO_WHEEL_RATIO = 10.0/9.0;
+	public static final double SWERVE_ENC_UNITS_PER_WHEEL_REV = DRIVE_ENCODER_RESOLUTION * SWERVE_ENCODER_TO_WHEEL_RATIO;
+	public static final double SWERVE_ENC_UNITS_PER_INCH = SWERVE_ENC_UNITS_PER_WHEEL_REV / (Math.PI * SWERVE_WHEEL_DIAMETER);
+
+/*
+ * Hanger
+ */
+	public static final double 	kHANGER_MAX_SPEED_UP		=   1.0;
+	public static final double 	kHANGER_MAX_SPPEED_DOWN		=  -1.0;
+	public static final double	kHANGER_JOYSTICK_DEAD_ZONE	=  .5;   //min power needed to move motor
+	public static final double 	kHANGER_ADJUST_ANGLE_SPEED	=   .4;
+
+/*
+ * shooter
+ */
+	
+	public static final double	kSHOOTER_MAXSPEED			= 1.0;
+	public static final double	kSHOOTER_BACKWARDSPEED		= -1.0;
+
+	public static final double  kHOODANGLE_CLOSESHOT		= 10000;
+	public static final double  kHOODANGLE_FARSHOT		    = 500;
+
+	public static final double	kSHOOTER_WHEELSPEED_LONG	= 4000.0;  //RPM or encode counts?
+	public static final double	kSHOOTER_WHEELSPEED_SHORT	= 2000.0;  //RPM or encode counts?
+
+/*
+ * Intake
+ */
+
+	public static final double BALL_IN 				= 1.0;
+
+	public static final int	INTAKE_HATCH_OPEN		=  1;
+	public static final int	INTAKE_HATCH_CLOSE		=  0;
+	
+/*
+ * Color Wheel
+ * /
+ 
+
+/*
+ * Vision
+ */
+
+	public static final int kVISION_LED_ON				= 0;
+	public static final int kVISION_LED_OFF				= 1;
+	public static final int kVISION_LED_BLINK			= 2;
+	public static final int kVISION_PIPELINE_0			= 0;
+
+	public static final int kVISION_TARGET_NOT_FOUND	= 0;
+	public static final int kVISION_TARGET_FOUND		= 1;
+
+	public static final double kVISION_TARGET_Y 		=  0.0;		
+	public static final double kVISION_Y_THRESHOLD		=  1.0;	  //Target angle in degrees
+	public static final double kVISION_X_THRESHOLD 		=   .6;   //Target angle in degrees
+
+	public static final double kVISION_AREA_THRESHOLD		= 	2.0;
+	public static final double kVISION_HIGHGOAL_TARGETAREA	=	10.0;
+
+
+/*
+ * Smart Dashboard  & FMS
+ */
+
+	public static final int kALLIANCE_RED 	 		=  1;
+	public static final int kALLIANCE_BLUE 	 		= -1;
+
 	public static final double SEND_STATS_INTERVAL	= .2;	// Interval for reporting in seconds
-	public static final boolean DEBUG 				= true;
-	   
+	public static final boolean DEBUG 				= true;	   
 }
