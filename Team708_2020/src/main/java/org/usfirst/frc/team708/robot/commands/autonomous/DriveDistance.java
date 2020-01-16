@@ -1,9 +1,7 @@
 package org.usfirst.frc.team708.robot.commands.autonomous;
 
 import org.usfirst.frc.team708.robot.Robot;
-import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
-import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
-import org.usfirst.frc.team708.robot.commands.drivetrain.GearLow;
+
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
 import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
 
@@ -21,15 +19,11 @@ public class DriveDistance extends CommandGroup {
 //    	Robot.drivetrain.resetGyro();
     }
 	
-    pu() {
+    protected void execute() {
 		// addSequential(new Sen - Start"));
-    	addSequential(new GearLow());
 
    	    addSequential(new WaitCommand(2.0));
-        //    addSequential(new DriveCurvatureToEncoderOrTime(.4, -0.1, false, 20, 1.0));
-        addSequential(new DriveStraightToEncoderDistanceOrTime(60, .6, 2.0));
-        // addSequential(new DriveStraightToEncoderDistanceOrTime(-120, -.8, 10.0));
-        // addSequential(new Sen - End"));
+        // addSequential(new DriveDirectionDistanceOrTime(double direction, double distance, double speed, double maxTime);
     }
     
     // Make this return true when this Command no longer needs to run execute()

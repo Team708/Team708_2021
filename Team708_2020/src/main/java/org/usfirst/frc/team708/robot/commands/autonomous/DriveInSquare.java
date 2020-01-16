@@ -31,31 +31,14 @@ public class DriveInSquare extends CommandGroup {
 		//Shuffleboard.addEventMarker("in DriveInSquare", "Start", EventImportance.kHigh);
 		addSequential(new Send("in DriveInSquare - Start"));
     	addSequential(new WaitCommand(1.0));
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
-		addSequential(new WaitCommand(0.1));
-		//Shuffleboard.addEventMarker("in DriveInSquare", "Turn 1", EventImportance.kHigh);
-		addSequential(new Send("in DriveInSquare - turn 1"));
-    	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
+    //  addSequential(new DriveDirectionDistanceOrTime(double direction, double distance, double speed, double maxTime);
     	addSequential(new WaitCommand(0.1));
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
+    //  addSequential(new DriveDirectionDistanceOrTime(double direction, double distance, double speed, double maxTime);
 		addSequential(new WaitCommand(0.1));
-		//Shuffleboard.addEventMarker("in DriveInSquare", "Turn 2", EventImportance.kHigh);
-		addSequential(new Send("in DriveInSquare - turn2"));
-    	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
-    	addSequential(new WaitCommand(0.1));
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
+	//  addSequential(new DriveDirectionDistanceOrTime(double direction, double distance, double speed, double maxTime);
 		addSequential(new WaitCommand(0.1));
-		//Shuffleboard.addEventMarker("in DriveInSquare", "Turn 3", EventImportance.kHigh);
-		addSequential(new Send("in DriveInSquare - turn 3"));
-    	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
-    	addSequential(new WaitCommand(0.1));
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
+	//  addSequential(new DriveDirectionDistanceOrTime(double direction, double distance, double speed, double maxTime);
 		addSequential(new WaitCommand(0.1));
-		//Shuffleboard.addEventMarker("in DriveInSquare", "Turn 4", EventImportance.kHigh);
-		addSequential(new Send("in DriveInSquare - turn 4"));
-    	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
-		addSequential(new WaitCommand(0.1));
-		//Shuffleboard.addEventMarker("in DriveInSquare", "End", EventImportance.kHigh);
 		addSequential(new Send("in DriveInSquare - end"));
     }
     

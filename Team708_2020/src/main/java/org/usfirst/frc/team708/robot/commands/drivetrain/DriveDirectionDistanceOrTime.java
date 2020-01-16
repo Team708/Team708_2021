@@ -5,22 +5,22 @@ import org.usfirst.frc.team708.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-publicDirectionCommand {
+import edu.wpi.first.wpilibj.command.*;
 
+
+
+public class DriveDirectionDistanceOrTime extends Command {
+
+	private double 		 targetDirection;
 	private double 		 targetDistance;
-	private final double rotate = 0.0;
 	private double 		 tspeed;
 	
   
     public DriveDirectionDistanceOrTime(double direction, double distance, double speed, double maxTime) {
        
-   	// Use requires() here to declare subsystem dependencies
-    	// requires(Robot.drivetrain);
-        tspeed = speed;
-        targetDistance = distance;
+        this.tspeed = speed;
+        this.targetDistance = distance;
+        this.targetDirection = direction;
     	this.setTimeout(maxTime);
     }
 
@@ -32,12 +32,12 @@ publicDirectionCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.haloDrive(tspeed, rotate, false);
+    	// Robot.drivetrain.haloDrive(tspeed, rotate, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(direction >= 270 || direction < 90)
+        if(targetDirection >= 270 || targetDirection < 90)
         	return (Robot.drivetrain.getEncoderDistanceLeft() >= targetDistance) || isTimedOut();
         else
         	return (Robot.drivetrain.getEncoderDistanceLeft() <= targetDistance) || isTimedOut();

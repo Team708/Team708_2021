@@ -180,8 +180,6 @@ public class Robot extends TimedRobot {
     private void queueAutonomousModes() {
 
         autonomousMode.addOption("Do Nothing", new DoNothing());
-        autonomousMode.addOption("Do Nothing", new DriveForward());
-
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }
 

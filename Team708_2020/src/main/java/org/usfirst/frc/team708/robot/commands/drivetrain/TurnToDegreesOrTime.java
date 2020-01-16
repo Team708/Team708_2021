@@ -33,9 +33,9 @@ public class TurnToDegreesOrTime extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (goalDegrees >= 0) {
-    		Robot.drivetrain.haloDrive(0.0, rotationSpeed, false); //switched from -
+    		// Robot.drivetrain.haloDrive(0.0, rotationSpeed, false); //switched from -
     	} else {
-    		Robot.drivetrain.haloDrive(0.0, -rotationSpeed, false);  //switched form +
+    		// Robot.drivetrain.haloDrive(0.0, -rotationSpeed, false);  //switched form +
     	}
     }
 

@@ -3,12 +3,7 @@ package org.usfirst.frc.team708.robot;
 import edu.wpi.first.wpilibj.buttons.*;
 import org.usfirst.frc.team708.robot.util.Gamepad;
 import org.usfirst.frc.team708.robot.util.triggers.*;
-import org.usfirst.frc.team708.robot.commands.climber.*;
-import org.usfirst.frc.team708.robot.commands.climber.SetClimbLvl2;
 import org.usfirst.frc.team708.robot.commands.drivetrain.*;
-import org.usfirst.frc.team708.robot.commands.elevator.*;
-import org.usfirst.frc.team708.robot.commands.intake.*;
-import org.usfirst.frc.team708.robot.commands.driverAssist.*;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 
 
@@ -120,10 +115,10 @@ public class OI {
     public OI() {
 
 // Driver
-		FindHighGoal.whenPressed(new TargetHighGoal());				
-		TurnToFront.whenPressed(new RotateToZero());				
-		TurnClockWise.whenPressed(new RotateClockwise());				
-		TurnCounterClockwise.whenPressed(new RotateCounterClockwise());				
+		// FindHighGoal.whenPressed(new TargetHighGoal());				
+		// TurnToFront.whenPressed(new RotateToZero());				
+		// TurnClockWise.whenPressed(new RotateClockwise());				
+		// TurnCounterClockwise.whenPressed(new RotateCounterClockwise());				
 		
 //Operator
 

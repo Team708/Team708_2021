@@ -6,6 +6,8 @@ package org.usfirst.frc.team708.robot;
  * gamepad controls are found in OI
  */
 
+import org.usfirst.frc.team254.lib.util.math.Translation2d;
+
 public final class Constants {
 
 /*
@@ -20,7 +22,7 @@ public final class Constants {
 	//Swerve Calculations Constants
 	public static final double kDT_WHEELBASE_LENGTH = 24 / 12.0; //feet
     public static final double kDT_WHEELBASE_WIDTH  = 24 / 12.0; //feet
-    public static final double kDT_SWERVE_DIAGONAL = Math.hypot(WHEELBASE_LENGTH, WHEELBASE_WIDTH);
+    public static final double kDT_SWERVE_DIAGONAL = Math.hypot(kDT_WHEELBASE_LENGTH, kDT_WHEELBASE_WIDTH);
 	
 	//Physical Robot Dimensions
 	public static final double ROBOT_WIDTH = 17.50 / 12.0;
@@ -40,10 +42,10 @@ public final class Constants {
 	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 550+2048;  // mod 3  500
 	
 	//Swerve Module Positions
-	public static final Translation2d kVehicleToModuleOne = new Translation2d(WHEELBASE_LENGTH/2, WHEELBASE_WIDTH/2);
-	public static final Translation2d kVehicleToModuleTwo = new Translation2d(WHEELBASE_LENGTH/2, -WHEELBASE_WIDTH/2);
-	public static final Translation2d kVehicleToModuleThree = new Translation2d(-WHEELBASE_LENGTH/2, -WHEELBASE_WIDTH/2);
-	public static final Translation2d kVehicleToModuleFour = new Translation2d(-WHEELBASE_LENGTH/2, WHEELBASE_WIDTH/2);
+	public static final Translation2d kVehicleToModuleOne = new Translation2d(kDT_WHEELBASE_LENGTH/2, kDT_WHEELBASE_WIDTH/2);
+	public static final Translation2d kVehicleToModuleTwo = new Translation2d(kDT_WHEELBASE_LENGTH/2, -kDT_WHEELBASE_WIDTH/2);
+	public static final Translation2d kVehicleToModuleThree = new Translation2d(-kDT_WHEELBASE_LENGTH/2, -kDT_WHEELBASE_WIDTH/2);
+	public static final Translation2d kVehicleToModuleFour = new Translation2d(-kDT_WHEELBASE_LENGTH/2, kDT_WHEELBASE_WIDTH/2);
 	
 	//Scrub Factors
 	public static final double[] kWheelScrubFactors = new double[]{1.0, 1.0, 1.0, /*5.0/5.15*/1.0};	
