@@ -29,16 +29,18 @@ public class RobotMap {
 // Motor Controler Device IDS
 
 // Drivetrain
-	 public static final int kdrivetrainFrontLeftDrive	= 11; 
-	 public static final int kdrivetrainFrontRightDrive	= 12; 
+	public static final int kdrivetrainFrontRightDrive	= 11; 
+	 public static final int kdrivetrainFrontLeftDrive	= 12; 
 	 public static final int kdrivetrainRearLeftDrive  	= 13;
 	 public static final int kdrivetrainRearRightDrive 	= 14;
 
- 	 public static final int kdrivetrainFrontLeftTurn	= 11; 
-	 public static final int kdrivetrainFrontRightTurn	= 12; 
-	 public static final int kdrivetrainRearLeftTurn 	= 13;
-	 public static final int kdrivetrainRearRightTurn 	= 14;
+	 public static final int kdrivetrainFrontRightTurn	= 15; 
+ 	 public static final int kdrivetrainFrontLeftTurn	= 16; 
+	 public static final int kdrivetrainRearLeftTurn 	= 17;
+	 public static final int kdrivetrainRearRightTurn 	= 18;
 
+// public static final int PIGEON_TALON = 52;
+public static final int PIGEON       = 0;
 
 // Digital IO
 //   public static final int 				= 0;  	

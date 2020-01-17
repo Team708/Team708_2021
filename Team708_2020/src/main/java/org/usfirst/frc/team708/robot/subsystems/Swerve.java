@@ -1,21 +1,21 @@
-package com.team1323.frc2018.subsystems;
+package org.usfirst.frc.team708.robot.subsystems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.team1323.frc2018.Constants;
-import com.team1323.frc2018.Ports;
-import com.team1323.frc2018.RobotState;
-import com.team1323.frc2018.loops.Loop;
-import com.team1323.frc2018.loops.Looper;
-import com.team1323.frc2018.pathfinder.PathfinderPath;
-import com.team1323.lib.util.SwerveHeadingController;
-import com.team1323.lib.util.SwerveKinematics;
-import com.team1323.lib.util.Util;
-import com.team254.lib.util.math.RigidTransform2d;
-import com.team254.lib.util.math.Rotation2d;
-import com.team254.lib.util.math.Translation2d;
+import org.usfirst.frc.team708.robot.Constants;
+import org.usfirst.frc.team708.robot.RobotMap;
+import org.usfirst.frc.team708.robot.RobotState;
+import org.usfirst.frc.team708.robot.loops.Loop;
+import org.usfirst.frc.team708.robot.loops.Looper;
+import org.usfirst.frc.team708.robot.pathfinder.PathfinderPath;
+import org.usfirst.frc.team708.robot.util.libs.SwerveHeadingController;
+import org.usfirst.frc.team708.robot.util.libs.SwerveKinematics;
+import org.usfirst.frc.team708.robot.util.libs.Util;
+import org.usfirst.frc.team254.lib.util.math.RigidTransform2d;
+import org.usfirst.frc.team254.lib.util.math.Rotation2d;
+import org.usfirst.frc.team254.lib.util.math.Translation2d;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -74,13 +74,13 @@ public class Swerve extends Subsystem{
 	}
 	
 	private Swerve(){
-		frontRight = new SwerveDriveModule(Ports.FRONT_RIGHT_ROTATION, Ports.FRONT_RIGHT_DRIVE,
+		frontRight = new SwerveDriveModule(RobotMap.kdrivetrainFrontRightTurn, RobotMap.kdrivetrainFrontRightDrive,
 				0, Constants.FRONT_RIGHT_ENCODER_STARTING_POS, Constants.kVehicleToModuleOne);
-		frontLeft = new SwerveDriveModule(Ports.FRONT_LEFT_ROTATION, Ports.FRONT_LEFT_DRIVE,
+		frontLeft = new SwerveDriveModule(RobotMap.kdrivetrainFrontLeftTurn, RobotMap.kdrivetrainFrontLeftDrive,
 				1, Constants.FRONT_LEFT_ENCODER_STARTING_POS, Constants.kVehicleToModuleTwo);
-		rearLeft = new SwerveDriveModule(Ports.REAR_LEFT_ROTATION, Ports.REAR_LEFT_DRIVE,
+		rearLeft = new SwerveDriveModule(RobotMap.kdrivetrainRearLeftTurn, RobotMap.kdrivetrainRearLeftDrive,
 				2, Constants.REAR_LEFT_ENCODER_STARTING_POS, Constants.kVehicleToModuleThree);
-		rearRight = new SwerveDriveModule(Ports.REAR_RIGHT_ROTATION, Ports.REAR_RIGHT_DRIVE,
+		rearRight = new SwerveDriveModule(RobotMap.kdrivetrainRearRightTurn, RobotMap.kdrivetrainRearRightDrive,
 				3, Constants.REAR_RIGHT_ENCODER_STARTING_POS, Constants.kVehicleToModuleFour);
 		
 		modules = Arrays.asList(frontRight, frontLeft, rearLeft, rearRight);
@@ -295,12 +295,12 @@ public class Swerve extends Subsystem{
 	}
 	
 	public synchronized void updateControlCycle(double timestamp){
-		if(trackCube && RobotState.getInstance().getAimingParameters().isPresent()){
-			headingController.setSnapTarget(Util.placeInAppropriate0To360Scope(pose.getRotation().getUnboundedDegrees(), RobotState.getInstance().getAimingParameters().get().getRobotToGoal().getDegrees()));
-			if(RobotState.getInstance().getAimingParameters().isPresent()){
-				//System.out.println("Angle To Cube: " + RobotState.getInstance().getAimingParameters().get().getRobotToGoal().getDegrees());
-			}
-		}
+		// if(trackCube && RobotState.getInstance().getAimingParameters().isPresent()){
+			// headingController.setSnapTarget(Util.placeInAppropriate0To360Scope(pose.getRotation().getUnboundedDegrees(), RobotState.getInstance().getAimingParameters().get().getRobotToGoal().getDegrees()));
+			// if(RobotState.getInstance().getAimingParameters().isPresent()){
+			// System.out.println("Angle To Cube: " + RobotState.getInstance().getAimingParameters().get().getRobotToGoal().getDegrees());
+			// }
+		// }
 		double rotationCorrection = headingController.updateRotationCorrection(pose.getRotation().getUnboundedDegrees(), timestamp);
 		//rotationCorrection = 0.0;
 		switch(currentState){
@@ -362,7 +362,7 @@ public class Swerve extends Subsystem{
 			Rotation2d angleToLookahead = lookaheadPosition.translateBy(pose.getTranslation().inverse()).direction();
 			//angleToLookahead = Rotation2d.fromRadians(pathFollower.getHeading());
 			if(currentPathSegment >= (currentPathTrajectory.length() - 1)){
-				double error = currentPath.getFinalPosition().translateBy(pose.getTranslation().inverse()).norm();
+				//double error = currentPath.getFinalPosition().translateBy(pose.getTranslation().inverse()).norm();
 				//if(error <= (1.0/12.0)){
 					hasFinishedPath = true;
 					setState(ControlState.NEUTRAL);

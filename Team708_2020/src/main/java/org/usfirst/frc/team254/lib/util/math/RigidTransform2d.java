@@ -1,7 +1,7 @@
-package com.team254.lib.util.math;
+package org.usfirst.frc.team254.lib.util.math;
 
-import com.team1323.lib.util.Interpolable;
-import com.team1323.lib.util.Util;
+import org.usfirst.frc.team708.robot.util.libs.Interpolable;
+import org.usfirst.frc.team708.robot.util.libs.Util;
 
 /**
  * Represents a 2d pose (rigid transform) containing translational and rotational elements.

@@ -1,4 +1,4 @@
-package com.team1323.frc2018.subsystems;
+package org.usfirst.frc.team708.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -7,12 +7,12 @@ import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.VelocityMeasPeriod;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import com.team1323.frc2018.Constants;
-import com.team1323.frc2018.loops.Looper;
-import com.team1323.lib.util.Util;
-import com.team254.lib.util.math.RigidTransform2d;
-import com.team254.lib.util.math.Rotation2d;
-import com.team254.lib.util.math.Translation2d;
+import org.usfirst.frc.team708.robot.Constants;
+import org.usfirst.frc.team708.robot.loops.Looper;
+import org.usfirst.frc.team708.robot.util.libs.Util;
+import org.usfirst.frc.team254.lib.util.math.RigidTransform2d;
+import org.usfirst.frc.team254.lib.util.math.Rotation2d;
+import org.usfirst.frc.team254.lib.util.math.Translation2d;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

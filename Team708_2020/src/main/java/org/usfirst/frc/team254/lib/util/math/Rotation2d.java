@@ -1,9 +1,9 @@
-package com.team254.lib.util.math;
+package org.usfirst.frc.team254.lib.util.math;
 
 import java.text.DecimalFormat;
 
-import com.team1323.lib.util.Interpolable;
-import com.team1323.lib.util.Util;
+import org.usfirst.frc.team708.robot.util.libs.Interpolable;
+import org.usfirst.frc.team708.robot.util.libs.Util;
 
 /**
  * A rotation in a 2d coordinate frame represented a point on the unit circle (cosine and sine).

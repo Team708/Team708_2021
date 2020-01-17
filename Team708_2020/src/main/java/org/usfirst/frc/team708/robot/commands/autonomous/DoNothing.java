@@ -26,12 +26,18 @@ public class DoNothing extends CommandGroup {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.drivetrain.resetEncoder();
+        //setNTInfo("ledMode", Constants.kVISION_LED_ON);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        // addSequential(new WaitCommand(2.0));
+        // addSequential(new FindBall());
+        // addSequential(new WaitCommand(2.0));
+
+
     }
+
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

@@ -12,13 +12,19 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import edu.wpi.first.cameraserver.CameraServer;
+//import edu.wpi.first.cameraserver.CameraServer;
 
-import edu.wpi.cscore.UsbCamera;
+//import edu.wpi.cscore.UsbCamera;
 
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
 import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
+import org.usfirst.frc.team708.robot.Xbox;
+import org.usfirst.frc.team708.robot.loops.Looper;
+import org.usfirst.frc.team254.lib.util.math.RigidTransform2d;
+import org.usfirst.frc.team254.lib.util.math.Rotation2d;
+import org.usfirst.frc.team254.lib.util.math.Translation2d;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 
 
@@ -26,9 +32,14 @@ public class Robot extends TimedRobot {
 
     Timer statsTimer; // Timer used for Smart Dash statistics
 
-    public static Drivetrain        drivetrain;
+    //
+    // public static Drivetrain        drivetrain;
 
-    public static OI oi;
+    private Swerve swerve;
+    private Looper swerveLooper = new Looper();
+    private Xbox driver;
+    public static VisionProcessor visionprocessor;
+    
 
     public String gameData;
     public String robotLocation;
@@ -53,19 +64,28 @@ public class Robot extends TimedRobot {
 
         statsTimer = new Timer(); // Initializes the timer for sending Smart Dashboard data
         statsTimer.start(); // Starts the timer for the Smart Dashboard
+ 
+        // Subsystem Initialization
 
-    // Subsystem Initialization
+        swerve = Swerve.getInstance();
+        driver = new Xbox(0);
+		driver.setDeadband(0.2);
+		swerve.registerEnabledLoops(swerveLooper);
+        swerve.zeroSensors();
+        visionprocessor = new VisionProcessor();
+   
+        // drivetrain      = new Drivetrain();
 
-        drivetrain      = new Drivetrain();
 
-
-    // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
+        visionprocessor.setNTInfo("ledMode", Constants.kVISION_LED_OFF);
     
         sendDashboardSubsystems(); // Sends each subsystem's cmds to Smart Dashboard
 
         queueAutonomousModes();    // Adds autonomous modes to the selection box
+    }
 
-        oi = new OI(); // Initializes the OI
+    private void allPeriodic(){
+        swerve.outputToSmartDashboard();
     }
 
     /**
@@ -101,7 +121,8 @@ public class Robot extends TimedRobot {
 		catch (Exception e)
 		{
              allianceColor = 11;
-    	}
+        }
+        allPeriodic();
     }
 
     /**
@@ -110,13 +131,15 @@ public class Robot extends TimedRobot {
 
     public void autonomousInit() {
     // schedule the autonomous command
-        drivetrain.setBrakeMode(true);
-        drivetrain.resetGyro();
+        // drivetrain.setBrakeMode(true);
+        // drivetrain.resetGyro();
     // intake.intakeRetract();
 
         autonomousCommand = (Command) autonomousMode.getSelected();
         if (autonomousCommand != null)
             autonomousCommand.start();
+        swerve.zeroSensors();
+        swerveLooper.start();
     }
 
     /**
@@ -125,6 +148,7 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         sendStatistics();
+        allPeriodic();
     }
 
     /**
@@ -136,9 +160,10 @@ public class Robot extends TimedRobot {
         // remove this line or comment it out.
         if (autonomousCommand != null)
             autonomousCommand.cancel();
+        swerveLooper.start();
 
      // intake.intakeRetract();
-        drivetrain.setBrakeMode(false);
+        // drivetrain.setBrakeMode(false);
     }
 
     /**
@@ -146,6 +171,8 @@ public class Robot extends TimedRobot {
      * reset subsystems before shutting down.
      */
     public void disabledInit() {
+        swerveLooper.stop();
+		swerveLooper.start();
      //  let's set the hanger to a finished state here
     }
 
@@ -155,6 +182,23 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         sendStatistics();
+        driver.update();
+		
+		swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
+		if(driver.yButton.wasPressed())
+			swerve.rotate(0);
+		else if(driver.bButton.wasPressed())
+			swerve.rotate(90);
+		else if(driver.aButton.wasPressed())
+			swerve.rotate(180);
+		else if(driver.xButton.wasPressed())
+			swerve.rotate(270);
+		if(driver.backButton.isBeingPressed()){
+			swerve.temporarilyDisableHeadingController();
+			// swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
+		}
+		
+		allPeriodic();
     }
 
     /**
@@ -170,7 +214,7 @@ public class Robot extends TimedRobot {
 
     private void sendStatistics() {
         // if (statsTimer.get() >= Constants.SEND_STATS_INTERVAL) statsTimer.reset();
-        drivetrain.sendToDashboard();
+        // drivetrain.sendToDashboard();
     }
 
     /**
@@ -187,6 +231,6 @@ public class Robot extends TimedRobot {
      * Sends every subsystem to the Smart Dashboard
      */
     private void sendDashboardSubsystems() {
-        SmartDashboard.putData(drivetrain);
+       // SmartDashboard.putData(drivetrain);
     }
 }

@@ -10,6 +10,11 @@ import org.usfirst.frc.team254.lib.util.math.Translation2d;
 
 public final class Constants {
 
+	//Looper Constants
+	public static final double kLooperDt = 0.02;
+	
+	public static final double kEpsilon = 0.0001;
+
 /*
  * Drivetrain
  */
@@ -37,7 +42,7 @@ public final class Constants {
 	
     //Swerve Module Wheel Offsets
 	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 1478+2048; // mod 0   1478 
-	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1451+2048; // mod 1   1451
+	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1451; // mod 1   1451
 	public static final int REAR_LEFT_ENCODER_STARTING_POS   = 2600-2048; // mod 2  2600
 	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 550+2048;  // mod 3  500
 	
@@ -54,6 +59,12 @@ public final class Constants {
 	public static final double SWERVE_WHEEL_DIAMETER = 3.93; //inches
 	public static final double ROTATION_ENCODER_RESOLUTION = 4096.0;
 	public static final double DRIVE_ENCODER_RESOLUTION    = 42.0;
+
+	//pid
+	public static final double Kp = 0;
+	public static final double Ki = 0;
+	public static final double Kd = 0;
+
 
 	/**
 	 * The number of rotations the swerve drive encoder undergoes for every rotation of the wheel.
@@ -116,6 +127,16 @@ public final class Constants {
 	public static final double kVISION_AREA_THRESHOLD		= 	2.0;
 	public static final double kVISION_HIGHGOAL_TARGETAREA	=	10.0;
 
+	public static final double kVISION_ROTATE = 0.0;
+/*
+ * camera
+ */
+	public static final double kCameraYOffset = 2.25 / 12.0;
+    public static final double kCameraXOffset = 4.5 / 12.0;
+    public static final double kCameraZOffset = 17.0 / 12.0;
+    public static final double kCameraYawAngleDegrees = 0.0;
+    public static final double kCameraPitchAngleDegrees = -10.0;
+    
 
 /*
  * Smart Dashboard  & FMS

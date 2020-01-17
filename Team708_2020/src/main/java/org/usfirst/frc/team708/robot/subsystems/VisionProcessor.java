@@ -67,16 +67,16 @@ public class VisionProcessor extends Subsystem {
 	public void toggleLEDMode() {
 		led = !led;
 		if(led) 
-			setNTInfo("ledMode", Constants.VISION_LED_ON);		
+			setNTInfo("ledMode", Constants.kVISION_LED_ON);		
 		else 
-			setNTInfo("ledMode", Constants.VISION_LED_OFF);		
+			setNTInfo("ledMode", Constants.kVISION_LED_OFF);		
 	}
 
 	public boolean isAtY(double targetY) {
 		yAngle = getNTInfo("ty");
 		difference = yAngle - targetY;
 		
-		if (Math.abs(difference) <= Constants.Y_THRESHOLD)
+		if (Math.abs(difference) <= Constants.kVISION_Y_THRESHOLD)
 			isAtY = true;			
 		else 
 			isAtY = false;			
@@ -85,7 +85,7 @@ public class VisionProcessor extends Subsystem {
 
 	public boolean isCentered() {
 		xAngle = getNTInfo("tx");	
-		if (Math.abs(xAngle) <= Constants.X_THRESHOLD) 
+		if (Math.abs(xAngle) <= Constants.kVISION_X_THRESHOLD) 
 			isCentered = true;		
 		else
 			isCentered = false;
@@ -97,56 +97,56 @@ public class VisionProcessor extends Subsystem {
 		if (seesTarget())
 			if (!isCentered())	
 					if (xAngle > 0)
-						rotate = Constants.VISION_ROTATE;
+						rotate = Constants.kVISION_ROTATE;
 					else 
-						rotate = -Constants.VISION_ROTATE;
+						rotate = -Constants.kVISION_ROTATE;
 			else // centered
 				rotate= 0.0;			 
 		return rotate;
 	}
 
 	
-	public double getMoveCargoship (double targetValue) {
-		if (seesTarget)
-			if (!isAtY(targetValue))
-				if (yAngle < (targetValue - Constants.Y_THRESHOLD))
-					move = 0.0;				
-				else if (yAngle > (targetValue + Constants.Y_THRESHOLD))
-					move = Constants.VISION_MOVE;
-				else 
-					move = 0.0;
-			else
-				move = 0.0;
-		else
-			move = 0.0;
-		return move;
-	}
+	// public double getMoveCargoship (double targetValue) {
+	// 	if (seesTarget)
+	// 		if (!isAtY(targetValue))
+	// 			if (yAngle < (targetValue - Constants.Y_THRESHOLD))
+	// 				move = 0.0;				
+	// 			else if (yAngle > (targetValue + Constants.Y_THRESHOLD))
+	// 				move = Constants.VISION_MOVE;
+	// 			else 
+	// 				move = 0.0;
+	// 		else
+	// 			move = 0.0;
+	// 	else
+	// 		move = 0.0;
+	// 	return move;
+	// }
 	
-	public double getMoveRocket(double targetValue) {	
-		if (seesTarget()) 
-			if (!isAtY(targetValue)) 	
-				if (Robot.intake.hasBall()) {
-					if (yAngle < (targetValue - Constants.Y_THRESHOLD))
-						move = Constants.VISION_MOVE;				
-					else if (yAngle > (targetValue + Constants.Y_THRESHOLD)) 
-						move = 0.0;	
-					else 
-						move = 0.0;
-				}
-				else {
-					if (yAngle < (targetValue - Constants.Y_THRESHOLD))
-						move = 0.0;				
-					else if (yAngle > (targetValue + Constants.Y_THRESHOLD))
-						move = Constants.VISION_MOVE;
-					else 
-						move = 0.0;
-				}						
-			else  // centered
-				move= 0.0;			
-		else
-			move = 0.0; 
-		return move;
-	}
+	// public double getMoveRocket(double targetValue) {	
+	// 	if (seesTarget()) 
+	// 		if (!isAtY(targetValue)) 	
+	// 			if (Robot.intake.hasBall()) {
+	// 				if (yAngle < (targetValue - Constants.Y_THRESHOLD))
+	// 					move = Constants.VISION_MOVE;				
+	// 				else if (yAngle > (targetValue + Constants.Y_THRESHOLD)) 
+	// 					move = 0.0;	
+	// 				else 
+	// 					move = 0.0;
+	// 			}
+	// 			else {
+	// 				if (yAngle < (targetValue - Constants.Y_THRESHOLD))
+	// 					move = 0.0;				
+	// 				else if (yAngle > (targetValue + Constants.Y_THRESHOLD))
+	// 					move = Constants.VISION_MOVE;
+	// 				else 
+	// 					move = 0.0;
+	// 			}						
+	// 		else  // centered
+	// 			move= 0.0;			
+	// 	else
+	// 		move = 0.0; 
+	// 	return move;
+	// }
 
 	// public boolean isAtArea(double targetArea) {
 	// 	area = getNTInfo("ta");
@@ -176,7 +176,7 @@ public class VisionProcessor extends Subsystem {
 		SmartDashboard.putBoolean("Is Centered", isCentered());
 		SmartDashboard.putNumber("Displacement X", xAngle);
 		SmartDashboard.putNumber("Displacement Y", yAngle);
-		SmartDashboard.putBoolean("Is At Y", isAtY(Constants.TARGET_Y));
+		// SmartDashboard.putBoolean("Is At Y", isAtY(Constants.TARGET_Y));
 		// SmartDashboard.putBoolean("Is At Area-Ball", isAtArea(Constants.ROCKET_CARGO_TARGET_AREA));
 		// SmartDashboard.putBoolean("Is At Area-Hatch", isAtArea(Constants.ROCKET_HATCH_TARGET_AREA));
 		SmartDashboard.putBoolean("Has Target", seesTarget());

@@ -1,8 +1,8 @@
-package com.team254.lib.util.math;
+package org.usfirst.frc.team254.lib.util.math;
 
 import java.text.DecimalFormat;
 
-import com.team1323.lib.util.Interpolable;
+import org.usfirst.frc.team708.robot.util.libs.Interpolable;
 
 /**
  * A translation in a 2d coordinate frame. Translations are simply shifts in an (x, y) plane.
