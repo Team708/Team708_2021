@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.RobotState;
-import org.usfirst.frc.team708.robot.loops.Loop;
-import org.usfirst.frc.team708.robot.loops.Looper;
+import org.usfirst.frc.team708.robot.commands.swerve.*;
+// import org.usfirst.frc.team708.robot.loops.Loop;
+// import org.usfirst.frc.team708.robot.loops.Looper;
 import org.usfirst.frc.team708.robot.pathfinder.PathfinderPath;
 import org.usfirst.frc.team708.robot.util.libs.SwerveHeadingController;
 import org.usfirst.frc.team708.robot.util.libs.SwerveKinematics;
@@ -16,7 +18,7 @@ import org.usfirst.frc.team708.robot.util.libs.Util;
 import org.usfirst.frc.team254.lib.util.math.RigidTransform2d;
 import org.usfirst.frc.team254.lib.util.math.Rotation2d;
 import org.usfirst.frc.team254.lib.util.math.Translation2d;
-
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.Trajectory;
@@ -43,15 +45,16 @@ public class Swerve extends Subsystem{
 	boolean robotXPassed = false;
 	
 	Pigeon pigeon;
-	SwerveHeadingController headingController = new SwerveHeadingController();
+	public SwerveHeadingController headingController = new SwerveHeadingController();
 	public void temporarilyDisableHeadingController(){
 		headingController.temporarilyDisable();
 	}
-	
+	public static int timesCalled=0;
 	RigidTransform2d pose;
-	double distanceTraveled;
+	public double distanceinches;
+	public double distanceTraveled;
 	double currentVelocity = 0;
-	double lastUpdateTimestamp = 0;
+	public double lastUpdateTimestamp = 0;
 	public RigidTransform2d getPose(){
 		return pose;
 	}
@@ -99,10 +102,10 @@ public class Swerve extends Subsystem{
 		distanceTraveled = 0;
 	}
 	
-	private double xInput = 0;
-	private double yInput = 0;
-	private double rotationalInput = 0;
-	private Rotation2d lastActiveVector = new Rotation2d();
+	public double xInput = 0;
+	public double yInput = 0;
+	public double rotationalInput = 0;
+	public Rotation2d lastActiveVector = new Rotation2d();
 	private final Rotation2d rotationalVector = new Rotation2d();
 	private double maxSpeedFactor = 1.0;
 	public void setMaxSpeed(double max){
@@ -302,9 +305,10 @@ public class Swerve extends Subsystem{
 			// }
 		// }
 		double rotationCorrection = headingController.updateRotationCorrection(pose.getRotation().getUnboundedDegrees(), timestamp);
-		//rotationCorrection = 0.0;
+		rotationCorrection = 0.0;
 		switch(currentState){
 		case MANUAL:
+			distanceinches=getDistanceInches();
 			if(xInput == 0 && yInput == 0 && rotationalInput == 0){
 				if(lastActiveVector.equals(rotationalVector) || isInLowPower){
 					stop();
@@ -412,10 +416,7 @@ public class Swerve extends Subsystem{
 			break;
 		}
 	}
-	
-	private final Loop loop = new Loop(){
 
-		@Override
 		public void onStart(double timestamp) {
 			synchronized(Swerve.this){
 				xInput = 0;
@@ -427,7 +428,7 @@ public class Swerve extends Subsystem{
 			}
 		}
 
-		@Override
+		
 		public void onLoop(double timestamp) {
 			synchronized(Swerve.this){
 				updatePose(timestamp);
@@ -436,7 +437,6 @@ public class Swerve extends Subsystem{
 			}
 		}
 
-		@Override
 		public void onStop(double timestamp) {
 			synchronized(Swerve.this){
 				xInput = 0;
@@ -446,20 +446,17 @@ public class Swerve extends Subsystem{
 			}
 		}
 		
-	};
-	
-	@Override
-	public void registerEnabledLoops(Looper enabledLooper) {
-		enabledLooper.register(loop);
+	// };
+
+	public double getDistanceInches(){
+		return frontLeft.driveEncoder.getPosition()/Constants.SWERVE_ENC_UNITS_PER_INCH;
 	}
 
-	@Override
 	public synchronized void stop() {
 		setState(ControlState.NEUTRAL);
 		modules.forEach((m) -> m.stop());
 	}
 
-	@Override
 	public synchronized void zeroSensors() {
 		zeroSensors(new RigidTransform2d());
 	}
@@ -477,17 +474,31 @@ public class Swerve extends Subsystem{
 		distanceTraveled = 0;
 	}
 
-	@Override
+	public synchronized void SetDriveBrakesOn(){
+		modules.forEach((m) -> m.setDriveBrakeOn());
+	}
+
+	public synchronized void SetDriveBrakesOff(){
+		modules.forEach((m) -> m.setDriveBrakeOff());
+	}
+
+	public void initDefaultCommand() {
+		setDefaultCommand(new SwerveDrive());
+		
+	}
+
 	public void outputToSmartDashboard() {
 		modules.forEach((m) -> m.outputToSmartDashboard());
-		SmartDashboard.putNumber("Robot X", pose.getTranslation().x());
-		SmartDashboard.putNumber("Robot Y", pose.getTranslation().y());
-		SmartDashboard.putNumber("Robot Heading", pose.getRotation().getUnboundedDegrees());
-		SmartDashboard.putString("Heading Controller", headingController.getState().toString());
-		SmartDashboard.putNumber("Target Heading", headingController.getTargetHeading());
-		SmartDashboard.putNumber("Distance Traveled", distanceTraveled);
-		SmartDashboard.putNumber("Robot Velocity", currentVelocity);
+		//SmartDashboard.putNumber("Robot X", pose.getTranslation().x());
+		//SmartDashboard.putNumber("Robot Y", pose.getTranslation().y());
+		//SmartDashboard.putNumber("Robot Heading", pose.getRotation().getUnboundedDegrees());
+		//SmartDashboard.putString("Heading Controller", headingController.getState().toString());
+		//SmartDashboard.putNumber("Target Heading", headingController.getTargetHeading());
+		//SmartDashboard.putNumber("Distance Traveled", distanceTraveled);
+		//SmartDashboard.putNumber("Robot Velocity", currentVelocity);
 		SmartDashboard.putString("Swerve State", currentState.toString());
-		SmartDashboard.putNumber("Swerve Ultrasonic", getUltrasonicReading());
+		//SmartDashboard.putNumber("Swerve Ultrasonic", getUltrasonicReading());
+		SmartDashboard.putNumber("GetDistance", getDistanceInches());
+		SmartDashboard.putNumber("Times Called", timesCalled);
 	}
 }

@@ -21,7 +21,7 @@ public class FindBall extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        // Robot.visionprocessor.setNTInfo("ledMode", Constants.kVISION_LED_OFF);
+        Robot.visionprocessor.setNTInfo("ledMode", Constants.kVISION_LED_OFF);
         // Robot.visionProcessor.setNTInfo("led", Constants.VISION_LED_OFF);
         // if  (Robot.visionProcessor.seesTarget()) {
         //     if (!Robot.visionProcessor.isCentered()) {

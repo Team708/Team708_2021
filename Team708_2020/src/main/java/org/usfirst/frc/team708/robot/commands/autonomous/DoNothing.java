@@ -22,19 +22,20 @@ public class DoNothing extends CommandGroup {
     public DoNothing() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        addSequential(new WaitCommand(2.0));
+        addSequential(new FindBall());
+        addSequential(new WaitCommand(2.0));
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        //setNTInfo("ledMode", Constants.kVISION_LED_ON);
+    
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        // addSequential(new WaitCommand(2.0));
-        // addSequential(new FindBall());
-        // addSequential(new WaitCommand(2.0));
-
+        
+        //Nothing goes here
 
     }
 

@@ -42,7 +42,7 @@ public final class Constants {
 	
     //Swerve Module Wheel Offsets
 	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 1478+2048; // mod 0   1478 
-	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1451; // mod 1   1451
+	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1451+2048; // mod 1   1451
 	public static final int REAR_LEFT_ENCODER_STARTING_POS   = 2600-2048; // mod 2  2600
 	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 550+2048;  // mod 3  500
 	
@@ -69,7 +69,7 @@ public final class Constants {
 	/**
 	 * The number of rotations the swerve drive encoder undergoes for every rotation of the wheel.
 	 */
-	public static final double SWERVE_ENCODER_TO_WHEEL_RATIO = 10.0/9.0;
+	public static final double SWERVE_ENCODER_TO_WHEEL_RATIO = .1;  //10.0/9.0;
 	public static final double SWERVE_ENC_UNITS_PER_WHEEL_REV = DRIVE_ENCODER_RESOLUTION * SWERVE_ENCODER_TO_WHEEL_RATIO;
 	public static final double SWERVE_ENC_UNITS_PER_INCH = SWERVE_ENC_UNITS_PER_WHEEL_REV / (Math.PI * SWERVE_WHEEL_DIAMETER);
 
@@ -146,5 +146,25 @@ public final class Constants {
 	public static final int kALLIANCE_BLUE 	 		= -1;
 
 	public static final double SEND_STATS_INTERVAL	= .2;	// Interval for reporting in seconds
-	public static final boolean DEBUG 				= true;	   
+	public static final boolean DEBUG 				= true;	 
+	
+	
+/*
+ * 2019 Field Landmarks (copied from 1323 for pathfinder)
+ */
+
+	public static final double kCubeWidth = 13.0/12.0;
+	public static final Translation2d kAutoStartingCorner = new Translation2d(0.0, 12.5);
+	public static final Translation2d kRightSwitchCloseCorner = new Translation2d(140.0 / 12.0, 27.0 - (85.25/12.0));
+	public static final Translation2d kRightSwitchFarCorner = new Translation2d(196.0 / 12.0, 27.0 - (85.25/12.0));
+	public static final Translation2d kLeftSwitchCloseCorner = new Translation2d(140.0 / 12.0, 85.25/12.0);
+	public static final Translation2d kLeftSwitchFarCorner = new Translation2d(196.0 / 12.0, 85.25/12.0);
+	public static final Translation2d kRightScaleCorner = new Translation2d(299.65 / 12.0, 27.0 - (95.25/12.0));
+	public static final Translation2d kLeftScaleCorner = new Translation2d(299.65 / 12.0, 95.25 / 12.0);
+	public static final Translation2d kRightMostCube = kRightSwitchFarCorner.translateBy(new Translation2d(kCubeWidth, -0.25));
+	public static final Translation2d kLeftMostCube = kLeftSwitchFarCorner.translateBy(new Translation2d(kCubeWidth, kCubeWidth/2.0));
+	public static final Translation2d kLeftMostCubeCorner = kLeftSwitchFarCorner.translateBy(new Translation2d(kCubeWidth, 0.0));
+	public static final Translation2d kSecondLeftCube = kLeftMostCube.translateBy(new Translation2d(0.0, kCubeWidth + (15.1/12.0)));
+	public static final Translation2d kSecondLeftCubeCorner = kSecondLeftCube.translateBy(new Translation2d(0.0, -kCubeWidth/2.0));
+	
 }

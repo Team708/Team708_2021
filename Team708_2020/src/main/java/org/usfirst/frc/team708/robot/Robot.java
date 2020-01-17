@@ -17,10 +17,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.cscore.UsbCamera;
 
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
+import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
 import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Xbox;
-import org.usfirst.frc.team708.robot.loops.Looper;
 import org.usfirst.frc.team254.lib.util.math.RigidTransform2d;
 import org.usfirst.frc.team254.lib.util.math.Rotation2d;
 import org.usfirst.frc.team254.lib.util.math.Translation2d;
@@ -34,10 +34,8 @@ public class Robot extends TimedRobot {
 
     //
     // public static Drivetrain        drivetrain;
-
-    private Swerve swerve;
-    private Looper swerveLooper = new Looper();
     private Xbox driver;
+    public static Swerve swerve;
     public static VisionProcessor visionprocessor;
     
 
@@ -66,12 +64,10 @@ public class Robot extends TimedRobot {
         statsTimer.start(); // Starts the timer for the Smart Dashboard
  
         // Subsystem Initialization
-
-        swerve = Swerve.getInstance();
         driver = new Xbox(0);
-		driver.setDeadband(0.2);
-		swerve.registerEnabledLoops(swerveLooper);
-        swerve.zeroSensors();
+        driver.setDeadband(0.2);
+        swerve = Swerve.getInstance();
+        Robot.swerve.zeroSensors();
         visionprocessor = new VisionProcessor();
    
         // drivetrain      = new Drivetrain();
@@ -82,10 +78,6 @@ public class Robot extends TimedRobot {
         sendDashboardSubsystems(); // Sends each subsystem's cmds to Smart Dashboard
 
         queueAutonomousModes();    // Adds autonomous modes to the selection box
-    }
-
-    private void allPeriodic(){
-        swerve.outputToSmartDashboard();
     }
 
     /**
@@ -122,7 +114,7 @@ public class Robot extends TimedRobot {
 		{
              allianceColor = 11;
         }
-        allPeriodic();
+       
     }
 
     /**
@@ -139,7 +131,8 @@ public class Robot extends TimedRobot {
         if (autonomousCommand != null)
             autonomousCommand.start();
         swerve.zeroSensors();
-        swerveLooper.start();
+        swerve.SetDriveBrakesOn();
+        
     }
 
     /**
@@ -148,7 +141,7 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         sendStatistics();
-        allPeriodic();
+    
     }
 
     /**
@@ -160,7 +153,8 @@ public class Robot extends TimedRobot {
         // remove this line or comment it out.
         if (autonomousCommand != null)
             autonomousCommand.cancel();
-        swerveLooper.start();
+        swerve.SetDriveBrakesOff();
+        
 
      // intake.intakeRetract();
         // drivetrain.setBrakeMode(false);
@@ -171,9 +165,7 @@ public class Robot extends TimedRobot {
      * reset subsystems before shutting down.
      */
     public void disabledInit() {
-        swerveLooper.stop();
-		swerveLooper.start();
-     //  let's set the hanger to a finished state here
+
     }
 
     /**
@@ -198,7 +190,6 @@ public class Robot extends TimedRobot {
 			// swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
 		}
 		
-		allPeriodic();
     }
 
     /**
@@ -215,6 +206,7 @@ public class Robot extends TimedRobot {
     private void sendStatistics() {
         // if (statsTimer.get() >= Constants.SEND_STATS_INTERVAL) statsTimer.reset();
         // drivetrain.sendToDashboard();
+        swerve.outputToSmartDashboard();
     }
 
     /**
@@ -224,6 +216,7 @@ public class Robot extends TimedRobot {
     private void queueAutonomousModes() {
 
         autonomousMode.addOption("Do Nothing", new DoNothing());
+        autonomousMode.addOption("Drive Straight", new DriveStraight());
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }
 
@@ -231,6 +224,7 @@ public class Robot extends TimedRobot {
      * Sends every subsystem to the Smart Dashboard
      */
     private void sendDashboardSubsystems() {
-       // SmartDashboard.putData(drivetrain);
+       SmartDashboard.putData(swerve);
+
     }
 }

@@ -29,7 +29,7 @@ public class DriveInSquare extends CommandGroup {
 	
     public  DriveInSquare() {
 		//Shuffleboard.addEventMarker("in DriveInSquare", "Start", EventImportance.kHigh);
-		addSequential(new Send("in DriveInSquare - Start"));
+		//addSequential(new Send("in DriveInSquare - Start"));
     	addSequential(new WaitCommand(1.0));
     //  addSequential(new DriveDirectionDistanceOrTime(double direction, double distance, double speed, double maxTime);
     	addSequential(new WaitCommand(0.1));
@@ -39,7 +39,7 @@ public class DriveInSquare extends CommandGroup {
 		addSequential(new WaitCommand(0.1));
 	//  addSequential(new DriveDirectionDistanceOrTime(double direction, double distance, double speed, double maxTime);
 		addSequential(new WaitCommand(0.1));
-		addSequential(new Send("in DriveInSquare - end"));
+	//	addSequential(new Send("in DriveInSquare - end"));
     }
     
     // Make this return true when this Command no longer needs to run execute()
