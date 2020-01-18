@@ -25,7 +25,7 @@ public class Turn extends CommandGroup {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         addSequential(new WaitCommand(1));
-        addSequential(new RotateinPlaceCommand(.5));
+        addSequential(new RotateinPlaceCommand(-90));
         //addSequential(new StopatAngle(90,10));
         
     }

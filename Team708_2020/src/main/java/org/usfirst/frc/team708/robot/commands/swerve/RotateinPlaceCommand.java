@@ -8,18 +8,22 @@ import edu.wpi.first.wpilibj.Timer;
 import java.lang.*;
 
 public class RotateinPlaceCommand extends Command {
-	
-    private double rotatePower;
-	
-    public RotateinPlaceCommand(double rotatePower) {
 
+    private Translation2d driveVector;
+    private double angle;
+
+    public RotateinPlaceCommand(double angle) {
+        this.angle=angle;
+        
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         Swerve.getInstance().zeroSensors();
-        Swerve.timesCalled++;
-        Swerve.getInstance().sendInput(.1, .1, 0, false, false);
+        Swerve.getInstance().timesCalled++;
+        //Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), .5, true, false);
+        Swerve.getInstance().rotate(angle);
+        
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -151,9 +151,9 @@ public class RobotState {
     // }
     
     // public synchronized void resetRobotPosition(Translation2d cubePosition){
-    	// List<TrackReport> reports = goal_tracker_.getTracks();
-        // if (!reports.isEmpty()) {
-            // TrackReport report = reports.get(0);
+    // 	List<TrackReport> reports = goal_tracker_.getTracks();
+    //     if (!reports.isEmpty()) {
+    //         TrackReport report = reports.get(0);
     //         Translation2d robotFrameToFieldFrame = report.field_to_goal.inverse().translateBy(cubePosition);
     //         if(robotFrameToFieldFrame.norm() <= 2.0){
     //         	Swerve.getInstance().resetPosition(new RigidTransform2d(Swerve.getInstance().getPose().getTranslation().translateBy(robotFrameToFieldFrame), Swerve.getInstance().getPose().getRotation()));

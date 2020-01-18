@@ -10,6 +10,7 @@ import java.lang.*;
 public class DriveStraightCommand extends Command {
 	
     private Translation2d driveVector;
+    private double angle;
 
 	
     public DriveStraightCommand(double angle, double power) {
@@ -21,14 +22,13 @@ public class DriveStraightCommand extends Command {
     protected void initialize() {
         Swerve.getInstance().zeroSensors();
         Swerve.getInstance().timesCalled++;
-        //Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), .5, true, false);
-        //Swerve.getInstance().setPositionTarget(directionDegrees, magnitudeInches);
+        //Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), 0, true, false);
+        Swerve.getInstance().rotate(angle);
         
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Swerve.getInstance().rotateInPlaceAbsolutely(100);
         Robot.swerve.updatePose(Timer.getFPGATimestamp());
         Robot.swerve.updateControlCycle(Timer.getFPGATimestamp());
         Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();

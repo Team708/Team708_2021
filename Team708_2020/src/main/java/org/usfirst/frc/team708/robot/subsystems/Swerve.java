@@ -9,8 +9,6 @@ import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.RobotState;
 import org.usfirst.frc.team708.robot.commands.swerve.*;
-// import org.usfirst.frc.team708.robot.loops.Loop;
-// import org.usfirst.frc.team708.robot.loops.Looper;
 import org.usfirst.frc.team708.robot.pathfinder.PathfinderPath;
 import org.usfirst.frc.team708.robot.util.libs.SwerveHeadingController;
 import org.usfirst.frc.team708.robot.util.libs.SwerveKinematics;
@@ -186,11 +184,11 @@ public class Swerve extends Subsystem{
 	}
 	
 	public void rotateInPlace(double goalHeading){
-		/*setState(ControlState.POSITION);
-		kinematics.calculate(0, 0, 1);
-		modules.forEach((m) -> m.setModuleAngle(kinematics.wheelAngles[m.moduleID]));
-		Rotation2d deltaAngle = goalHeading.rotateBy(pose.getRotation().inverse());
-		modules.forEach((m) -> m.setDrivePositionTarget(deltaAngle.getRadians()*(Constants.SWERVE_DIAGONAL/2)*12.0));*/
+		// setState(ControlState.POSITION);
+		// kinematics.calculate(0, 0, 1);
+		// modules.forEach((m) -> m.setModuleAngle(kinematics.wheelAngles[m.moduleID]));
+		// Rotation2d deltaAngle = goalHeading.rotateBy(pose.getRotation().inverse());
+		// modules.forEach((m) -> m.setDrivePositionTarget(deltaAngle.getRadians()*(Constants.SWERVE_DIAGONAL/2)*12.0));
 		setState(ControlState.ROTATION);
 		headingController.setStationaryTarget(
 				Util.placeInAppropriate0To360Scope(pose.getRotation().getUnboundedDegrees(), goalHeading));
@@ -283,11 +281,11 @@ public class Swerve extends Subsystem{
 		SmartDashboard.putNumber("Modules Used", modulesToUse.size());
 		
 		for(SwerveDriveModule m : modulesToUse){
-			//if(m.moduleID != 0 && m.moduleID != 2 && m.moduleID != 1){
-			//m.updatePose(heading);
+			// if(m.moduleID != 0 && m.moduleID != 2 && m.moduleID != 1){
+			// m.updatePose(heading);
 			x += m.getEstimatedRobotPose().getTranslation().x();
 			y += m.getEstimatedRobotPose().getTranslation().y();
-			//}
+			// }
 		}
 		RigidTransform2d updatedPose = new RigidTransform2d(new Translation2d(x / modulesToUse.size(), y / modulesToUse.size()), heading);
 		double deltaPos = updatedPose.getTranslation().translateBy(pose.getTranslation().inverse()).norm();
@@ -298,17 +296,16 @@ public class Swerve extends Subsystem{
 	}
 	
 	public synchronized void updateControlCycle(double timestamp){
-		// if(trackCube && RobotState.getInstance().getAimingParameters().isPresent()){
-			// headingController.setSnapTarget(Util.placeInAppropriate0To360Scope(pose.getRotation().getUnboundedDegrees(), RobotState.getInstance().getAimingParameters().get().getRobotToGoal().getDegrees()));
-			// if(RobotState.getInstance().getAimingParameters().isPresent()){
-			// System.out.println("Angle To Cube: " + RobotState.getInstance().getAimingParameters().get().getRobotToGoal().getDegrees());
-			// }
-		// }
+	// 	if(trackCube && RobotState.getInstance().getAimingParameters().isPresent()){
+	// 		headingController.setSnapTarget(Util.placeInAppropriate0To360Scope(pose.getRotation().getUnboundedDegrees(), RobotState.getInstance().getAimingParameters().get().getRobotToGoal().getDegrees()));
+	// 		if(RobotState.getInstance().getAimingParameters().isPresent()){
+	// 		// System.out.println("Angle To Cube: " + RobotState.getInstance().getAimingParameters().get().getRobotToGoal().getDegrees());
+	// 		}
+	// 	}
 		double rotationCorrection = headingController.updateRotationCorrection(pose.getRotation().getUnboundedDegrees(), timestamp);
-		rotationCorrection = 0.0;
+		//rotationCorrection = 0.0;
 		switch(currentState){
 		case MANUAL:
-			distanceinches=getDistanceInches();
 			if(xInput == 0 && yInput == 0 && rotationalInput == 0){
 				if(lastActiveVector.equals(rotationalVector) || isInLowPower){
 					stop();
@@ -364,9 +361,9 @@ public class Swerve extends Subsystem{
 			Segment lookaheadPoint = currentPathTrajectory.get(lookaheadPointIndex);
 			Translation2d lookaheadPosition = new Translation2d(lookaheadPoint.x, lookaheadPoint.y);
 			Rotation2d angleToLookahead = lookaheadPosition.translateBy(pose.getTranslation().inverse()).direction();
-			//angleToLookahead = Rotation2d.fromRadians(pathFollower.getHeading());
+			angleToLookahead = Rotation2d.fromRadians(pathFollower.getHeading());
 			if(currentPathSegment >= (currentPathTrajectory.length() - 1)){
-				//double error = currentPath.getFinalPosition().translateBy(pose.getTranslation().inverse()).norm();
+				double error = currentPath.getFinalPosition().translateBy(pose.getTranslation().inverse()).norm();
 				//if(error <= (1.0/12.0)){
 					hasFinishedPath = true;
 					setState(ControlState.NEUTRAL);
@@ -411,42 +408,41 @@ public class Swerve extends Subsystem{
 				robotXPassed = true;
 			}*/
 			break;
+		
 		case NEUTRAL:
 			stop();
 			break;
 		}
 	}
-
-		public void onStart(double timestamp) {
-			synchronized(Swerve.this){
-				xInput = 0;
-				yInput = 0;
-				rotationalInput = 0;
-				headingController.temporarilyDisable();
-				stop();
-				lastUpdateTimestamp = timestamp;
-			}
-		}
+	// public void onStart(double timestamp) {
+	// 	synchronized(Swerve.this){
+	// 			xInput = 0;
+	// 			yInput = 0;
+	// 			rotationalInput = 0;
+	// 			headingController.temporarilyDisable();
+	// 			stop();
+	// 			lastUpdateTimestamp = timestamp;
+	// 		}
+	// 	}
 
 		
-		public void onLoop(double timestamp) {
-			synchronized(Swerve.this){
-				updatePose(timestamp);
-				updateControlCycle(timestamp);
-				lastUpdateTimestamp = timestamp;
-			}
-		}
+	// 	public void onLoop(double timestamp) {
+	// 		synchronized(Swerve.this){
+	// 			updatePose(timestamp);
+	// 			updateControlCycle(timestamp);
+	// 			lastUpdateTimestamp = timestamp;
+	// 		}
+	// 	}
 
-		public void onStop(double timestamp) {
-			synchronized(Swerve.this){
-				xInput = 0;
-				yInput = 0;
-				rotationalInput = 0;
-				stop();
-			}
-		}
+	// 	public void onStop(double timestamp) {
+	// 		synchronized(Swerve.this){
+	// 			xInput = 0;
+	// 			yInput = 0;
+	// 			rotationalInput = 0;
+	// 			stop();
+	// 		}
+	// 	}
 		
-	// };
 
 	public double getDistanceInches(){
 		return frontLeft.driveEncoder.getPosition()/Constants.SWERVE_ENC_UNITS_PER_INCH;
@@ -462,7 +458,7 @@ public class Swerve extends Subsystem{
 	}
 	
 	public synchronized void zeroSensors(RigidTransform2d startingPose){
-		pigeon.setAngle(0);
+		pigeon.setAngle(startingPose.getRotation().getUnboundedDegrees());
 		modules.forEach((m) -> m.zeroSensors(startingPose));
 		pose = startingPose;
 		distanceTraveled = 0;

@@ -268,7 +268,7 @@ public class SwerveDriveModule extends Subsystem{
 	}
 	
 	public synchronized void stop(){
-		//setModuleAngle(getModuleAngle().getDegrees());
+		setModuleAngle(getModuleAngle().getDegrees());
 		setRotationOpenLoop(0.0);
 		setDriveOpenLoop(0.0);
 	}
