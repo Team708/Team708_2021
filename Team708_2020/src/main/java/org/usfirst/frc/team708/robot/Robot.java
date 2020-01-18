@@ -153,7 +153,7 @@ public class Robot extends TimedRobot {
         // remove this line or comment it out.
         if (autonomousCommand != null)
             autonomousCommand.cancel();
-        swerve.SetDriveBrakesOff();
+        swerve.SetDriveBrakesOn();
         
 
      // intake.intakeRetract();
@@ -179,15 +179,15 @@ public class Robot extends TimedRobot {
 		swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
 		if(driver.yButton.wasPressed())
 			swerve.rotate(0);
-		else if(driver.bButton.wasPressed())
+		if(driver.bButton.wasPressed())
 			swerve.rotate(90);
-		else if(driver.aButton.wasPressed())
+		if(driver.aButton.wasPressed())
 			swerve.rotate(180);
-		else if(driver.xButton.wasPressed())
+		if(driver.xButton.wasPressed())
 			swerve.rotate(270);
 		if(driver.backButton.isBeingPressed()){
 			swerve.temporarilyDisableHeadingController();
-			// swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
+			swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
 		}
 		
     }
@@ -217,6 +217,7 @@ public class Robot extends TimedRobot {
 
         autonomousMode.addOption("Do Nothing", new DoNothing());
         autonomousMode.addOption("Drive Straight", new DriveStraight());
+        autonomousMode.addOption("Turn", new Turn());
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }
 

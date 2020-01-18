@@ -462,7 +462,7 @@ public class Swerve extends Subsystem{
 	}
 	
 	public synchronized void zeroSensors(RigidTransform2d startingPose){
-		pigeon.setAngle(startingPose.getRotation().getUnboundedDegrees());
+		pigeon.setAngle(0);
 		modules.forEach((m) -> m.zeroSensors(startingPose));
 		pose = startingPose;
 		distanceTraveled = 0;
@@ -489,6 +489,7 @@ public class Swerve extends Subsystem{
 
 	public void outputToSmartDashboard() {
 		modules.forEach((m) -> m.outputToSmartDashboard());
+		pigeon.outputToSmartDashboard();
 		//SmartDashboard.putNumber("Robot X", pose.getTranslation().x());
 		//SmartDashboard.putNumber("Robot Y", pose.getTranslation().y());
 		//SmartDashboard.putNumber("Robot Heading", pose.getRotation().getUnboundedDegrees());

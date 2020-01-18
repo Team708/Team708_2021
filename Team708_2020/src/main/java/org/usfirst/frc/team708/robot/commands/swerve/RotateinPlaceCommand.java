@@ -7,28 +7,23 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
 import java.lang.*;
 
-public class DriveStraightCommand extends Command {
+public class RotateinPlaceCommand extends Command {
 	
-    private Translation2d driveVector;
+    private double rotatePower;
+	
+    public RotateinPlaceCommand(double rotatePower) {
 
-	
-    public DriveStraightCommand(double angle, double power) {
-        this.driveVector = Rotation2d.fromDegrees(angle+90).toTranslation().scale(power);
-        
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         Swerve.getInstance().zeroSensors();
-        Swerve.getInstance().timesCalled++;
-        //Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), .5, true, false);
-        //Swerve.getInstance().setPositionTarget(directionDegrees, magnitudeInches);
-        
+        Swerve.timesCalled++;
+        Swerve.getInstance().sendInput(.1, .1, 0, false, false);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Swerve.getInstance().rotateInPlaceAbsolutely(100);
         Robot.swerve.updatePose(Timer.getFPGATimestamp());
         Robot.swerve.updateControlCycle(Timer.getFPGATimestamp());
         Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();

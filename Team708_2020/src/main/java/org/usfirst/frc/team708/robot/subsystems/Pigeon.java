@@ -57,5 +57,6 @@ public class Pigeon {
 		SmartDashboard.putBoolean("Pigeon Good", isGood());
 		SmartDashboard.putNumber("Pigeon Temp", pigeon.getTemp());
 		SmartDashboard.putNumber("Pigeon Compass", pigeon.getAbsoluteCompassHeading());
+		SmartDashboard.putNumber("Yaw", getAngle().getDegrees());
 	}
 }

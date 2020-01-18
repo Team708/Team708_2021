@@ -1,53 +1,50 @@
 package org.usfirst.frc.team708.robot.commands.swerve;
 import org.usfirst.frc.team708.robot.subsystems.Swerve;
+import org.usfirst.frc.team708.robot.subsystems.Pigeon;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team254.lib.util.math.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Timer;
 import java.lang.*;
 
-public class DriveStraightCommand extends Command {
+public class StopatAngle extends Command {
 	
-    private Translation2d driveVector;
-
+    private double angle;
+    private double timeout;
 	
-    public DriveStraightCommand(double angle, double power) {
-        this.driveVector = Rotation2d.fromDegrees(angle+90).toTranslation().scale(power);
-        
+    public StopatAngle(double angle, double timeout) {
+        this.angle = angle;
+        this.timeout = timeout;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         Swerve.getInstance().zeroSensors();
-        Swerve.getInstance().timesCalled++;
-        //Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), .5, true, false);
-        //Swerve.getInstance().setPositionTarget(directionDegrees, magnitudeInches);
+        timeSinceInitialized();
+        Swerve.timesCalled++;
         
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Swerve.getInstance().rotateInPlaceAbsolutely(100);
-        Robot.swerve.updatePose(Timer.getFPGATimestamp());
-        Robot.swerve.updateControlCycle(Timer.getFPGATimestamp());
-        Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();
 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        
+        return (this.timeSinceInitialized()>=timeout) || (Math.abs(angle) <= Math.abs(Pigeon.getInstance().getAngle().getDegrees()));
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    
+        Swerve.getInstance().stop();
+        Swerve.getInstance().zeroSensors();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        Swerve.getInstance().stop();
+    	end();
     }
 }
