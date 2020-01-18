@@ -184,7 +184,13 @@ public class Robot extends TimedRobot {
 		if(driver.aButton.wasPressed())
 			swerve.rotate(180);
 		if(driver.xButton.wasPressed())
-			swerve.rotate(270);
+            swerve.rotate(270);
+        if(driver.rightBumper.wasPressed())
+            swerve.rotate(45);
+        if(driver.leftBumper.wasPressed())
+            swerve.rotate(-45);
+        if(driver.startButton.wasPressed())
+            swerve.wheelBrake();   
 		if(driver.backButton.isBeingPressed()){
 			swerve.temporarilyDisableHeadingController();
 			swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));

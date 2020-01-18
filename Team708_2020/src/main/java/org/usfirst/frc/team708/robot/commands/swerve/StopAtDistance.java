@@ -1,4 +1,5 @@
 package org.usfirst.frc.team708.robot.commands.swerve;
+
 import org.usfirst.frc.team708.robot.subsystems.Swerve;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team254.lib.util.math.*;
@@ -32,7 +33,7 @@ public class StopAtDistance extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         
-        return (this.timeSinceInitialized()>=timeout) || (distance <= Math.abs(Swerve.getInstance().distanceinches));
+        return (this.timeSinceInitialized()>=timeout) || (distance <= Math.abs(Swerve.getInstance().getDistanceInches()));
     }
 
     // Called once after isFinished returns true

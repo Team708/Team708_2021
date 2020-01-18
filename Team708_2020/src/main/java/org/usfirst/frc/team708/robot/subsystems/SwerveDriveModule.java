@@ -309,6 +309,7 @@ public class SwerveDriveModule extends Subsystem{
 		// SmartDashboard.putNumber(name + "Drive Voltage", driveMotor.getMotorOutputVoltage()); //JNP removed
 		//SmartDashboard.putNumber(name + "Drive Voltage", driveMotor.getVoltageCompensationNominalVoltage()); //JNP added
 		SmartDashboard.putNumber(name + "Inches Driven", getDriveDistanceInches());
+		SmartDashboard.putNumber(name + "raw value", driveEncoder.getPosition());
 		//SmartDashboard.putNumber(name + "Rotation Voltage", rotationMotor.getMotorOutputVoltage());
 		// SmartDashboard.putNumber(name + "Velocity", encUnitsPer100msToFeetPerSecond(driveMotor.getSelectedSensorVelocity(0))); //JNP removed
 		//if(rotationMotor.getControlMode() == ControlMode.MotionMagic)

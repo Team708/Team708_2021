@@ -175,6 +175,16 @@ public class Swerve extends Subsystem{
 			lastActiveVector = rotationalVector;
 	}
 	
+	public void wheelBrake(){
+		setState(ControlState.POSITION);
+		frontLeft.setModuleAngle(-45);
+		frontRight.setModuleAngle(45);
+		rearRight.setModuleAngle(-45);
+		rearLeft.setModuleAngle(45);
+		
+	
+	}
+
 	public void rotate(double goalHeading){
 		if(xInput == 0 && yInput == 0)
 			rotateInPlace(goalHeading);

@@ -2,6 +2,7 @@ package org.usfirst.frc.team708.robot.commands.autonomous;
 
 import org.usfirst.frc.team708.robot.commands.drivetrain.*;
 import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
+import org.usfirst.frc.team708.robot.commands.swerve.RotateinPlaceCommand;
 import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistance;
 import org.usfirst.frc.team708.robot.commands.swerve.StopatAngle;
 import org.usfirst.frc.team708.robot.Constants;
@@ -26,18 +27,22 @@ public class DriveStraight extends CommandGroup {
     public DriveStraight() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        addSequential(new WaitCommand(1));
-        addSequential(new DriveStraightCommand(0, .1));
+        //addSequential(new WaitCommand(1));
+        //addSequential(new DriveStraightCommand(0, .1));
         //addSequential(new StopatAngle(180, 5));
+        //addSequential(new WaitCommand(1));
+        //addSequential(new DriveStraightCommand(0, .5));
+        // addSequential(new WaitCommand(1));
+        
+        //addSequential(new StopAtDistance(10, 10));
+        //addSequential(new WaitCommand(1));
+        addSequential(new DriveStraightCommand(0, .5));
+        addSequential(new StopAtDistance(60, 10));
+        addSequential(new WaitCommand(1.5));
+        addSequential(new RotateinPlaceCommand(270));
+        addSequential(new WaitCommand(1.5));
         // addSequential(new WaitCommand(.5));
-        // addSequential(new DriveStraightCommand(90, .7));
-        // addSequential(new StopAtDistance(60, 10));
-        // addSequential(new WaitCommand(.5));
-        // addSequential(new DriveStraightCommand(0, .7));
-        // addSequential(new StopAtDistance(60, 10));
-        // addSequential(new WaitCommand(.5));
-        // addSequential(new DriveStraightCommand(270, .7));
-        // addSequential(new StopAtDistance(60, 10));
+        
         // addSequential(new WaitCommand(.5));
         // addSequential(new DriveStraightCommand(135, .7));
         // addSequential(new StopAtDistance(60, 10));

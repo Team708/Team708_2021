@@ -21,9 +21,8 @@ public class DriveStraightCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         Swerve.getInstance().zeroSensors();
-        Swerve.getInstance().timesCalled++;
-        //Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), 0, true, false);
-        Swerve.getInstance().rotate(angle);
+        Swerve.timesCalled++;
+        Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), 0, false, false);
         
     }
 

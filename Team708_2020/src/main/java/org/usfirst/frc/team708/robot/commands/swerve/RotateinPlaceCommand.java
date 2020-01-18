@@ -1,4 +1,5 @@
 package org.usfirst.frc.team708.robot.commands.swerve;
+import org.usfirst.frc.team708.robot.subsystems.Pigeon;
 import org.usfirst.frc.team708.robot.subsystems.Swerve;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team254.lib.util.math.*;
@@ -21,7 +22,6 @@ public class RotateinPlaceCommand extends Command {
     protected void initialize() {
         Swerve.getInstance().zeroSensors();
         Swerve.getInstance().timesCalled++;
-        //Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), .5, true, false);
         Swerve.getInstance().rotate(angle);
         
     }
@@ -36,17 +36,18 @@ public class RotateinPlaceCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
+        //return Pigeon.getInstance().getAngle().getDegrees()==angle;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    
+        //Swerve.getInstance().stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        Swerve.getInstance().stop();
+        end();
     }
 }

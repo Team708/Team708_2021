@@ -56,7 +56,7 @@ public final class Constants {
 	public static final double[] kWheelScrubFactors = new double[]{1.0, 1.0, 1.0, /*5.0/5.15*/1.0};	
 
 	//Swerve Odometry Constants
-	public static final double SWERVE_WHEEL_DIAMETER = 3.93; //inches
+	public static final double SWERVE_WHEEL_DIAMETER = 3.952; //inches
 	public static final double ROTATION_ENCODER_RESOLUTION = 4096.0;
 	public static final double DRIVE_ENCODER_RESOLUTION    = 42.0;
 
@@ -69,7 +69,7 @@ public final class Constants {
 	/**
 	 * The number of rotations the swerve drive encoder undergoes for every rotation of the wheel.
 	 */
-	public static final double SWERVE_ENCODER_TO_WHEEL_RATIO = .1;  //10.0/9.0;
+	public static final double SWERVE_ENCODER_TO_WHEEL_RATIO = .119;  //10.0/9.0;
 	public static final double SWERVE_ENC_UNITS_PER_WHEEL_REV = DRIVE_ENCODER_RESOLUTION * SWERVE_ENCODER_TO_WHEEL_RATIO;
 	public static final double SWERVE_ENC_UNITS_PER_INCH = SWERVE_ENC_UNITS_PER_WHEEL_REV / (Math.PI * SWERVE_WHEEL_DIAMETER);
 
