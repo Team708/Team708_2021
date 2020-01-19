@@ -1,10 +1,8 @@
 package org.usfirst.frc.team708.robot.commands.autonomous;
 
-import org.usfirst.frc.team708.robot.commands.drivetrain.*;
 import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
 import org.usfirst.frc.team708.robot.commands.swerve.RotateinPlaceCommand;
 import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistance;
-import org.usfirst.frc.team708.robot.commands.swerve.StopatAngle;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.autonomous.*;

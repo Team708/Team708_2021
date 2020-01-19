@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.usfirst.frc.team708.robot.subsystems.Swerve;
-// import org.usfirst.frc.team708.robot.vision.GoalTracker;
-// import org.usfirst.frc.team708.robot.vision.GoalTracker.TrackReport;
 import org.usfirst.frc.team708.robot.vision.ShooterAimingParameters;
 import org.usfirst.frc.team708.robot.vision.TargetInfo;
 import org.usfirst.frc.team708.robot.util.libs.InterpolatingDouble;

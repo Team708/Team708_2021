@@ -209,6 +209,10 @@ public class Swerve extends Subsystem{
 		headingController.setStationaryTarget(absoluteHeading);
 	}
 	
+	public void rotateDegreesfromPosition(double degrees){
+		rotate(Pigeon.getInstance().getAngle().getDegrees()+degrees);
+	}
+
 	public void setPathHeading(double goalHeading){
 		headingController.setSnapTarget(
 				Util.placeInAppropriate0To360Scope(

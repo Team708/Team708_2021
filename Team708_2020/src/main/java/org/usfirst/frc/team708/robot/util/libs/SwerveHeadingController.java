@@ -1,14 +1,14 @@
 package org.usfirst.frc.team708.robot.util.libs;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team708.robot.Constants;
 
 public class SwerveHeadingController {
 	private double targetHeading;
 	private double disabledTimestamp;
 	private double lastUpdateTimestamp;
 	private final double disableTimeLength = 0.3;
-	private SynchronousPIDF stabilizationPID = new SynchronousPIDF(0.005, 0.0, 0.0, 0.0);
+	public SynchronousPIDF stabilizationPID = new SynchronousPIDF(Constants.rotateKp, Constants.rotateKi, Constants.rotateKd, Constants.rotateKf);
 	private SynchronousPIDF snapPID = new SynchronousPIDF(0.015, 0.0, 0.0, 0.0);
 	private SynchronousPIDF stationaryPID = new SynchronousPIDF(0.01, 0.0, 0.002, 0.0);
 	

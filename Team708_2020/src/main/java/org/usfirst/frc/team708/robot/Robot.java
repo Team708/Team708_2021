@@ -186,9 +186,9 @@ public class Robot extends TimedRobot {
 		if(driver.xButton.wasPressed())
             swerve.rotate(270);
         if(driver.rightBumper.wasPressed())
-            swerve.rotate(45);
+        swerve.rotateDegreesfromPosition(135);
         if(driver.leftBumper.wasPressed())
-            swerve.rotate(-45);
+            visionprocessor.findTarget();
         if(driver.startButton.wasPressed())
             swerve.wheelBrake();   
 		if(driver.backButton.isBeingPressed()){

@@ -93,18 +93,15 @@ public class VisionProcessor extends Subsystem {
 	}
 
 	public double getRotate() {	
-		rotate=0.0;
-		if (seesTarget())
-			if (!isCentered())	
-					if (xAngle > 0)
-						rotate = Constants.kVISION_ROTATE;
-					else 
-						rotate = -Constants.kVISION_ROTATE;
-			else // centered
-				rotate= 0.0;			 
-		return rotate;
+		return getNTInfo("tx");
 	}
 
+	public void findTarget() {
+		double angle = getRotate();
+		Swerve.getInstance().rotateDegreesfromPosition(angle);
+		
+
+	}
 	
 	// public double getMoveCargoship (double targetValue) {
 	// 	if (seesTarget)

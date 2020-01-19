@@ -60,10 +60,12 @@ public final class Constants {
 	public static final double ROTATION_ENCODER_RESOLUTION = 4096.0;
 	public static final double DRIVE_ENCODER_RESOLUTION    = 42.0;
 
-	//pid
-	public static final double Kp = 0;
-	public static final double Ki = 0;
-	public static final double Kd = 0;
+	//Rotation pid
+	public static final double rotateKp = 0.05; //26
+	public static final double rotateKi = 0; //15
+	public static final double rotateKd = 0; //3
+	public static final double rotateKf = 0;
+
 
 
 	/**

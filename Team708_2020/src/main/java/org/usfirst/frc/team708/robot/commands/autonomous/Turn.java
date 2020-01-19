@@ -1,6 +1,5 @@
 package org.usfirst.frc.team708.robot.commands.autonomous;
 
-import org.usfirst.frc.team708.robot.commands.drivetrain.*;
 import org.usfirst.frc.team708.robot.commands.swerve.*;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
