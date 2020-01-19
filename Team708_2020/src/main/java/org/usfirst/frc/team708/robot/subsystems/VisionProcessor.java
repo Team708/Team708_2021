@@ -102,6 +102,10 @@ public class VisionProcessor extends Subsystem {
 		
 
 	}
+
+	public double getDistance(){
+			return 83.75/Math.tan(Math.PI*getNTInfo("ty")/180);
+	}
 	
 	// public double getMoveCargoship (double targetValue) {
 	// 	if (seesTarget)
@@ -170,15 +174,16 @@ public class VisionProcessor extends Subsystem {
 	// }
 
 	public void sendToDashboard() {
-		SmartDashboard.putBoolean("Is Centered", isCentered());
-		SmartDashboard.putNumber("Displacement X", xAngle);
-		SmartDashboard.putNumber("Displacement Y", yAngle);
+		//SmartDashboard.putBoolean("Is Centered", isCentered());
+		//SmartDashboard.putNumber("Displacement X", xAngle);
+		//SmartDashboard.putNumber("Displacement Y", yAngle);
 		// SmartDashboard.putBoolean("Is At Y", isAtY(Constants.TARGET_Y));
 		// SmartDashboard.putBoolean("Is At Area-Ball", isAtArea(Constants.ROCKET_CARGO_TARGET_AREA));
 		// SmartDashboard.putBoolean("Is At Area-Hatch", isAtArea(Constants.ROCKET_HATCH_TARGET_AREA));
-		SmartDashboard.putBoolean("Has Target", seesTarget());
-		SmartDashboard.putNumber("TV", tv);
-		SmartDashboard.putNumber("TA", area);
+		//SmartDashboard.putBoolean("Has Target", seesTarget());
+		//SmartDashboard.putNumber("TV", tv);
+		//SmartDashboard.putNumber("TA", area);
+		SmartDashboard.putNumber("Distance to Target", getDistance());
 	}
 
 	public void initDefaultCommand() {

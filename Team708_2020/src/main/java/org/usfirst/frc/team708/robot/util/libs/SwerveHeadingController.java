@@ -10,7 +10,7 @@ public class SwerveHeadingController {
 	private final double disableTimeLength = 0.3;
 	public SynchronousPIDF stabilizationPID = new SynchronousPIDF(Constants.rotateKp, Constants.rotateKi, Constants.rotateKd, Constants.rotateKf);
 	private SynchronousPIDF snapPID = new SynchronousPIDF(0.015, 0.0, 0.0, 0.0);
-	private SynchronousPIDF stationaryPID = new SynchronousPIDF(0.01, 0.0, 0.002, 0.0);
+	private SynchronousPIDF stationaryPID = new SynchronousPIDF(.01, 0.001, 0.00208, 0.0);
 	
 	public enum State{
 		Off, Stabilize, Snap, TemporaryDisable, Stationary

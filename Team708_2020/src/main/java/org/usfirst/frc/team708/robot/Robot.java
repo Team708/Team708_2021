@@ -213,6 +213,7 @@ public class Robot extends TimedRobot {
         // if (statsTimer.get() >= Constants.SEND_STATS_INTERVAL) statsTimer.reset();
         // drivetrain.sendToDashboard();
         swerve.outputToSmartDashboard();
+        visionprocessor.sendToDashboard();
     }
 
     /**
