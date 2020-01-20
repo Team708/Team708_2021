@@ -87,8 +87,9 @@ public final class Constants {
  * shooter
  */
 	
-	public static final double	kSHOOTER_MAXSPEED			= 1.0;
+	public static final double	kSHOOTER_MAXSPEED			= 5676;
 	public static final double	kSHOOTER_BACKWARDSPEED		= -1.0;
+	public static final double	kSHOOTERHEIGHT		        = 15;
 
 	public static final double  kHOODANGLE_CLOSESHOT		= 10000;
 	public static final double  kHOODANGLE_FARSHOT		    = 500;
@@ -130,6 +131,7 @@ public final class Constants {
 	public static final double kVISION_HIGHGOAL_TARGETAREA	=	10.0;
 
 	public static final double kVISION_ROTATE = 0.0;
+	
 /*
  * camera
  */
@@ -138,7 +140,7 @@ public final class Constants {
     public static final double kCameraZOffset = 17.0 / 12.0;
     public static final double kCameraYawAngleDegrees = 0.0;
     public static final double kCameraPitchAngleDegrees = -10.0;
-    
+    public static final double kCAMERAHEIGHT = 0.0;
 
 /*
  * Smart Dashboard  & FMS

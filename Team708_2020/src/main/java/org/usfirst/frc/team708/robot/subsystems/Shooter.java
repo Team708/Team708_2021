@@ -3,13 +3,16 @@ package org.usfirst.frc.team708.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import org.usfirst.frc.team708.robot.Constants;
+import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
-
+// import org.usfirst.frc.team708.robot.subsystems.VisionProcessor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shooter extends Subsystem {
 
@@ -19,7 +22,7 @@ public class Shooter extends Subsystem {
     private CANPIDController shooterPIDController;
 
     public Solenoid hoodSolenoid;
-    private boolean hoodUp   =true;
+    private boolean hoodUp = true;
 
     private double RPMAdjust = 300;
     private double FlyWheelEffeciency = .235;
@@ -32,19 +35,20 @@ public class Shooter extends Subsystem {
         shooterEncoder = new CANEncoder(shooterMotor);
 
         shooterPIDController = shooterMotor.getPIDController();
-        shooterPIDController.setP(0);
+        shooterPIDController.setP(5e-4);
         shooterPIDController.setI(0);
-        shooterPIDController.setD(0);
-        shooterPIDController.setFF(0);
+        shooterPIDController.setD(6e-5);
+        shooterPIDController.setFF(2e-4);
         shooterPIDController.setIZone(0);
-        shooterPIDController.setOutputRange(0, 0);
+        shooterPIDController.setOutputRange(-1, 0);
 
 
         // intakeMotor = new CANSparkMax(22, MotorType.kBrushless); //change 22 to constant, decide port #
-        // //format motor
+        // //format moto
 
         // intakeEncoder = new CANEncoder(intakeMotor);
-        // hoodSolenoid = new Solenoid(RobotMap.hoodSolenoid);
+        hoodSolenoid = new Solenoid(RobotMap.hoodSolenoid);
+        hoodSolenoid.set(hoodUp); //Starts with hood up (45 degrees)
     }
 
     public void intake(CANSparkMax motor, double speed){
@@ -52,19 +56,23 @@ public class Shooter extends Subsystem {
     }
 
     public void shootManual(double speed){
-        
         shooterMotor.set(speed);
     }
 
+    public void stopShooter(){
+        shooterMotor.stopMotor();
+    }
 
+    
     public double adjustAnglePosition(boolean extended, double distance){
-        // if(extended){
-        //     //extend solenoid if not already
-        // }else{
-        //     //retract solenoid if not already
-        // }
-
-        double angleInRadians = Math.atan(1/(distance / (2 * Constants.kGOALHEIGHT)));
+        double angle;
+        if(extended){
+            angle=25;
+        }else{
+            angle=45;
+        }
+        double angleInRadians=angle*Math.PI/180;
+        //angleInRadians = Math.atan2(1,(distance / (2 * (Constants.kGOALHEIGHT-Constants.kCAMERAHEIGHT))));
         return angleInRadians;
     }
 
@@ -73,21 +81,49 @@ public class Shooter extends Subsystem {
      * @param distance
      *                 Defines a distance away from the goal and makes calculations based on it.
      */
-    // public double determineVelocity(double distance){
+    public double determineShooterSpeed(double distance){
+        distance = distance / 12;
+        double angle = adjustAnglePosition(false, distance);
+        //velocity = sqrt((32.2*distance^2)/2(cos(Θ(RADIANS)))^2 * (-height+distance*tan(Θ(RAIDANS))))
 
-        // double angle = adjustAnglePosition(false, distance);
-        //velocity = sqrt((32.2*distance^2)/2(cos(theta(RADIANS)))^2 * (-height+distance*tan(theta(RAIDANS))))
+        double p1 = (32.2 * Math.pow(distance, 2));
+        double p2 = (2 * (Math.pow(Math.cos(angle) , 2)));
+        double p3 = -1*(Constants.kGOALHEIGHT-Constants.kSHOOTERHEIGHT)/12 + distance * Math.tan(angle);
 
-        //double p1 = (32.2 * (distance * distance));
-        //double p2 = (2 * (Math.cos(angle) * Math.cos(angle)));
-        //double p3 = (-Constants.kGOALHEIGHT + distance * Math.tan(angle));
+        double velocity = Math.sqrt(p1 / (p2 * p3));
 
-        // double velocity = Math.sqrt(p1 / (p2 * p3));
+        double RPM = (velocity) / (4 * FlyWheelEffeciency * 2) * 60 * Math.PI; //change 4 to cnst.
+        //double velocity = 0;
+        return RPM;
+    }
 
-        // double RPM = (velocity) / (4 * FlyWheelEffeciency * 2) * 60 * Math.PI + RPMAdjust; //change 4 to cnst.
+    public void shootAuto(){
+        double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
+        shooterPIDController.setReference(-(RPM -100), ControlType.kVelocity);
+    }
+    // public void outputToSmartDashboard() {
 
-        // return RPM;
+    //     //SmartDashboard.getNumber(key, defaultValue)
     // }
+
+    public boolean getAnglePistonPosition(){
+        return hoodUp;
+    }
+
+    public void moveHoodUp(){
+        hoodUp = true;
+        hoodSolenoid.set(hoodUp);
+    }
+
+    public void moveHoodDown(){
+        hoodUp = false;
+        hoodSolenoid.set(hoodUp);
+    }
+
+    public void toggleHood(){
+        hoodUp = !hoodUp;
+        hoodSolenoid.set(hoodUp);
+    }
 
 
     @Override

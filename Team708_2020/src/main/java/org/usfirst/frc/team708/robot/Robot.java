@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.cscore.UsbCamera;
 
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
+import org.usfirst.frc.team708.robot.commands.shooter.*;
 import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
 import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
@@ -38,7 +39,7 @@ public class Robot extends TimedRobot {
     public static Swerve swerve;
     public static VisionProcessor visionprocessor;
     public static Shooter shooter;
-
+    public double speed;
     public String gameData;
     public String robotLocation;
     public String autoMode;
@@ -151,6 +152,7 @@ public class Robot extends TimedRobot {
         if (autonomousCommand != null)
             autonomousCommand.cancel();
         swerve.SetDriveBrakesOn();
+        speed=0.5;
     }
 
     /**
@@ -170,8 +172,16 @@ public class Robot extends TimedRobot {
         swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
         
         operator.update();
-        if(operator.yButton.isBeingPressed())
-            swerve.rotate(0);
+        if(operator.leftTrigger.isBeingPressed())
+            shooter.shootManual(speed);
+        else if(operator.rightTrigger.isBeingPressed())
+           shooter.shootAuto();
+        else
+           shooter.stopShooter();
+        if(operator.yButton.wasPressed())
+            speed += 0.1;
+        if(operator.aButton.wasPressed())
+            speed -= 0.1;
 
         driver.update();
 		if(driver.yButton.wasPressed())
@@ -192,11 +202,6 @@ public class Robot extends TimedRobot {
 			swerve.temporarilyDisableHeadingController();
 			swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
         }
-        
-        //if(operator.yButton.wasPressed())
-            //speed=+0.1;
-        //if(operator.aButton.wasPressed())
-            //speed=-0.1;
 		
     }
 
@@ -216,8 +221,13 @@ public class Robot extends TimedRobot {
         // drivetrain.sendToDashboard();
         swerve.outputToSmartDashboard();
         visionprocessor.sendToDashboard();
+        SmartDashboard.putNumber("Theor. RPM", ((shooter.determineShooterSpeed(visionprocessor.getDistance())*Constants.kSHOOTER_MAXSPEED)));
+        SmartDashboard.putNumber("Theor. RPM %", ((shooter.determineShooterSpeed(visionprocessor.getDistance()))));
+        SmartDashboard.putNumber("RPM", shooter.determineShooterSpeed(visionprocessor.getDistance()));
+        SmartDashboard.putNumber("velocity", shooter.shooterEncoder.getVelocity());
+
         //SmartDashboard.putNumber("Shooter Speed", speed);
-        SmartDashboard.putBoolean("Operator", operator.yButton.isBeingPressed());
+        SmartDashboard.putNumber("shoot speed %", speed);
     }
 
     /**
