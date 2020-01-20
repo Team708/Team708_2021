@@ -26,14 +26,15 @@ public class DriveStraight extends CommandGroup {
 
         addSequential(new WaitCommand(1));
         addSequential(new DriveStraightCommand(0, .5));
-        addSequential(new StopAtDistance(60, 10));
-    
-        addSequential(new WaitCommand(1));
-        addSequential(new RotateinPlaceCommand(270));
-
-        addSequential(new WaitCommand(1));
-        addSequential(new DriveStraightCommand(0, .5));
         addSequential(new StopAtDistance(20, 10));
+        addSequential(new WaitCommand(1));
+        addSequential(new FindTarget());
+        ///addSequential(new WaitCommand(1));
+        //addSequential(new RotateinPlaceCommand(270));
+
+        //addSequential(new WaitCommand(1));
+        //addSequential(new DriveStraightCommand(0, .5));
+        //addSequential(new StopAtDistance(20, 10));
         
         // addSequential(new WaitCommand(1));
         // addSequential(new DriveStraightCommand(0, .5));

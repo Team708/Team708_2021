@@ -78,9 +78,9 @@ public class Shooter extends Subsystem {
         // double angle = adjustAnglePosition(false, distance);
         //velocity = sqrt((32.2*distance^2)/2(cos(theta(RADIANS)))^2 * (-height+distance*tan(theta(RAIDANS))))
 
-        double p1 = (32.2 * (distance * distance));
-        double p2 = (2 * (Math.cos(angle) * Math.cos(angle)));
-        double p3 = (-Constants.kGOALHEIGHT + distance * Math.tan(angle));
+        //double p1 = (32.2 * (distance * distance));
+        //double p2 = (2 * (Math.cos(angle) * Math.cos(angle)));
+        //double p3 = (-Constants.kGOALHEIGHT + distance * Math.tan(angle));
 
         // double velocity = Math.sqrt(p1 / (p2 * p3));
 

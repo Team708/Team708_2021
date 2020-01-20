@@ -22,7 +22,6 @@ public class DoNothing extends CommandGroup {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         addSequential(new WaitCommand(2.0));
-        addSequential(new FindBall());
         addSequential(new WaitCommand(2.0));
     }
 
