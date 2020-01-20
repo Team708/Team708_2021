@@ -23,7 +23,6 @@ public class SwerveDrive extends Command {
         Robot.swerve.stop();
         Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();
         
-       
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -23,25 +23,23 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveStraight extends CommandGroup {
 
     public DriveStraight() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        //addSequential(new WaitCommand(1));
-        //addSequential(new DriveStraightCommand(0, .1));
-        //addSequential(new StopatAngle(180, 5));
-        //addSequential(new WaitCommand(1));
-        //addSequential(new DriveStraightCommand(0, .5));
-        // addSequential(new WaitCommand(1));
-        
-        //addSequential(new StopAtDistance(10, 10));
-        //addSequential(new WaitCommand(1));
+
+        addSequential(new WaitCommand(1));
         addSequential(new DriveStraightCommand(0, .5));
         addSequential(new StopAtDistance(60, 10));
-        addSequential(new WaitCommand(1.5));
+    
+        addSequential(new WaitCommand(1));
         addSequential(new RotateinPlaceCommand(270));
-        addSequential(new WaitCommand(1.5));
-        // addSequential(new WaitCommand(.5));
+
+        addSequential(new WaitCommand(1));
+        addSequential(new DriveStraightCommand(0, .5));
+        addSequential(new StopAtDistance(20, 10));
         
-        // addSequential(new WaitCommand(.5));
+        // addSequential(new WaitCommand(1));
+        // addSequential(new DriveStraightCommand(0, .5));
+        // addSequential(new StopAtDistance(60, 10));
+
+
         // addSequential(new DriveStraightCommand(135, .7));
         // addSequential(new StopAtDistance(60, 10));
         // addSequential(new WaitCommand(.5));
