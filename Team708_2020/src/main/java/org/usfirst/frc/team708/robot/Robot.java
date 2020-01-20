@@ -63,22 +63,22 @@ public class Robot extends TimedRobot {
         statsTimer.start(); // Starts the timer for the Smart Dashboard
  
         // Subsystem Initialization
-        driver = new Xbox(0);
+        driver   = new Xbox(0);
         operator = new Xbox(1);
-        driver.setDeadband(0.2);
-        operator.setDeadband(0.2);
+
+        
         swerve = Swerve.getInstance();
         Robot.swerve.zeroSensors();
-        shooter = new Shooter();
+        
+        shooter         = new Shooter();
         visionprocessor = new VisionProcessor();
-   
-        // drivetrain      = new Drivetrain();
-
-
+        
+        
+        driver.setDeadband(0.2);
+        operator.setDeadband(0.2);
         visionprocessor.setNTInfo("ledMode", Constants.kVISION_LED_OFF);
     
         sendDashboardSubsystems(); // Sends each subsystem's cmds to Smart Dashboard
-
         queueAutonomousModes();    // Adds autonomous modes to the selection box
     }
 
@@ -125,16 +125,12 @@ public class Robot extends TimedRobot {
 
     public void autonomousInit() {
     // schedule the autonomous command
-        // drivetrain.setBrakeMode(true);
-        // drivetrain.resetGyro();
-    // intake.intakeRetract();
 
         autonomousCommand = (Command) autonomousMode.getSelected();
         if (autonomousCommand != null)
             autonomousCommand.start();
         swerve.zeroSensors();
         swerve.SetDriveBrakesOn();
-        
     }
 
     /**
@@ -143,7 +139,6 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         sendStatistics();
-    
     }
 
     /**
@@ -156,10 +151,6 @@ public class Robot extends TimedRobot {
         if (autonomousCommand != null)
             autonomousCommand.cancel();
         swerve.SetDriveBrakesOn();
-        
-
-     // intake.intakeRetract();
-        // drivetrain.setBrakeMode(false);
     }
 
     /**
@@ -167,7 +158,6 @@ public class Robot extends TimedRobot {
      * reset subsystems before shutting down.
      */
     public void disabledInit() {
-
     }
 
     /**
@@ -176,9 +166,14 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         sendStatistics();
-        driver.update();
+
+        swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
+        
         operator.update();
-		swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
+        if(operator.yButton.isBeingPressed())
+            swerve.rotate(0);
+
+        driver.update();
 		if(driver.yButton.wasPressed())
 			swerve.rotate(0);
 		if(driver.bButton.wasPressed())
@@ -196,15 +191,12 @@ public class Robot extends TimedRobot {
 		if(driver.backButton.isBeingPressed()){
 			swerve.temporarilyDisableHeadingController();
 			swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
+        }
         
-        
-        if(operator.yButton.isBeingPressed())
-			swerve.rotate(0);
         //if(operator.yButton.wasPressed())
             //speed=+0.1;
         //if(operator.aButton.wasPressed())
             //speed=-0.1;
-        }
 		
     }
 
