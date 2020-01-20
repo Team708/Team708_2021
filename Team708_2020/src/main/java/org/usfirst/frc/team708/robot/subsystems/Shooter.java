@@ -73,21 +73,21 @@ public class Shooter extends Subsystem {
      * @param distance
      *                 Defines a distance away from the goal and makes calculations based on it.
      */
-    public double determineVelocity(double distance){
+    // public double determineVelocity(double distance){
 
-        double angle = adjustAnglePosition(false, distance);
+        // double angle = adjustAnglePosition(false, distance);
         //velocity = sqrt((32.2*distance^2)/2(cos(theta(RADIANS)))^2 * (-height+distance*tan(theta(RAIDANS))))
 
         double p1 = (32.2 * (distance * distance));
         double p2 = (2 * (Math.cos(angle) * Math.cos(angle)));
         double p3 = (-Constants.kGOALHEIGHT + distance * Math.tan(angle));
 
-        double velocity = Math.sqrt(p1 / (p2 * p3));
+        // double velocity = Math.sqrt(p1 / (p2 * p3));
 
-        double RPM = (velocity) / (4 * FlyWheelEffeciency * 2) * 60 * Math.PI + RPMAdjust; //change 4 to cnst.
+        // double RPM = (velocity) / (4 * FlyWheelEffeciency * 2) * 60 * Math.PI + RPMAdjust; //change 4 to cnst.
 
-        return RPM;
-    }
+        // return RPM;
+    // }
 
 
     @Override

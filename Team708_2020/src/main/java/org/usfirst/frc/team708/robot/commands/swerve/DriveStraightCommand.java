@@ -20,17 +20,25 @@ public class DriveStraightCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Swerve.getInstance().zeroSensors();
         Swerve.timesCalled++;
-        Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), 0, false, false);
-        
+
+        Robot.swerve.stop();
+        Swerve.getInstance().zeroSensors();
+
+        Robot.swerve.xInput = 0;
+        Robot.swerve.yInput = 0;
+        Robot.swerve.rotationalInput = 0;
+        Robot.swerve.headingController.temporarilyDisable();
+        Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();
+
+        Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), 0, true, false);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.swerve.updatePose(Timer.getFPGATimestamp());
-        Robot.swerve.updateControlCycle(Timer.getFPGATimestamp());
-        Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();
+        // Robot.swerve.updatePose(Timer.getFPGATimestamp());
+        // Robot.swerve.updateControlCycle(Timer.getFPGATimestamp());
+        // Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();
 
     }
 
@@ -41,12 +49,11 @@ public class DriveStraightCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    
+        // Swerve.getInstance().zeroSensors();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        Swerve.getInstance().stop();
     }
 }

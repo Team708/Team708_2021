@@ -25,8 +25,6 @@ public class Turn extends CommandGroup {
         // eg. requires(chassis);
         addSequential(new WaitCommand(1));
         addSequential(new RotateinPlaceCommand(-90));
-        //addSequential(new StopatAngle(90,10));
-        
     }
 
     // Called just before this Command runs the first time
