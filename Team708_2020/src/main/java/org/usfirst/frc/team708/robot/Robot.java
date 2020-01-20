@@ -34,15 +34,14 @@ public class Robot extends TimedRobot {
 
     //
     // public static Drivetrain        drivetrain;
-    private Xbox driver;
+    private Xbox driver, operator;
     public static Swerve swerve;
     public static VisionProcessor visionprocessor;
-    
+    public static Shooter shooter;
 
     public String gameData;
     public String robotLocation;
     public String autoMode;
-
     public static DriverStation 			ds;
     public static DriverStation.Alliance 	alliance;
     public static int 						allianceColor;
@@ -65,9 +64,12 @@ public class Robot extends TimedRobot {
  
         // Subsystem Initialization
         driver = new Xbox(0);
+        operator = new Xbox(1);
         driver.setDeadband(0.2);
+        operator.setDeadband(0.2);
         swerve = Swerve.getInstance();
         Robot.swerve.zeroSensors();
+        shooter = new Shooter();
         visionprocessor = new VisionProcessor();
    
         // drivetrain      = new Drivetrain();
@@ -175,7 +177,7 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
         sendStatistics();
         driver.update();
-		
+        operator.update();
 		swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
 		if(driver.yButton.wasPressed())
 			swerve.rotate(0);
@@ -186,15 +188,23 @@ public class Robot extends TimedRobot {
 		if(driver.xButton.wasPressed())
             swerve.rotate(270);
         if(driver.rightBumper.wasPressed())
-        swerve.rotateDegreesfromPosition(135);
+            swerve.rotateDegreesfromPosition(135);
         if(driver.leftBumper.wasPressed())
             visionprocessor.findTarget();
         if(driver.startButton.wasPressed())
-            swerve.wheelBrake();   
+            swerve.wheelBrake();  
 		if(driver.backButton.isBeingPressed()){
 			swerve.temporarilyDisableHeadingController();
 			swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
-		}
+        
+        
+        if(operator.yButton.isBeingPressed())
+			swerve.rotate(0);
+        //if(operator.yButton.wasPressed())
+            //speed=+0.1;
+        //if(operator.aButton.wasPressed())
+            //speed=-0.1;
+        }
 		
     }
 
@@ -214,6 +224,8 @@ public class Robot extends TimedRobot {
         // drivetrain.sendToDashboard();
         swerve.outputToSmartDashboard();
         visionprocessor.sendToDashboard();
+        //SmartDashboard.putNumber("Shooter Speed", speed);
+        SmartDashboard.putBoolean("Operator", operator.yButton.isBeingPressed());
     }
 
     /**

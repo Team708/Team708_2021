@@ -42,7 +42,7 @@ public class RobotMap {
 	 public static final int kshooterShootMotor         = 21;
 
 // CAN Gyro
-	 public static final int PIGEON       = 0;
+	 public static final int PIGEON     				= 0;
 
 // Digital IO
 //   public static final int 				= 0;  	
@@ -64,7 +64,7 @@ public class RobotMap {
 //	public static final int 		= 3;
 	
 // PCM Ports
-//	public static final int 				= 0; 	
+	public static final int hoodSolenoid	= 0; 	
 //	public static final int 				= 1; 	
 //  public static final int  				= 2;	
 //	public static final int					= 3;	

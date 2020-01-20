@@ -169,4 +169,9 @@ public final class Constants {
 	public static final Translation2d kSecondLeftCube = kLeftMostCube.translateBy(new Translation2d(0.0, kCubeWidth + (15.1/12.0)));
 	public static final Translation2d kSecondLeftCubeCorner = kSecondLeftCube.translateBy(new Translation2d(0.0, -kCubeWidth/2.0));
 	
+/*
+ * 2020 Field Landmarks
+ */
+
+	public static final double kGOALHEIGHT = 98.25;
 }
