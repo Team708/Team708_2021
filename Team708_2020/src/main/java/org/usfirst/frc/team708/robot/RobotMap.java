@@ -40,6 +40,8 @@ public class RobotMap {
 	 public static final int kdrivetrainRearRightTurn 	= 18;
 
 	 public static final int kshooterShootMotor         = 21;
+	 public static final int kfeederFeedMotor           = 25;
+
 
 // CAN Gyro
 	 public static final int PIGEON     				= 0;

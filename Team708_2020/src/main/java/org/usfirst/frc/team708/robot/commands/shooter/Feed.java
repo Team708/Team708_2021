@@ -11,33 +11,32 @@ import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import java.lang.*;
 
-public class shootAuto extends Command {
-    
-    private double speed;
+public class Feed extends Command {
+
     // private Translation2d driveVector;
 
-    public shootAuto() {
+    public Feed() {
     
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.visionprocessor.setNTInfo("ledMode", Constants.kVISION_LED_ON);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.shooter.shootAuto();
+        Robot.shooter.feederOn();
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false; 
+        return true; 
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.shooter.stopShooter();
+        
     }
 
     // Called when another command which requires one or more of the same

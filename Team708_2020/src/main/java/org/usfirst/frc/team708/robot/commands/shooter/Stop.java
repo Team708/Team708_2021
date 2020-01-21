@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import java.lang.*;
 
-public class shootAuto extends Command {
+public class Stop extends Command {
     
     private double speed;
     // private Translation2d driveVector;
 
-    public shootAuto() {
+    public Stop() {
     
     }
 
@@ -38,6 +38,7 @@ public class shootAuto extends Command {
     // Called once after isFinished returns true
     protected void end() {
         Robot.shooter.stopShooter();
+        Robot.shooter.feederOff();
     }
 
     // Called when another command which requires one or more of the same

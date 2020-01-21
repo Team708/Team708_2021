@@ -182,6 +182,10 @@ public class Robot extends TimedRobot {
             speed += 0.1;
         if(operator.aButton.wasPressed())
             speed -= 0.1;
+        if(operator.xButton.isBeingPressed())
+            shooter.feederOn();
+        else
+            shooter.feederOff();
 
         driver.update();
 		if(driver.yButton.wasPressed())
@@ -194,7 +198,7 @@ public class Robot extends TimedRobot {
             swerve.rotate(270);
         if(driver.rightBumper.wasPressed())
             swerve.rotateDegreesfromPosition(135);
-        if(driver.leftBumper.wasPressed())
+        if(driver.leftBumper.isBeingPressed())
             visionprocessor.findTarget();
         if(driver.startButton.wasPressed())
             swerve.wheelBrake();  

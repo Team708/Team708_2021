@@ -23,6 +23,7 @@ public class VisionProcessor extends Subsystem {
 	private boolean isAtY		= false;
 	private boolean isAtArea	= false;
 	public double robotSide;
+	public boolean targetFound = false;
 
 //	Required Network Table Data 	
 	private boolean seesTarget;	//Get from Network Table
@@ -99,6 +100,7 @@ public class VisionProcessor extends Subsystem {
 	public void findTarget() {
 		double angle = getRotate();
 		Swerve.getInstance().rotateDegreesfromPosition(angle);
+		targetFound = true;
 		
 
 	}
