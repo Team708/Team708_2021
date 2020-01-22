@@ -38,6 +38,8 @@ public class Robot extends TimedRobot {
     public static Swerve swerve;
     public static VisionProcessor visionprocessor;
     public static Shooter shooter;
+    public static Hopper hopper;
+
     public double speed;
     public String gameData;
     public String robotLocation;
@@ -72,6 +74,7 @@ public class Robot extends TimedRobot {
         
         shooter         = new Shooter();
         visionprocessor = new VisionProcessor();
+        hopper = new Hopper();
         
         
         driver.setDeadband(0.2);
@@ -171,7 +174,8 @@ public class Robot extends TimedRobot {
         swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
         
         operator.update();
-        if(operator.leftTrigger.isBeingPressed())
+
+        if(operator.rightBumper.isBeingPressed())
             shooter.shootManual(speed);
         else if(operator.rightTrigger.isBeingPressed())
            shooter.shootAuto();
@@ -181,10 +185,17 @@ public class Robot extends TimedRobot {
             speed += 0.1;
         if(operator.aButton.wasPressed())
             speed -= 0.1;
-        if(operator.xButton.isBeingPressed())
+        if(operator.leftTrigger.isBeingPressed())
             shooter.feederOn();
         else
             shooter.feederOff();
+        if(operator.backButton.isBeingPressed())
+            hopper.stopMotor();
+        else if(operator.xButton.isBeingPressed())
+            hopper.reverseMotor();
+        else
+            hopper.moveMotor();
+        
 
         driver.update();
 		if(driver.yButton.wasPressed())
