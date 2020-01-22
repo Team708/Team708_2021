@@ -39,6 +39,8 @@ public class Robot extends TimedRobot {
     public static VisionProcessor visionprocessor;
     public static Shooter shooter;
     public static Hopper hopper;
+    public static Intake intake;
+    public static Spinner spinner;
 
     public double speed;
     public String gameData;
@@ -72,7 +74,9 @@ public class Robot extends TimedRobot {
         swerve = Swerve.getInstance();
         Robot.swerve.zeroSensors();
         
-        shooter         = new Shooter();
+        spinner = new Spinner();
+        intake = new Intake();
+        shooter = new Shooter();
         visionprocessor = new VisionProcessor();
         hopper = new Hopper();
         
@@ -175,6 +179,10 @@ public class Robot extends TimedRobot {
         
         operator.update();
 
+        intake.intakeMotorOn(-operator.getY(Hand.kLeft));
+
+        if(operator.leftCenterClick.wasPressed())
+            intake.toggleIntake();
         if(operator.rightBumper.isBeingPressed())
             shooter.shootManual(speed);
         else if(operator.rightTrigger.isBeingPressed())
@@ -195,6 +203,9 @@ public class Robot extends TimedRobot {
             hopper.reverseMotor();
         else
             hopper.moveMotor();
+        if(operator.bButton.isBeingPressed()){
+            spinner.AutoPosition();
+        }
         
 
         driver.update();
