@@ -4,12 +4,12 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
-// import org.usfirst.frc.team708.robot.subsystems.VisionProcessor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,7 +21,7 @@ public class Shooter extends Subsystem {
     public boolean shooterSet = false;
     public CANEncoder shooterEncoder, feederEncoder;
     private CANPIDController shooterPIDController;
-
+    public double targetSpeed;
     public Solenoid hoodSolenoid;
     public boolean hoodUp = true;
     private double FlyWheelEffeciency = .235;
@@ -31,6 +31,7 @@ public class Shooter extends Subsystem {
         shooterMotor = new CANSparkMax(RobotMap.kshooterShootMotor, MotorType.kBrushless);
         feederMotor = new CANSparkMax(RobotMap.kfeederFeedMotor, MotorType.kBrushless);
         shooterMotor.setInverted(true);
+        feederMotor.setIdleMode(IdleMode.kBrake);
         shooterEncoder = new CANEncoder(shooterMotor);
         shooterPIDController = shooterMotor.getPIDController();
         shooterPIDController.setP(5e-4);
@@ -46,9 +47,11 @@ public class Shooter extends Subsystem {
     }
 
     public void feederOn(){
+        if (isShooterAtSpeed())
+            feederMotor.set(0.84);
+        else
+            feederMotor.set(0);
         
-       // if (shooterSet & Robot.visionprocessor.targetFound)
-    feederMotor.set(0.84);
     }
 
     public void feederOff(){
@@ -56,10 +59,15 @@ public class Shooter extends Subsystem {
     }
 
     public void shootManual(double speed){
+        setTargetSpeed(speed*Constants.kSHOOTER_MAXSPEED);
         shooterMotor.set(-speed);
     }
 
-    public void stopShooter(){
+    private void setTargetSpeed(double speed) {
+        targetSpeed=speed;
+    }
+
+    public void stopShooter() {
         shooterMotor.stopMotor();
     }
 
@@ -76,15 +84,10 @@ public class Shooter extends Subsystem {
         return angleInRadians;
     }
 
-    /**
-     * 
-     * @param distance
-     *                 Defines a distance away from the goal and makes calculations based on it.
-     */
+    
     public double determineShooterSpeed(double distance){
         distance = distance / 12;
         double angle = adjustAnglePosition(getHoodPosition(), distance);
-        //velocity = sqrt((32.2*distance^2)/2(cos(Θ(RADIANS)))^2 * (-height+distance*tan(Θ(RAIDANS))))
         
         double p1 = (32.2 * Math.pow(distance, 2));
         double p2 = (2 * (Math.pow(Math.cos(angle) , 2)));
@@ -93,18 +96,22 @@ public class Shooter extends Subsystem {
         double velocity = Math.sqrt(p1 / (p2 * p3));
         
         double RPM = (velocity) / (4 * FlyWheelEffeciency * 2) * 60 * Math.PI; //change 4 to cnst.
-        //double velocity = 0;
         return RPM;
     }
 
     public void shootAuto(){
         double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
-        shooterPIDController.setReference((-4700), ControlType.kVelocity);
+        setTargetSpeed(RPM); //setTargetSpeed(RPM);
+        shooterPIDController.setReference((-RPM-100), ControlType.kVelocity);
     }
-    // public void outputToSmartDashboard() {
 
-    //     //SmartDashboard.getNumber(key, defaultValue)
-    // }
+    public boolean isShooterAtSpeed(){
+        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.95) && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.05)
+            return true;
+        else
+            return false;
+
+    }
 
     public boolean getHoodPosition(){
         return hoodUp;
@@ -124,7 +131,17 @@ public class Shooter extends Subsystem {
         hoodUp = !hoodUp;
         hoodSolenoid.set(hoodUp);
     }
+    public void outputToSmartDashboard() {
+        
+        SmartDashboard.putBoolean("Target Speed Achieved", isShooterAtSpeed());
+        SmartDashboard.putNumber("Theor. RPM", ((determineShooterSpeed(Robot.visionprocessor.getDistance())*Constants.kSHOOTER_MAXSPEED)));
+        SmartDashboard.putNumber("Theor. RPM %", ((determineShooterSpeed(Robot.visionprocessor.getDistance()))));
+        SmartDashboard.putNumber("RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
+        SmartDashboard.putNumber("velocity", shooterEncoder.getVelocity());
+        SmartDashboard.putNumber("target speed", targetSpeed);
+        
 
+    }
 
     @Override
     protected void initDefaultCommand() {

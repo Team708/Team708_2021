@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.cscore.UsbCamera;
 
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
-import org.usfirst.frc.team708.robot.commands.shooter.*;
 import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
 import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
@@ -168,7 +167,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         sendStatistics();
-
+        
         swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
         
         operator.update();
@@ -199,7 +198,10 @@ public class Robot extends TimedRobot {
         if(driver.rightBumper.wasPressed())
             swerve.rotateDegreesfromPosition(135);
         if(driver.leftBumper.isBeingPressed())
-            visionprocessor.findTarget();
+            if (Math.abs(Pigeon.getInstance().getAngle().getDegrees())>60)
+                swerve.rotate(0);
+            else
+                visionprocessor.findTarget();
         if(driver.startButton.wasPressed())
             swerve.wheelBrake();  
 		if(driver.backButton.isBeingPressed()){
@@ -225,13 +227,8 @@ public class Robot extends TimedRobot {
         // drivetrain.sendToDashboard();
         swerve.outputToSmartDashboard();
         visionprocessor.sendToDashboard();
-        SmartDashboard.putNumber("Theor. RPM", ((shooter.determineShooterSpeed(visionprocessor.getDistance())*Constants.kSHOOTER_MAXSPEED)));
-        SmartDashboard.putNumber("Theor. RPM %", ((shooter.determineShooterSpeed(visionprocessor.getDistance()))));
-        SmartDashboard.putNumber("RPM", shooter.determineShooterSpeed(visionprocessor.getDistance()));
-        SmartDashboard.putNumber("velocity", shooter.shooterEncoder.getVelocity());
-
-        //SmartDashboard.putNumber("Shooter Speed", speed);
-        SmartDashboard.putNumber("shoot speed %", speed);
+        shooter.outputToSmartDashboard();
+        SmartDashboard.putNumber("Shooter Speed", speed);
     }
 
     /**
