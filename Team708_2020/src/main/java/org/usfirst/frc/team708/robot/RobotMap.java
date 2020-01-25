@@ -42,7 +42,6 @@ public class RobotMap {
 	 public static final int kshooterShootMotor         = 21;
 	 public static final int kfeederFeedMotor           = 25; 
 	 public static final int khopperMotor               = 28; 
-	 public static final int kintakeMotor               = 31;
 	 public static final int kspinnerMotor              = 41;
 
 
