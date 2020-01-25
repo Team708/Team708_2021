@@ -64,17 +64,9 @@ public class Intake extends Subsystem {
         }
         else
             intakeMotor.set(0);
-    }
 
-    //Methods below for commands
-    public void moveIntakeMotorAtSpeed(double speed){
-        if(intakeIn){
-            intakeMotor.set(speed);
-        }
-    }
+    
 
-    public void stopIntakeMotor(){
-        intakeMotor.set(0.0);
     }
 
     @Override
