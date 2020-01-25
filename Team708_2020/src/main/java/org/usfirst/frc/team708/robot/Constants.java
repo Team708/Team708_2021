@@ -108,10 +108,8 @@ public final class Constants {
 	
 /*
  * Color Wheel
- */
-	public static final double kSPIN_ONE_COLOR			= 300;  //one color
-	public static final double kSPIN_THREE_TIMES		= 1000; // <encoder * ratio * 3.25 
-
+ * /
+ 
 
 /*
  * Vision

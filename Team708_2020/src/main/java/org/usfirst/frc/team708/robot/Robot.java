@@ -203,10 +203,9 @@ public class Robot extends TimedRobot {
             hopper.reverseMotor();
         else
             hopper.moveMotor();
-        if (operator.bButton.wasPressed())
-            spinner.spinnerRotateOneColor();
-        if (operator.startButton.wasPressed())
-            spinner.spinnerRotateThreeTimes();
+        if(operator.bButton.isBeingPressed()){
+            spinner.AutoPosition();
+        }
         
 
         driver.update();
@@ -252,9 +251,6 @@ public class Robot extends TimedRobot {
         visionprocessor.sendToDashboard();
         shooter.outputToSmartDashboard();
         SmartDashboard.putNumber("Shooter Speed", speed);
-        intake.outputToSmartDashboard();
-        spinner.outputToSmartDashboard();
-
     }
 
     /**
