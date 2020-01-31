@@ -15,18 +15,18 @@ import org.usfirst.frc.team254.lib.util.math.Translation2d;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import com.revrobotics.CANSparkMax;                    // JNP added
-import com.revrobotics.CANEncoder;                     // JNP added
+import com.revrobotics.CANSparkMax;                    
+import com.revrobotics.CANEncoder;                     
 import com.revrobotics.CANPIDController;
-import com.revrobotics.CANSparkMax.IdleMode;           // JNP added
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;  // JNP added
+import com.revrobotics.CANSparkMax.IdleMode;           
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;  
 
 
 public class SwerveDriveModule extends Subsystem{
-	TalonSRX rotationMotor;   //  driveMotor;  JNP replaced
-	CANSparkMax driveMotor;   // JNP added
-	CANPIDController  drivePIDController; // JNP added
-	CANEncoder driveEncoder; // JNP added
+	TalonSRX rotationMotor;   
+	CANSparkMax driveMotor;   
+	CANPIDController  drivePIDController; 
+	CANEncoder driveEncoder;
 
 	int moduleID;
 	String name = "Module ";
@@ -45,9 +45,9 @@ public class SwerveDriveModule extends Subsystem{
 	public SwerveDriveModule(int rotationSlot, int driveSlot, int moduleID, 
 			int encoderOffset, Translation2d startingPose){
 		rotationMotor = new TalonSRX(rotationSlot);
-		driveMotor    = new CANSparkMax(driveSlot, MotorType.kBrushless);  // JNP added
-		drivePIDController  = new CANPIDController(driveMotor);  // JNP added
-		driveEncoder = new CANEncoder(driveMotor);   // JNP added
+		driveMotor    = new CANSparkMax(driveSlot, MotorType.kBrushless);  
+		drivePIDController  = new CANPIDController(driveMotor);  
+		driveEncoder = new CANEncoder(driveMotor);
 		
 		configureMotors();
 		this.moduleID = moduleID;
@@ -68,7 +68,7 @@ public class SwerveDriveModule extends Subsystem{
 	}
 	
 	public synchronized void reverseDriveSensor(boolean reverse){
-		driveMotor.setInverted(reverse);        // JNP added
+		driveMotor.setInverted(reverse);
 	}
 	
 	public synchronized void reverseRotationSensor(boolean reverse){
@@ -87,8 +87,8 @@ public class SwerveDriveModule extends Subsystem{
     	rotationMotor.configNominalOutputForward(0.0, 10);
     	rotationMotor.configNominalOutputReverse(0.0, 10);
     	rotationMotor.configAllowableClosedloopError(0, 0, 10);
-    	rotationMotor.configMotionAcceleration((int)(Constants.SWERVE_ROTATION_MAX_SPEED*1.0), 10);
-    	rotationMotor.configMotionCruiseVelocity((int)(Constants.SWERVE_ROTATION_MAX_SPEED*0.8), 10);//0.8
+    	rotationMotor.configMotionAcceleration((int)(Constants.SWERVE_ROTATION_MAX_SPEED*1.0), 10);  //10.0 jnp
+    	rotationMotor.configMotionCruiseVelocity((int)(Constants.SWERVE_ROTATION_MAX_SPEED*1.0), 10);//0.8  jnp
     	rotationMotor.selectProfileSlot(0, 0);
     	rotationMotor.config_kP(0, 4.0, 10);//4
     	rotationMotor.config_kI(0, 0.0, 10);
@@ -149,9 +149,9 @@ public class SwerveDriveModule extends Subsystem{
 	}
 	
 	public void setDrivePositionTarget(double deltaDistanceInches){
-		double setpoint = driveEncoder.getPosition() + inchesToEncUnits(deltaDistanceInches);  //JNP added
+		double setpoint = driveEncoder.getPosition() + inchesToEncUnits(deltaDistanceInches);
 	
-		driveEncoder.setPosition(setpoint);  //JNP added
+		driveEncoder.setPosition(setpoint);
 		driveSetpoint = setpoint;
 	}
 	

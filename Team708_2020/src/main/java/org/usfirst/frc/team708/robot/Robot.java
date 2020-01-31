@@ -1,6 +1,6 @@
 package org.usfirst.frc.team708.robot;
 
-//  added color back in to master - 1/25 jnp
+//  added color back in to master - 1/31 jnp
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -263,7 +263,6 @@ public class Robot extends TimedRobot {
             shooter.feederOff();
         }
         
-
         driver.update();
 
 		if(driver.yButton.wasPressed())
@@ -274,10 +273,10 @@ public class Robot extends TimedRobot {
 			swerve.rotate(180);
         else if(driver.xButton.wasPressed())
             swerve.rotate(270);
-        else if(driver.rightBumper.wasPressed())
-            swerve.rotateDegreesfromPosition(135);
-        else if(driver.startButton.wasPressed())
-            swerve.wheelBrake();  
+        else if(driver.startButton.wasPressed()){
+            swerve.wheelBrake();
+            driver.rumble(1.0, 1.0);
+        }
         else if(driver.backButton.wasPressed()){
             driver.rumble(1.0, 1.0);
             swerve.temporarilyDisableHeadingController();
