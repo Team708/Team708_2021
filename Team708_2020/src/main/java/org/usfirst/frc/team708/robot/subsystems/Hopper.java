@@ -8,12 +8,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import org.usfirst.frc.team708.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hopper extends Subsystem {
 
     public CANSparkMax hopperMotor;
 
-    private static final double speed = 0.2;
+    private int hopperForward = 1;
 
     public Hopper(){
         hopperMotor = new CANSparkMax(RobotMap.khopperMotor, MotorType.kBrushless);
@@ -21,16 +22,17 @@ public class Hopper extends Subsystem {
     }
 
     public void moveMotor(){
-        hopperMotor.set(speed);
+        hopperMotor.set(hopperForward * .4);
     }
 
     public void stopMotor(){
-        hopperMotor.set(.0);
+        hopperMotor.set(0);
     }
 
     //uses same speed as above, sets it to negative
     public void reverseMotor(){
-        hopperMotor.set(-speed);
+        hopperForward *= -1;
+        moveMotor();
     }
 
     @Override
@@ -39,4 +41,7 @@ public class Hopper extends Subsystem {
 
     }
     
+    public void outputToSmartDashboard() {
+        SmartDashboard.putNumber("Hopper direction", hopperForward);
+    }
 }

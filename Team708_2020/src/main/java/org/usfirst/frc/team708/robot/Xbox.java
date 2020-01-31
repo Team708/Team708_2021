@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Xbox extends XboxController{
-    private static final double PRESS_THRESHOLD = 0.3;
-    private double DEAD_BAND = 0.15;
-    private boolean rumbling = false;
+    private double PRESS_THRESHOLD = 0.15;
+    private double DEAD_BAND       = 0.15;
+    private boolean rumbling       = false;
     public ButtonCheck aButton;
     public ButtonCheck bButton;
     public ButtonCheck xButton;
@@ -29,16 +29,16 @@ public class Xbox extends XboxController{
     public static final int B_BUTTON = 2;
     public static final int X_BUTTON = 3;
     public static final int Y_BUTTON = 4;
-    public static final int LEFT_BUMPER = 5;
+    public static final int LEFT_BUMPER  = 5;
     public static final int RIGHT_BUMPER = 6;
-    public static final int BACK_BUTTON = 7;
+    public static final int BACK_BUTTON  = 7;
     public static final int START_BUTTON = 8;
-    public static final int LEFT_CENTER_CLICK = 9;
+    public static final int LEFT_CENTER_CLICK  = 9;
     public static final int RIGHT_CENTER_CLICK = 10;
-    public static final int LEFT_TRIGGER = -2;
+    public static final int LEFT_TRIGGER  = -2;
     public static final int RIGHT_TRIGGER = -3;
-    public static final int POV_0 = -4;
-    public static final int POV_90 = -5;
+    public static final int POV_0   = -4;
+    public static final int POV_90  = -5;
     public static final int POV_180 = -6;
     public static final int POV_270 = -7;
     
@@ -171,9 +171,8 @@ public class Xbox extends XboxController{
     		}
     		if(buttonCheck){
 	    		if(buttonActive){
-	    			if(System.currentTimeMillis() - buttonStartTime > 250){
+	    			if(System.currentTimeMillis() - buttonStartTime > 2500)  //250 jnp
 	    				longPressActive = true;
-	    			}
 	    		}else{
 	    			buttonActive = true;
 	    			buttonStartTime = System.currentTimeMillis();

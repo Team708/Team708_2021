@@ -15,7 +15,7 @@ public class Intake extends Subsystem {
 
     public CANSparkMax intakeMotor;
     public Solenoid intakeSolenoid0, intakeSolenoid1;
-    private boolean intakeIn;
+    private boolean intakeIn, intakeMotorIn = true;
 
 
     public Intake(){
@@ -37,56 +37,48 @@ public class Intake extends Subsystem {
         intakeMotor.set(0);
         intakeSolenoid0.set(intakeIn);
         intakeSolenoid1.set(intakeIn);
-
     }
 
     public void moveIntakeOut(){
         intakeIn = false;
         intakeSolenoid0.set(intakeIn);
         intakeSolenoid1.set(intakeIn);
+        intakeMotor.set(.2);
     }
 
+    public void StopIntake(){
+        intakeMotor.set(0);
+    }
     public void toggleIntake(){
         intakeIn = !intakeIn;
         intakeSolenoid0.set(intakeIn);
         intakeSolenoid1.set(intakeIn);
-
+         
+        if (!intakeIn)
+            moveIntakeOut();
+        else
+            moveIntakeIn();
     }
 
-    public void intakeMotorOn(double speed){
+    public void reverseIntakeMotor(){
         if(!intakeIn){
-            if(speed>0.2)
+            intakeMotorIn = !intakeMotorIn;
+            if(intakeMotorIn)
                 intakeMotor.set(.2);
-            else if (speed<-0.2)
-                intakeMotor.set(-.2);
             else
-                intakeMotor.set(0);
+                intakeMotor.set(-.2);
         }
         else
             intakeMotor.set(0);
     }
 
-    //Methods below for commands
-    public void moveIntakeMotorAtSpeed(double speed){
-        if(intakeIn){
-            intakeMotor.set(speed);
-        }
-    }
-
-    public void stopIntakeMotor(){
-        intakeMotor.set(0.0);
-    }
-
     @Override
     protected void initDefaultCommand() {
         // TODO Auto-generated method stub
-
     }
 
-    public void outputToSmartDashboard() {
+    public void sendToDashboard() {
         SmartDashboard.putBoolean("Intake is in",intakeIn);
-
+        SmartDashboard.putBoolean("Intake Motor spin in",intakeMotorIn);
     }
-
-    
 }

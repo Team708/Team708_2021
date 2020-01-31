@@ -87,7 +87,7 @@ public class SwerveDriveModule extends Subsystem{
     	rotationMotor.configNominalOutputForward(0.0, 10);
     	rotationMotor.configNominalOutputReverse(0.0, 10);
     	rotationMotor.configAllowableClosedloopError(0, 0, 10);
-    	rotationMotor.configMotionAcceleration((int)(Constants.SWERVE_ROTATION_MAX_SPEED*10), 10);
+    	rotationMotor.configMotionAcceleration((int)(Constants.SWERVE_ROTATION_MAX_SPEED*1.0), 10);
     	rotationMotor.configMotionCruiseVelocity((int)(Constants.SWERVE_ROTATION_MAX_SPEED*0.8), 10);//0.8
     	rotationMotor.selectProfileSlot(0, 0);
     	rotationMotor.config_kP(0, 4.0, 10);//4

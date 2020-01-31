@@ -470,7 +470,7 @@ public class Swerve extends Subsystem{
 		
 	}
 
-	public void outputToSmartDashboard() {
+	public void sendToDashboard() {
 		modules.forEach((m) -> m.outputToSmartDashboard());
 		pigeon.outputToSmartDashboard();
 		SmartDashboard.putString("Swerve State", currentState.toString());

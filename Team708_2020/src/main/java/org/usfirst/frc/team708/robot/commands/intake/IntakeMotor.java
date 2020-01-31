@@ -31,7 +31,7 @@ public class IntakeMotor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.intake.moveIntakeMotorAtSpeed(speed); //moves motor  whatever speed from constructor
+        Robot.intake.moveIntakeIn(); //moves motor  whatever speed from constructor
     }
 
     // Make this return true when this Command no longer needs to run execute()

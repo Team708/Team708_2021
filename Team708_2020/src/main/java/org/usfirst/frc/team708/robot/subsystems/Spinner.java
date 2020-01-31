@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import org.usfirst.frc.team708.robot.Constants;
+import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -20,6 +21,7 @@ public class Spinner extends Subsystem {
     public CANPIDController spinnerPID;
 
     private boolean pistonExtend;
+    private double  spinnerMotorSpeed = .3;
     public boolean spinnerRotateStop;
 
 public Spinner() {
@@ -39,7 +41,7 @@ public Spinner() {
 }
 
 public void SpinMotor(double speed) {
-    spinnerMotor.set(0.2);
+    spinnerMotor.set(spinnerMotorSpeed);
 }
 
 // public void StopSpin() {
@@ -56,11 +58,10 @@ public void spinnerRotateThreeTimes() {
     spinnerPID.setReference(Constants.kSPIN_THREE_TIMES/2, ControlType.kPosition);
 }
 
-//if (spinnerEncoder.getPosition()> Constants.SPINNER_POSITION_STOP)
-
 public void spinnerMotorStop() {
     spinnerMotor.set(0);
 }
+
 public void resetSpinnerEncoder() {
     spinnerEncoder.setPosition(0.0);
 }
@@ -88,9 +89,16 @@ public void pistonRetract() {
 
     }
     
-    public void outputToSmartDashboard() {
+    public void sendToDashboard() {
         SmartDashboard.putNumber("SpinnerEncoder", getSpinMotorCount());
 
+        SmartDashboard.putString("Target Color for Spinner", Robot.wheelTargetColor);
+
+        //puts colors to dashboard
+        SmartDashboard.putBoolean("Blue",   Robot.colors[0]);
+        SmartDashboard.putBoolean("Green",  Robot.colors[1]);
+        SmartDashboard.putBoolean("Red",    Robot.colors[2]);
+        SmartDashboard.putBoolean("Yellow", Robot.colors[3]);
     }
 
 }

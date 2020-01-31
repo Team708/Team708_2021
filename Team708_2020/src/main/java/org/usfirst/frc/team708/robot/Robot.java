@@ -199,93 +199,99 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
         sendStatistics();
 
-            ds = DriverStation.getInstance();
-            ColorWheelStage3 = ds.getGameSpecificMessage();
-            if(ColorWheelStage3.length() > 0){
-                switch(ColorWheelStage3.charAt(0)){
-                    case 'B' :
-                        wheelTargetColor = "Blue";
-                        colors[0] = true;
-                      break;
-                    case 'G' :
-                        wheelTargetColor = "Green";
-                        colors[1] = true;
-                      break;
-                        case 'R' :
-                        wheelTargetColor = "Red";
-                        colors[2] = true;
-                      break;
-                    case 'Y' :
-                        wheelTargetColor = "Yellow";
-                        colors[3] = true;
-                      break;
-                    default:
-                        wheelTargetColor = "Color Not Read";
-                        // colors[4] = true;
-                    }
-                }else{
-                    wheelTargetColor = "Color Not Available";
+        ds = DriverStation.getInstance();
+        ColorWheelStage3 = ds.getGameSpecificMessage();
+        if(ColorWheelStage3.length() > 0){
+            switch(ColorWheelStage3.charAt(0)){
+                case 'B' :
+                    wheelTargetColor = "Blue";
+                    colors[0] = true;
+                    break;
+                case 'G' :
+                    wheelTargetColor = "Green";
+                    colors[1] = true;
+                    break;
+                case 'R' :
+                    wheelTargetColor = "Red";
+                    colors[2] = true;
+                    break;
+                case 'Y' :
+                    wheelTargetColor = "Yellow";
+                    colors[3] = true;
+                    break;
+                default:
+                    wheelTargetColor = "Color Not Read";
                     for(int i = 0; i < colors.length; i++){
                         colors[i] = false;
                     }
+            }
+        }else{
+            wheelTargetColor = "Color Not Available";
+            for(int i = 0; i < colors.length; i++){
+                colors[i] = false;
                 }
+        }
         
         swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
         
         operator.update();
 
-        intake.intakeMotorOn(-operator.getY(Hand.kLeft));
-
         if(operator.leftCenterClick.wasPressed())
             intake.toggleIntake();
-        if(operator.rightBumper.isBeingPressed())
-            shooter.shootManual(speed);
-        else if(operator.rightTrigger.isBeingPressed())
-           shooter.shootAuto();
-        else
-           shooter.stopShooter();
-        if(operator.yButton.wasPressed())
-            speed += 0.1;
-        if(operator.aButton.wasPressed())
-            speed -= 0.1;
-        if(operator.leftTrigger.isBeingPressed())
-            shooter.feederOn();
-        else
-            shooter.feederOff();
-        if(operator.backButton.isBeingPressed())
-            hopper.stopMotor();
-        else if(operator.xButton.isBeingPressed())
-            hopper.reverseMotor();
-        else
-            hopper.moveMotor();
-        if (operator.bButton.wasPressed())
-            spinner.spinnerRotateOneColor();
-        if (operator.startButton.wasPressed())
+        else if(operator.rightCenterClick.wasPressed())
+            visionprocessor.toggleLEDMode();
+        else if (operator.leftBumper.wasPressed())
+            intake.reverseIntakeMotor();
+        else if (operator.startButton.wasPressed())
             spinner.spinnerRotateThreeTimes();
+        else if(operator.yButton.wasPressed())
+            speed += 0.1;
+        else if (operator.bButton.wasPressed())
+            spinner.spinnerRotateOneColor();
+        else if(operator.aButton.wasPressed())
+            speed -= 0.1;
+        else if(operator.backButton.wasPressed())
+            hopper.stopMotor();
+        else if(operator.xButton.wasPressed())
+            hopper.reverseMotor();
+        else if(operator.rightTrigger.isBeingPressed())
+            shooter.shootAuto();
+        else if(operator.rightBumper.isBeingPressed())
+            shooter.feederOn(speed);
+        else {
+            shooter.stopShooter();
+            shooter.feederOff();
+        }
         
 
         driver.update();
+
 		if(driver.yButton.wasPressed())
 			swerve.rotate(0);
-		if(driver.bButton.wasPressed())
+		else if(driver.bButton.wasPressed())
 			swerve.rotate(90);
-		if(driver.aButton.wasPressed())
+        else if(driver.aButton.wasPressed())
 			swerve.rotate(180);
-		if(driver.xButton.wasPressed())
+        else if(driver.xButton.wasPressed())
             swerve.rotate(270);
-        if(driver.rightBumper.wasPressed())
+        else if(driver.rightBumper.wasPressed())
             swerve.rotateDegreesfromPosition(135);
-        if(driver.leftBumper.isBeingPressed())
-            if (Math.abs(Pigeon.getInstance().getAngle().getDegrees())>60)
-                swerve.rotate(0);
-            else
-                visionprocessor.findTarget();
-        if(driver.startButton.wasPressed())
+        else if(driver.startButton.wasPressed())
             swerve.wheelBrake();  
-		if(driver.backButton.isBeingPressed()){
-			swerve.temporarilyDisableHeadingController();
-			swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
+        else if(driver.backButton.wasPressed()){
+            driver.rumble(1.0, 1.0);
+            swerve.temporarilyDisableHeadingController();
+            swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
         }
+        else if(driver.leftBumper.wasPressed())
+            if (Math.abs(Pigeon.getInstance().getAngle().getDegrees())>60) {
+                swerve.rotate(0);
+                visionprocessor.findTarget();
+            }
+            else {
+                visionprocessor.findTarget();
+                driver.rumble(1.0, 1.0);
+            }
     }
 
     /**
@@ -301,24 +307,11 @@ public class Robot extends TimedRobot {
 
     private void sendStatistics() {
         // if (statsTimer.get() >= Constants.SEND_STATS_INTERVAL) statsTimer.reset();
-        // drivetrain.sendToDashboard();
-        swerve.outputToSmartDashboard();
+        swerve.sendToDashboard();
+        shooter.sendToDashboard();
+        intake.sendToDashboard();
+        spinner.sendToDashboard();
         visionprocessor.sendToDashboard();
-        shooter.outputToSmartDashboard();
-        intake.outputToSmartDashboard();
-        spinner.outputToSmartDashboard();
-
-        SmartDashboard.putNumber("Shooter Speed", speed);
-        SmartDashboard.putString("Target Color for Spinner", wheelTargetColor);
-
-        //puts colors to dashboard
-        SmartDashboard.putBoolean("Blue", colors[0]);
-        SmartDashboard.putBoolean("Green", colors[1]);
-        SmartDashboard.putBoolean("Red", colors[2]);
-        SmartDashboard.putBoolean("Yellow", colors[3]);
-        // SmartDashboard.putBoolean("null", colors[4]);
-        // SmartDashboard.putBoolean("Robot Enabled", enabled);
-
     }
 
     /**
@@ -330,7 +323,7 @@ public class Robot extends TimedRobot {
         autonomousMode.addOption("Do Nothing", new DoNothing());
         autonomousMode.addOption("Drive Straight", new DriveStraight());
         autonomousMode.addOption("Turn", new Turn());
-        autonomousMode.addOption("Tests Every Motor", new EverythingAuto());
+        // autonomousMode.addOption("Tests Every Motor", new EverythingAuto());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }
@@ -339,7 +332,10 @@ public class Robot extends TimedRobot {
      * Sends every subsystem to the Smart Dashboard
      */
     private void sendDashboardSubsystems() {
+       SmartDashboard.putData(visionprocessor);
        SmartDashboard.putData(swerve);
-
+       SmartDashboard.putData(shooter);
+       SmartDashboard.putData(intake);
+       SmartDashboard.putData(spinner);
     }
 }
