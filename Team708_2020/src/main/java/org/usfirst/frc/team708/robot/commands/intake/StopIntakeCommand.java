@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import java.lang.*;
 
-public class RetractIntake extends Command {
+public class StopIntakeCommand extends Command {
 
-    public RetractIntake() {
+    // private Translation2d driveVector;
 
+    public StopIntakeCommand() {
+    
     }
 
     // Called just before this Command runs the first time
@@ -24,7 +26,7 @@ public class RetractIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.intake.moveIntakeOut();
+        Robot.intake.StopIntake();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -2,11 +2,11 @@ package org.usfirst.frc.team708.robot.commands.autonomous;
 
 import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
 import org.usfirst.frc.team708.robot.commands.swerve.RotateinPlaceCommand;
-import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistance;
+import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistanceCommand;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
-import org.usfirst.frc.team708.robot.commands.shooter.shootAuto;
+import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 import org.usfirst.frc.team254.lib.util.math.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -25,9 +25,9 @@ public class ThreeBallAuto extends CommandGroup {
         
         addSequential(new WaitCommand(1));
         addSequential(new DriveStraightCommand(0, .5));
-        addSequential(new StopAtDistance(20, 10));
+        addSequential(new StopAtDistanceCommand(20, 10));
         addSequential(new WaitCommand(1));
-        addSequential(new FindTarget());
+        addSequential(new FindTargetCommand());
     }
 
     // Called just before this Command runs the first time

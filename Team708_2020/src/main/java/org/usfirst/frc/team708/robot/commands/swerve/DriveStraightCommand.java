@@ -23,7 +23,7 @@ public class DriveStraightCommand extends Command {
         Swerve.timesCalled++;
 
         Robot.swerve.stop();
-        Swerve.getInstance().zeroSensors();
+        // Swerve.getInstance().zeroSensors();
 
         Robot.swerve.xInput = 0;
         Robot.swerve.yInput = 0;
@@ -31,7 +31,7 @@ public class DriveStraightCommand extends Command {
         Robot.swerve.headingController.temporarilyDisable();
         Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();
 
-        Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), 0, true, false);
+        Swerve.getInstance().sendInput(driveVector.x(), driveVector.y(), 0, false, false);
     }
 
     // Called repeatedly when this Command is scheduled to run

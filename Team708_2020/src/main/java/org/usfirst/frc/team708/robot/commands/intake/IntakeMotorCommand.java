@@ -1,4 +1,4 @@
-package org.usfirst.frc.team708.robot.commands.shooter;
+package org.usfirst.frc.team708.robot.commands.intake;
 
 import org.usfirst.frc.team708.robot.subsystems.Pigeon;
 import org.usfirst.frc.team708.robot.subsystems.Shooter;
@@ -11,34 +11,36 @@ import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import java.lang.*;
 
-public class Stop extends Command {
-    
-    private double speed;
-    // private Translation2d driveVector;
+public class IntakeMotorCommand extends Command {
 
-    public Stop() {
-    
+    // private Translation2d driveVector;
+    private double speed;
+
+    /**
+     * 
+     * @param speed Speed of intake from -1.0 to 1.0
+     */
+    public IntakeMotorCommand(double speed) {
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.visionprocessor.setNTInfo("ledMode", Constants.kVISION_LED_ON);
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.shooter.shootAuto();
+        Robot.intake.moveIntakeIn(); //moves motor  whatever speed from constructor
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false; 
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.shooter.stopShooter();
-        Robot.shooter.feederOff();
     }
 
     // Called when another command which requires one or more of the same

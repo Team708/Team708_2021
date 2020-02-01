@@ -54,14 +54,14 @@ public class VisionProcessor extends Subsystem {
 		super("Vision Processor");
 	}
 
-	public boolean seesTarget() {
-		tv = getNTInfo("tv");
-		if (tv != 0.0) 
-			seesTarget = true;		
-		else 
-			seesTarget = false;		
-		return seesTarget;
-	}
+	// public boolean seesTarget() {
+	// 	tv = getNTInfo("tv");
+	// 	if (tv != 0.0) 
+	// 		seesTarget = true;		
+	// 	else 
+	// 		seesTarget = false;		
+	// 	return seesTarget;
+	// }
 	public void toggleLEDMode() {
 		led = !led;
 		if(led) 

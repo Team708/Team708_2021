@@ -323,9 +323,9 @@ public class Robot extends TimedRobot {
         
         autonomousMode.addOption("Do Nothing", new DoNothing());
         autonomousMode.addOption("Five Ball Auto", new FiveBallAuto());
-        autonomousMode.addOption("Drive off line", new DriveOffLine());
-        autonomousMode.addOption("Turn", new Turn());
-        autonomousMode.addOption("Testing", new DriveStraight());
+        autonomousMode.addOption("Three Ball Auto", new ThreeBallAuto());
+        autonomousMode.addOption("Drive off line", new DriveOffLineAuto());
+        autonomousMode.addOption("Testing", new DriveStraightAuto());
         // autonomousMode.addOption("Tests Every Motor", new EverythingAuto());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);

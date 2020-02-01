@@ -9,12 +9,11 @@ import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import java.lang.*;
 
-public class FindTarget extends Command {
+public class FindTargetCommand extends Command {
 
     // private Translation2d driveVector;
 
-
-    public FindTarget() {
+    public FindTargetCommand() {
     
     }
 
@@ -41,13 +40,13 @@ public class FindTarget extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        Swerve.getInstance().zeroSensors();
-        Robot.swerve.xInput = 0;
-        Robot.swerve.yInput = 0;
-        Robot.swerve.rotationalInput = 0;
-        Robot.swerve.headingController.temporarilyDisable();
-        Robot.swerve.stop();
-        Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();
+        // Swerve.getInstance().zeroSensors();
+        // Robot.swerve.xInput = 0;
+        // Robot.swerve.yInput = 0;
+        // Robot.swerve.rotationalInput = 0;
+        // Robot.swerve.headingController.temporarilyDisable();
+        // Robot.swerve.stop();
+        // Robot.swerve.lastUpdateTimestamp = Timer.getFPGATimestamp();
     }
 
     // Called when another command which requires one or more of the same

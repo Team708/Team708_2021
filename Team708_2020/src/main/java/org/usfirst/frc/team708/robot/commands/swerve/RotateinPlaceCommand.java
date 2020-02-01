@@ -12,6 +12,7 @@ public class RotateinPlaceCommand extends Command {
 
     // private Translation2d driveVector;
     private double angle;
+    private double timeout = 1.0;
 
     public RotateinPlaceCommand(double angle) {
         this.angle=angle;
@@ -19,7 +20,7 @@ public class RotateinPlaceCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Swerve.getInstance().zeroSensors();
+        // Swerve.getInstance().zeroSensors();
         Swerve.timesCalled++;
 
         Swerve.getInstance().rotate(angle);
@@ -36,12 +37,13 @@ public class RotateinPlaceCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Pigeon.getInstance().getAngle().getDegrees()) >= Math.abs(angle);
+        return (this.timeSinceInitialized()>=timeout) || Math.abs(Pigeon.getInstance().getAngle().getDegrees()) >= Math.abs(angle);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Swerve.getInstance().zeroSensors();
+        // Swerve.getInstance().zeroSensors();
+
         Robot.swerve.xInput = 0;
         Robot.swerve.yInput = 0;
         Robot.swerve.rotationalInput = 0;

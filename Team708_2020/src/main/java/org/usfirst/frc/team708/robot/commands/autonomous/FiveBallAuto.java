@@ -2,11 +2,13 @@ package org.usfirst.frc.team708.robot.commands.autonomous;
 
 import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
 import org.usfirst.frc.team708.robot.commands.swerve.RotateinPlaceCommand;
-import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistance;
+import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistanceCommand;
+import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistanceCommand;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
-import org.usfirst.frc.team708.robot.commands.shooter.shootAuto;
+import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
+import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 import org.usfirst.frc.team254.lib.util.math.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -23,16 +25,27 @@ public class FiveBallAuto extends CommandGroup {
 
     public FiveBallAuto() {
         
-        addSequential(new DriveStraightCommand(170, 0.6));
-        addSequential(new StopAtDistance(96, 5.0));
-        addSequential(new shootAuto());
-        addSequential(new WaitCommand(3.0));
-        addSequential(new RotateinPlaceCommand(0));
-        addSequential(new WaitCommand(3.0));
-        addSequential(new DriveStraightCommand(170, 0.6));
-        addSequential(new StopAtDistance(30, 1.0));
+        addSequential(new DriveStraightCommand(170, 0.45));
+        addSequential(new StopAtDistanceCommand(120, 5.0));
+        
+        addSequential(new WaitCommand(1.0));
+        addSequential(new shootAutoCommand());
+        // addSequential(new WaitCommand(1.0));
+        
+        // addSequential(new RotateinPlaceCommand(10)); //clockwise
+        // addSequential(new WaitCommand(1.0));
+        
+        addSequential(new DriveStraightCommand(170, 0.45));
+        addSequential(new StopAtDistanceCommand(90, 2.0));
 
+        // addSequential(new RotateinPlaceCommand(-8));  //counter clockwise
+        addSequential(new WaitCommand(1.0));
+        
+        addSequential(new DriveStraightCommand(5, 0.45));
+        addSequential(new StopAtDistanceCommand(60, 3.0));
 
+        addSequential(new WaitCommand(1.0));
+        addSequential(new shootAutoCommand());
     }
 
     // Called just before this Command runs the first time
@@ -42,9 +55,7 @@ public class FiveBallAuto extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        
         //Nothing goes here
-
     }
 
 

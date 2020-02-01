@@ -466,7 +466,7 @@ public class Swerve extends Subsystem{
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new SwerveDrive());
+		setDefaultCommand(new SwerveDriveCommand());
 		
 	}
 

@@ -11,12 +11,10 @@ import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import java.lang.*;
 
-public class ToggleIntake extends Command {
+public class ExtendIntakeCommand extends Command {
 
-    // private Translation2d driveVector;
-
-    public ToggleIntake() {
-    
+    public ExtendIntakeCommand() {
+        
     }
 
     // Called just before this Command runs the first time
@@ -26,7 +24,7 @@ public class ToggleIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.intake.toggleIntake();
+        Robot.intake.moveIntakeIn();
     }
 
     // Make this return true when this Command no longer needs to run execute()
