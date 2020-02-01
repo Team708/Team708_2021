@@ -25,7 +25,7 @@
 //         // Use requires() here to declare subsystem dependencies
 //         // eg. requires(chassis);
 //         addSequential(new shootAuto());
-//         addSequential(new WaitCommand(1));
+//         addSequential(new WaitCommand(1.0));
 //         addSequential(new Feed());
 //         addSequential(new WaitCommand(1));
 //         addSequential(new Stop());

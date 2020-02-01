@@ -22,8 +22,8 @@ public class DriveOffLine extends CommandGroup {
 
     public DriveOffLine() {
         
-        addSequential(new DriveStraightCommand(0, 0.7));
-        addSequential(new StopAtDistance(60, 10));
+        addSequential(new DriveStraightCommand(180, 0.6));
+        addSequential(new StopAtDistance(24, 2));
 
     }
 

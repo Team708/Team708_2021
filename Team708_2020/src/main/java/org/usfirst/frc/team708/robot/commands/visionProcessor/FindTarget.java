@@ -35,7 +35,8 @@ public class FindTarget extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (-1.5<Robot.visionprocessor.getNTInfo("tx") & Robot.visionprocessor.getNTInfo("tx")<1.5);
+        // return (-1.5<Robot.visionprocessor.getNTInfo("tx") & Robot.visionprocessor.getNTInfo("tx")<1.5);
+        return(true);
     }
 
     // Called once after isFinished returns true

@@ -246,8 +246,10 @@ public class Robot extends TimedRobot {
             spinner.spinnerRotateThreeTimes();
         else if(operator.yButton.wasPressed())
             speed += 0.1;
-        else if (operator.bButton.wasPressed())
+        else if (operator.bButton.wasPressed()){
             spinner.spinnerRotateOneColor();
+            operator.rumble(1.0, 1.0);
+        }
         else if(operator.aButton.wasPressed())
             speed -= 0.1;
         else if(operator.backButton.wasPressed())
@@ -318,10 +320,12 @@ public class Robot extends TimedRobot {
      * Dashboard
      */
     private void queueAutonomousModes() {
-
+        
         autonomousMode.addOption("Do Nothing", new DoNothing());
-        autonomousMode.addOption("Drive Straight", new DriveStraight());
+        autonomousMode.addOption("Five Ball Auto", new FiveBallAuto());
+        autonomousMode.addOption("Drive off line", new DriveOffLine());
         autonomousMode.addOption("Turn", new Turn());
+        autonomousMode.addOption("Testing", new DriveStraight());
         // autonomousMode.addOption("Tests Every Motor", new EverythingAuto());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
