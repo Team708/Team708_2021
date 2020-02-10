@@ -180,8 +180,6 @@ public class Swerve extends Subsystem{
 		frontRight.setModuleAngle(45);
 		rearRight.setModuleAngle(-45);
 		rearLeft.setModuleAngle(45);
-		
-	
 	}
 
 	public void rotate(double goalHeading){
@@ -223,6 +221,9 @@ public class Swerve extends Subsystem{
 		modules.forEach((m) -> m.setDrivePositionTarget(magnitudeInches));
 	}
 	
+	public double getPigeonRotation(){
+		return(Pigeon.getInstance().getAngle().getDegrees());
+	}
 	public boolean positionOnTarget(){
 		boolean onTarget = false;
 		for(SwerveDriveModule m : modules){

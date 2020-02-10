@@ -5,71 +5,108 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
+import org.usfirst.frc.team708.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends Subsystem {
 
     public CANSparkMax intakeMotor;
-    public Solenoid intakeSolenoid0, intakeSolenoid1;
-    private boolean intakeIn, intakeMotorIn = true;
+    public DoubleSolenoid  camSolenoid;
+    public DoubleSolenoid  pivotSolenoid;
+
+    public Solenoid  shifterHanger;
+    public Solenoid  lockHanger;
+
+    private boolean intakeIn = true;
+    public boolean inHangerPosition = false;
 
 
     public Intake(){
         intakeMotor = new CANSparkMax(RobotMap.kintakeMotor, MotorType.kBrushless);
         intakeMotor.setInverted(false);
         
-        intakeSolenoid0 = new Solenoid(RobotMap.intakeSolenoid0);
-        intakeSolenoid0.set(intakeIn);
-        intakeSolenoid1 = new Solenoid(RobotMap.intakeSolenoid1);
-        intakeSolenoid1.set(intakeIn);
+        camSolenoid   = new DoubleSolenoid(RobotMap.armCam0, RobotMap.armCam1);
+        pivotSolenoid = new DoubleSolenoid(RobotMap.armPivot0, RobotMap.armPivot1);
+
+        shifterHanger = new Solenoid(RobotMap.hangerEngage);
+        lockHanger    = new Solenoid(RobotMap.hangerLock);
+    }
+
+    public void toIntake(){
+        Robot.spinner.pistonRetract();
+        camSolenoid.set(DoubleSolenoid.Value.kForward);   // I
+        pivotSolenoid.set(DoubleSolenoid.Value.kReverse); // O
+        moveMotorIntakeIn();
+        inHangerPosition = false;
+    }
+
+    public void toHanger(){
+        Robot.spinner.pistonRetract();
+        camSolenoid.set(DoubleSolenoid.Value.kForward);   // I
+        pivotSolenoid.set(DoubleSolenoid.Value.kForward); // I
+        StopMotorIntake();
+        shiftToHanger();
+        inHangerPosition = true;
+    }
+
+    public void toColorFromIntake(){
+        camSolenoid.set(DoubleSolenoid.Value.kReverse);   // O
+        pivotSolenoid.set(DoubleSolenoid.Value.kForward); // I
+        StopMotorIntake();
+        inHangerPosition = false;
+    }
+    public void toColorFromHanger(){
+        camSolenoid.set(DoubleSolenoid.Value.kReverse);   // O
+        pivotSolenoid.set(DoubleSolenoid.Value.kForward); // O
+        StopMotorIntake();
+        inHangerPosition = false;
+    }
+
+    public void shiftToHanger(){
+        if(inHangerPosition)
+            shifterHanger.set(true);
+        else
+            shifterHanger.set(false);
+    }
+
+    public void moveHanger(double Y){
+        intakeMotor.set(Y);
+    }
+    public void lockHanger(){
+        lockHanger.set(true);
     }
 
     public boolean getIntakePosition(){
         return intakeIn;
     }
 
-    public void moveIntakeIn(){
+    public void moveMotorIntakeIn(){
         intakeIn = true;
         intakeMotor.set(0);
-        intakeSolenoid0.set(intakeIn);
-        intakeSolenoid1.set(intakeIn);
     }
 
-    public void moveIntakeOut(){
+    public void moveMotorIntakeOut(){
         intakeIn = false;
-        intakeSolenoid0.set(intakeIn);
-        intakeSolenoid1.set(intakeIn);
-        intakeMotor.set(.2);
+        intakeMotor.set(.4);
     }
 
-    public void StopIntake(){
+    public void StopMotorIntake(){
         intakeMotor.set(0);
     }
-    public void toggleIntake(){
+
+    public void toggleMotorIntake(){
         intakeIn = !intakeIn;
-        intakeSolenoid0.set(intakeIn);
-        intakeSolenoid1.set(intakeIn);
          
         if (!intakeIn)
-            moveIntakeOut();
+            moveMotorIntakeOut();
         else
-            moveIntakeIn();
-    }
-
-    public void reverseIntakeMotor(){
-        if(!intakeIn){
-            intakeMotorIn = !intakeMotorIn;
-            if(intakeMotorIn)
-                intakeMotor.set(.2);
-            else
-                intakeMotor.set(-.2);
-        }
-        else
-            intakeMotor.set(0);
+            moveMotorIntakeIn();
     }
 
     @Override
@@ -79,6 +116,5 @@ public class Intake extends Subsystem {
 
     public void sendToDashboard() {
         SmartDashboard.putBoolean("Intake is in",intakeIn);
-        SmartDashboard.putBoolean("Intake Motor spin in",intakeMotorIn);
     }
 }

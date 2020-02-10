@@ -85,8 +85,9 @@ public class VisionProcessor extends Subsystem {
 	}
 
 	public double getDistance(){
-			return 83.75/Math.tan(Math.PI*getNTInfo("ty")/180);
-	}
+			return 74/Math.tan(Math.PI*((getNTInfo("ty")+20)/180));  //target 98.25" - camera height 24.25" 
+															    	//ty =  camera angle + Ty
+	}  
 	
 	public void sendToDashboard() {
 		SmartDashboard.putBoolean("Has Target", targetFound);

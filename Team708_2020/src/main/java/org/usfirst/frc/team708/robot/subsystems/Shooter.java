@@ -6,6 +6,11 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
@@ -18,15 +23,18 @@ public class Shooter extends Subsystem {
 
     
     public CANSparkMax shooterMotor, feederMotor;
-    public CANEncoder shooterEncoder, feederEncoder;
+    public CANEncoder  shooterEncoder;
     private CANPIDController shooterPIDController;
-    
+
+    public TalonSRX turretMotor;
     public double   targetSpeed;
+
     public Solenoid hoodSolenoid;
     public boolean  shooterSet = false;
-    public boolean  hoodUp     = true;
-    private double  FlyWheelEffeciency = .235;
-    private double  feederMotorSpeed   = .84;
+    public boolean  hoodUp     = false;
+
+    private double  feederMotorSpeed   = Constants.kFEEDERMOTORSPEED;
+	        int turretEncoderReverseFactor = 1;
 
     public Shooter(){
 
@@ -43,11 +51,10 @@ public class Shooter extends Subsystem {
         shooterPIDController.setIZone(0);
         shooterPIDController.setOutputRange(-1, 1);
 
-        feederEncoder = new CANEncoder(feederMotor);
         hoodSolenoid = new Solenoid(RobotMap.hoodSolenoid);
-        hoodSolenoid.set(hoodUp); //Starts with hood up (45 degrees)
+        hoodSolenoid.set(hoodUp); //Starts with hood down
     }
-
+    
     public void feederOn(double speed){
         if (isShooterAtSpeed())
             feederMotor.set(feederMotorSpeed);   // set feeder motor power
@@ -91,14 +98,15 @@ public class Shooter extends Subsystem {
         distance = distance / 12;
         double angle = adjustAnglePosition(getHoodPosition(), distance);
         
-        double p1 = (32.2 * Math.pow(distance, 2));
-        double p2 = (2 * (Math.pow(Math.cos(angle) , 2)));
-        double p3 = -1*(Constants.kGOALHEIGHT-Constants.kSHOOTERHEIGHT)/12 + distance * Math.tan(angle);
+        // double p1 = (32.2 * Math.pow(distance, 2));
+        // double p2 = (2 * (Math.pow(Math.cos(angle) , 2)));
+        // double p3 = -1*(Constants.kGOALHEIGHT-Constants.kSHOOTERHEIGHT)/12 + distance * Math.tan(angle);
         
-        double velocity = Math.sqrt(p1 / (p2 * p3));
+        // double velocity = Math.sqrt(p1 / (p2 * p3));
         
-        double RPM = (velocity) / (4 * FlyWheelEffeciency * 2) * 60 * Math.PI; //change 4 to cnst.
-        return RPM;
+        // double RPM = (velocity) / (4 * FlyWheelEffeciency * 2) * 60 * Math.PI; //change 4 to cnst.
+        // return RPM;
+        return 3500;
     }
 
     public void shootAuto(){

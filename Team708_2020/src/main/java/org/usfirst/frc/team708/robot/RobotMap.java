@@ -42,7 +42,10 @@ public class RobotMap {
 	 public static final int kshooterShootMotor         = 21;
 	 public static final int kfeederFeedMotor           = 25; 
 	 public static final int khopperMotor               = 28; 
+	 public static final int kturretMotor               = 23; 
+
 	 public static final int kintakeMotor               = 31;
+	 
 	 public static final int kspinnerMotor              = 41;
 
 
@@ -73,13 +76,13 @@ public class RobotMap {
 	
 // PCM Ports
 	public static final int hoodSolenoid	= 0; 	
-	public static final int intakeSolenoid0 = 1; 	
- 	public static final int intakeSolenoid1	= 2;	
-	public static final int	spinnerSolenoid = 3;	
-//  public static final int	 				= 4;	
-//	public static final int 				= 5;
-//  public static final int  				= 6;
-//	public static final int 		        = 7;
+	public static final int hangerEngage	= 1; 	
+ 	public static final int hangerLock		= 2;	
+	public static final int	littlePecker    = 3;	
+	public static final int	armCam0			= 4;	
+	public static final int armCam1			= 5;
+	public static final int armPivot0		= 6;
+	public static final int armPivot1       = 7;
 	
 	
 }

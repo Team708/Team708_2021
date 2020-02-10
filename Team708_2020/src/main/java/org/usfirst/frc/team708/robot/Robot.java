@@ -1,6 +1,6 @@
 package org.usfirst.frc.team708.robot;
 
-//  added color back in to master - 1/31 jnp
+//  added color back in to master - 2/8 jnp
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
     public static Shooter shooter;
     public static Hopper hopper;
     public static Intake intake;
+    public static Turret turret;
     public static Spinner spinner;
 
     public double speed;
@@ -81,6 +82,7 @@ public class Robot extends TimedRobot {
         
         spinner = new Spinner();
         intake = new Intake();
+        turret = new Turret();
         shooter = new Shooter();
         visionprocessor = new VisionProcessor();
         hopper = new Hopper();
@@ -88,7 +90,7 @@ public class Robot extends TimedRobot {
         
         driver.setDeadband(0.2);
         operator.setDeadband(0.2);
-        visionprocessor.setNTInfo("ledMode", Constants.kVISION_LED_OFF);
+        visionprocessor.setNTInfo("ledMode", Constants.kVISION_LED_ON);
 
         colors = new Boolean[4];
         colors[0] = false; //Blue
@@ -233,15 +235,22 @@ public class Robot extends TimedRobot {
         }
         
         swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
-        
+        turret.updateAngle();
+
         operator.update();
 
-        if(operator.leftCenterClick.wasPressed())
-            intake.toggleIntake();
-        else if(operator.rightCenterClick.wasPressed())
-            visionprocessor.toggleLEDMode();
-        else if (operator.leftBumper.wasPressed())
-            intake.reverseIntakeMotor();
+        if(operator.leftCenterClick.wasPressed()) {
+            intake.shiftToHanger();
+            operator.rumble(1.0, 1.0);
+        }
+        else if(operator.rightCenterClick.wasPressed()) {
+            intake.lockHanger();
+            operator.rumble(1.0, 1.0);
+        }
+        else if (operator.leftBumper.wasPressed()) {
+            intake.toggleMotorIntake();
+            operator.rumble(1.0, 1.0);
+        }
         else if (operator.startButton.wasPressed())
             spinner.spinnerRotateThreeTimes();
         else if(operator.yButton.wasPressed())
@@ -250,6 +259,14 @@ public class Robot extends TimedRobot {
             spinner.spinnerRotateOneColor();
             operator.rumble(1.0, 1.0);
         }
+        else if(operator.POV0.wasPressed())
+            intake.toHanger();
+        else if(operator.POV90.wasPressed())
+            intake.toColorFromIntake();
+        else if(operator.POV180.wasPressed())
+            intake.toIntake();            
+        else if(operator.POV270.wasPressed())
+            intake.toColorFromHanger();
         else if(operator.aButton.wasPressed())
             speed -= 0.1;
         else if(operator.backButton.wasPressed())
@@ -261,6 +278,9 @@ public class Robot extends TimedRobot {
         else if(operator.rightBumper.isBeingPressed())
             shooter.feederOn(speed);
         else {
+            if (Math.abs(operator.getY(Hand.kLeft)) >= .5)
+                intake.moveHanger(operator.getY(Hand.kLeft));
+                
             shooter.stopShooter();
             shooter.feederOff();
         }
@@ -284,15 +304,15 @@ public class Robot extends TimedRobot {
             swerve.temporarilyDisableHeadingController();
             swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
         }
-        else if(driver.leftBumper.wasPressed())
+        else if(driver.leftBumper.wasPressed()) {
             if (Math.abs(Pigeon.getInstance().getAngle().getDegrees())>60) {
                 swerve.rotate(0);
-                visionprocessor.findTarget();
             }
             else {
-                visionprocessor.findTarget();
                 driver.rumble(1.0, 1.0);
             }
+            visionprocessor.findTarget();
+        }
     }
 
     /**
@@ -310,6 +330,7 @@ public class Robot extends TimedRobot {
         // if (statsTimer.get() >= Constants.SEND_STATS_INTERVAL) statsTimer.reset();
         swerve.sendToDashboard();
         shooter.sendToDashboard();
+        turret.sendToDashboard();
         intake.sendToDashboard();
         spinner.sendToDashboard();
         visionprocessor.sendToDashboard();
@@ -338,6 +359,7 @@ public class Robot extends TimedRobot {
        SmartDashboard.putData(visionprocessor);
        SmartDashboard.putData(swerve);
        SmartDashboard.putData(shooter);
+       SmartDashboard.putData(turret);
        SmartDashboard.putData(intake);
        SmartDashboard.putData(spinner);
     }

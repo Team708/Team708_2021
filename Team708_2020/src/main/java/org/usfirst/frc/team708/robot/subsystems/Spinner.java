@@ -24,11 +24,13 @@ public class Spinner extends Subsystem {
     private double  spinnerMotorSpeed = .3;
     public boolean spinnerRotateStop;
 
+    public Solenoid  deployColorWheel;
+
 public Spinner() {
     spinnerMotor = new CANSparkMax(RobotMap.kspinnerMotor, MotorType.kBrushless);
     spinnerEncoder = new CANEncoder(spinnerMotor);
 
-    spinnerSolenoid = new Solenoid(RobotMap.spinnerSolenoid);
+    spinnerSolenoid = new Solenoid(RobotMap.littlePecker);
 
     spinnerEncoder.setPosition(0);
     spinnerPID = spinnerMotor.getPIDController();
@@ -38,6 +40,8 @@ public Spinner() {
     spinnerPID.setFF(0.1);
     spinnerPID.setIZone(0);
     spinnerPID.setOutputRange(-0.5, 0.5);
+
+    spinnerSolenoid.set(false);
 }
 
 public void SpinMotor(double speed) {
@@ -49,13 +53,15 @@ public void SpinMotor(double speed) {
 // }
 
 public void spinnerRotateOneColor() {
+    spinnerSolenoid.set(true);
     resetSpinnerEncoder();
-    spinnerPID.setReference(Constants.kSPIN_ONE_COLOR/2, ControlType.kPosition);
+    spinnerPID.setReference(Constants.kSPIN_ONE_COLOR, ControlType.kPosition);
 }
 
 public void spinnerRotateThreeTimes() {
+    spinnerSolenoid.set(true);
     resetSpinnerEncoder();
-    spinnerPID.setReference(Constants.kSPIN_THREE_TIMES/2, ControlType.kPosition);
+    spinnerPID.setReference(Constants.kSPIN_THREE_TIMES, ControlType.kPosition);
 }
 
 public void spinnerMotorStop() {

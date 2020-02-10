@@ -41,11 +41,16 @@ public final class Constants {
     public static final double SWERVE_DRIVE_MAX_SPEED    = 5432.0;
 	
     //Swerve Module Wheel Offsets
-	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 1478+2048; // mod 0   1478 
-	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1451+2048; // mod 1   1451
-	public static final int REAR_LEFT_ENCODER_STARTING_POS   = 2600-2048; // mod 2  2600
-	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 550+2048;  // mod 3  500
+	// public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 1478+2048; // mod 0   1478 
+	// public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1451+2048; // mod 1   1451
+	// public static final int REAR_LEFT_ENCODER_STARTING_POS   = 2600-2048; // mod 2  2600
+	// public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 550+2048;  // mod 3  500
 	
+	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 1693;   // mod 0   1478 
+	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = -1078;  // mod 1   1451
+	public static final int REAR_LEFT_ENCODER_STARTING_POS   = 1250;   // mod 2  2600
+	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = -1545;  // mod 3  500
+
 	//Swerve Module Positions
 	public static final Translation2d kVehicleToModuleOne = new Translation2d(kDT_WHEELBASE_LENGTH/2, kDT_WHEELBASE_WIDTH/2);
 	public static final Translation2d kVehicleToModuleTwo = new Translation2d(kDT_WHEELBASE_LENGTH/2, -kDT_WHEELBASE_WIDTH/2);
@@ -96,6 +101,13 @@ public final class Constants {
 
 	public static final double	kSHOOTER_WHEELSPEED_LONG	= 4000.0;  //RPM or encode counts?
 	public static final double	kSHOOTER_WHEELSPEED_SHORT	= 2000.0;  //RPM or encode counts?
+
+	public static final int TURRET_ENCODER_STARTING_POS  = 550+2048;  // turret offset
+	public static final double kFEEDERMOTORSPEED = .84;
+	public static final int TURRET_ENCODER_COUNT = 4096;
+	public static final int kTurretOnTargetTolerance = 1;
+	public static final int kTurretSafeTolerance = 2;
+	public static final double TURRET_ROTATION_MAX_SPEED = 2664; //counts/100ms on 775w/gearbox
 
 /*
  * Intake
@@ -178,4 +190,5 @@ public final class Constants {
  */
 
 	public static final double kGOALHEIGHT = 98.25;
+
 }
