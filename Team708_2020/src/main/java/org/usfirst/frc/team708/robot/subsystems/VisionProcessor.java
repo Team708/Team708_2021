@@ -76,7 +76,7 @@ public class VisionProcessor extends Subsystem {
 
 	public void findTarget() {
 		double angle = getRotate();
-		if (Math.abs(angle) > 2.0) {
+		if (Math.abs(angle) > 1.0) {
 			Swerve.getInstance().rotateDegreesfromPosition(angle);
 			targetFound = false;
 		}
@@ -86,7 +86,7 @@ public class VisionProcessor extends Subsystem {
 
 	public double getDistance(){
 			return 74/Math.tan(Math.PI*((getNTInfo("ty")+20)/180));  //target 98.25" - camera height 24.25" 
-															    	//ty =  camera angle + Ty
+															    	 //ty =  camera angle + Ty
 	}  
 	
 	public void sendToDashboard() {

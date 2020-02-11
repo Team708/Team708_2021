@@ -308,9 +308,7 @@ public class Robot extends TimedRobot {
             if (Math.abs(Pigeon.getInstance().getAngle().getDegrees())>60) {
                 swerve.rotate(0);
             }
-            else {
-                driver.rumble(1.0, 1.0);
-            }
+            driver.rumble(1.0, 1.0);
             visionprocessor.findTarget();
         }
     }

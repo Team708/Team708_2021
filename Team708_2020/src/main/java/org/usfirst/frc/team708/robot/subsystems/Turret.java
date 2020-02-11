@@ -27,14 +27,15 @@ public class Turret extends Subsystem {
 
     public TalonSRX turretMotor;
     public boolean useLimelight = true;
-
+    
     int turretEncoderReverseFactor = 1;
-    int[] adjusted = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    int[] adjusted = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int nextsample = 0;
-    int samplerate = 9;
+    int samplerate = 3;
     boolean ignorePigeon = false;
     double onedegree = Constants.TURRET_ENCODER_COUNT / 360;
-
+    double normalized = 0;
+    
     public Turret() {
 
         turretMotor = new TalonSRX(RobotMap.kturretMotor);
@@ -66,27 +67,23 @@ public class Turret extends Subsystem {
     }
 
     public synchronized void updateAngle() {
-        // turretMotor.set(ControlMode.MotionMagic, angle / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));
-        int normalized = 0;
-        if (useLimelight){
-            if (nextsample < samplerate) nextsample += 1; else nextsample=0; 
-            adjusted[nextsample] = (int) -Robot.visionprocessor.getRotate();
-            for (int i = 0; i < samplerate; i++) {
-                normalized += adjusted[i]; 
-            }
-            normalized = normalized / samplerate;
-            normalized+=10; //camera error;
-            // if (Math.abs(normalized) <= 5) adjusted = 0;
-        }
+        //calcuate the angle of the turret and add it to Tx
+        double turretAngle = turretMotor.getSelectedSensorPosition(0) / onedegree; // turret is at this degree
+        double cameraAngle = Robot.visionprocessor.getRotate();  //target is Tx degrees
 
-        turretMotor.set(ControlMode.MotionMagic, ((Robot.swerve.getPigeonRotation() + normalized) * onedegree));
+        double rotateToTarget = turretAngle + cameraAngle;  //calc numberof degrees to target
+        double toEncoderCount = rotateToTarget * onedegree; //calc number of encoder tickets for degrees
+
+        turretMotor.set(ControlMode.MotionMagic, toEncoderCount);  //turn turret to encoder value to find target
         
-        // SmartDashboard.putNumber("turret_from", ((turretMotor.getSelectedSensorPosition(0)/Constants.TURRET_ENCODER_COUNT) / 360));
-        // SmartDashboard.putNumber("turret_to", ((Robot.swerve.getPigeonRotation() + normalized) * onedegree));
-        // SmartDashboard.putNumber("turre_Pigeon", ((Robot.swerve.getPigeonRotation() * onedegree)));
-        // SmartDashboard.putNumber("turret_Camera", (normalized * onedegree));
-
-
+        // turretMotor.set(ControlMode.MotionMagic, angle / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));
+        // turretMotor.set(ControlMode.MotionMagic, ((Robot.swerve.getPigeonRotation() + normalized) * onedegree));
+        // turretMotor.set(ControlMode.MotionMagic, (normalized) * onedegree));
+        
+        SmartDashboard.putNumber("turret_Angle", turretAngle);
+        SmartDashboard.putNumber("turret_Camera", cameraAngle);
+        SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
+        SmartDashboard.putNumber("turret_ToEncoderCount", toEncoderCount);
     }
 
     // public void updateTarget(){
