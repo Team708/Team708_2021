@@ -115,6 +115,6 @@ public class Intake extends Subsystem {
     }
 
     public void sendToDashboard() {
-        SmartDashboard.putBoolean("Intake is in",intakeIn);
+        // SmartDashboard.putBoolean("Intake is in",intakeIn);
     }
 }

@@ -42,6 +42,6 @@ public class Hopper extends Subsystem {
     }
     
     public void outputToSmartDashboard() {
-        SmartDashboard.putNumber("Hopper direction", hopperForward);
+        // SmartDashboard.putNumber("Hopper direction", hopperForward);
     }
 }

@@ -54,14 +54,15 @@ public class VisionProcessor extends Subsystem {
 		super("Vision Processor");
 	}
 
-	// public boolean seesTarget() {
-	// 	tv = getNTInfo("tv");
-	// 	if (tv != 0.0) 
-	// 		seesTarget = true;		
-	// 	else 
-	// 		seesTarget = false;		
-	// 	return seesTarget;
-	// }
+	public boolean seesTarget() {
+		tv = getNTInfo("tv");
+		if (tv != 0.0) 
+			seesTarget = true;		
+		else 
+			seesTarget = false;		
+		return seesTarget;
+	}
+
 	public void toggleLEDMode() {
 		led = !led;
 		if(led) 
@@ -90,9 +91,9 @@ public class VisionProcessor extends Subsystem {
 	}  
 	
 	public void sendToDashboard() {
-		SmartDashboard.putBoolean("Has Target", targetFound);
-		SmartDashboard.putNumber("Distance to Target", getDistance());
-		SmartDashboard.putNumber("tx", getRotate());
+		// SmartDashboard.putBoolean("Has Target", targetFound);
+		// SmartDashboard.putNumber("Distance to Target", getDistance());
+		// SmartDashboard.putNumber("tx", getRotate());
 	}
 
 	public void initDefaultCommand() {

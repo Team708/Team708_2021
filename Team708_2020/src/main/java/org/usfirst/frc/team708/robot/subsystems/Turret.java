@@ -35,6 +35,7 @@ public class Turret extends Subsystem {
     boolean ignorePigeon = false;
     double onedegree = Constants.TURRET_ENCODER_COUNT / 360;
     double normalized = 0;
+    double TURRET_MAX_ROTATION = 260;
     
     public Turret() {
 
@@ -70,20 +71,23 @@ public class Turret extends Subsystem {
         //calcuate the angle of the turret and add it to Tx
         double turretAngle = turretMotor.getSelectedSensorPosition(0) / onedegree; // turret is at this degree
         double cameraAngle = Robot.visionprocessor.getRotate();  //target is Tx degrees
+        double robotAngle  = Robot.swerve.getPigeonRotation();   //Angle in degrees robot is at
 
-        double rotateToTarget = turretAngle + cameraAngle;  //calc numberof degrees to target
-        double toEncoderCount = rotateToTarget * onedegree; //calc number of encoder tickets for degrees
+        double rotateToTarget = turretAngle - cameraAngle;       //calc numberof degrees to target
+        double toEncoderCount = rotateToTarget * onedegree;      //calc number of encoder tickets for degrees
 
-        turretMotor.set(ControlMode.MotionMagic, toEncoderCount);  //turn turret to encoder value to find target
-        
+        if (Robot.visionprocessor.seesTarget()  && Math.abs(turretAngle) < TURRET_MAX_ROTATION )
+            turretMotor.set(ControlMode.MotionMagic, toEncoderCount);  //turn turret to encoder value to find target
+        else
+            turretMotor.set(ControlMode.MotionMagic, robotAngle * onedegree);
+
         // turretMotor.set(ControlMode.MotionMagic, angle / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));
         // turretMotor.set(ControlMode.MotionMagic, ((Robot.swerve.getPigeonRotation() + normalized) * onedegree));
-        // turretMotor.set(ControlMode.MotionMagic, (normalized) * onedegree));
         
         SmartDashboard.putNumber("turret_Angle", turretAngle);
         SmartDashboard.putNumber("turret_Camera", cameraAngle);
+        SmartDashboard.putNumber("turret_Robot_Angle", robotAngle);
         SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
-        SmartDashboard.putNumber("turret_ToEncoderCount", toEncoderCount);
     }
 
     // public void updateTarget(){
