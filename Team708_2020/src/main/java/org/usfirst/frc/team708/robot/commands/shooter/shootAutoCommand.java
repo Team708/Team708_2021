@@ -25,12 +25,10 @@ public class shootAutoCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         this.timeout = 2;
-        Robot.visionprocessor.findTarget();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
         // Robot.shooter.shootAuto();
     }
 

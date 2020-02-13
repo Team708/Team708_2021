@@ -21,13 +21,29 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Drives Off Line
  */
-public class FiveBallAuto extends CommandGroup {
+public class EightBallAuto extends CommandGroup {
 
-    public FiveBallAuto() {
+    public EightBallAuto() {
         
         addSequential(new DriveStraightCommand(170, 0.45));
         addSequential(new StopAtDistanceCommand(120, 5.0));
         
+        addSequential(new WaitCommand(1.0));
+        addSequential(new shootAutoCommand());
+        // addSequential(new WaitCommand(1.0));
+        
+        // addSequential(new RotateinPlaceCommand(10)); //clockwise
+        // addSequential(new WaitCommand(1.0));
+        
+        addSequential(new DriveStraightCommand(170, 0.45));
+        addSequential(new StopAtDistanceCommand(90, 2.0));
+
+        // addSequential(new RotateinPlaceCommand(-8));  //counter clockwise
+        addSequential(new WaitCommand(1.0));
+        
+        addSequential(new DriveStraightCommand(5, 0.45));
+        addSequential(new StopAtDistanceCommand(60, 3.0));
+
         addSequential(new WaitCommand(1.0));
         addSequential(new shootAutoCommand());
     }

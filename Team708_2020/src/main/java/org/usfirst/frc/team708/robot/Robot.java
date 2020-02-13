@@ -340,11 +340,12 @@ public class Robot extends TimedRobot {
      */
     private void queueAutonomousModes() {
         
-        autonomousMode.addOption("Do Nothing", new DoNothing());
-        autonomousMode.addOption("Five Ball Auto", new FiveBallAuto());
+        autonomousMode.addOption("Do Nothing",      new DoNothing());
         autonomousMode.addOption("Three Ball Auto", new ThreeBallAuto());
-        autonomousMode.addOption("Drive off line", new DriveOffLineAuto());
-        autonomousMode.addOption("Testing", new DriveStraightAuto());
+        autonomousMode.addOption("Five  Ball Auto", new FiveBallAuto());
+        autonomousMode.addOption("Eight Ball Auto", new EightBallAuto());
+        autonomousMode.addOption("Drive off line",  new DriveOffLineAuto());
+        autonomousMode.addOption("Testing",         new DriveStraightAuto());
         // autonomousMode.addOption("Tests Every Motor", new EverythingAuto());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);

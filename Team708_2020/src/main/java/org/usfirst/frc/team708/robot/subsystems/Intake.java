@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.subsystems.*;
@@ -25,7 +26,8 @@ public class Intake extends Subsystem {
 
     private boolean intakeIn = true;
     public boolean inHangerPosition = false;
-
+    
+    private double motordirection = 1;  //start with motor spinning forward
 
     public Intake(){
         intakeMotor = new CANSparkMax(RobotMap.kintakeMotor, MotorType.kBrushless);
@@ -42,7 +44,7 @@ public class Intake extends Subsystem {
         Robot.spinner.pistonRetract();
         camSolenoid.set(DoubleSolenoid.Value.kForward);   // I
         pivotSolenoid.set(DoubleSolenoid.Value.kReverse); // O
-        moveMotorIntakeIn();
+        moveMotorIntakeOut();
         inHangerPosition = false;
     }
 
@@ -78,6 +80,7 @@ public class Intake extends Subsystem {
     public void moveHanger(double Y){
         intakeMotor.set(Y);
     }
+
     public void lockHanger(){
         lockHanger.set(true);
     }
@@ -88,12 +91,12 @@ public class Intake extends Subsystem {
 
     public void moveMotorIntakeIn(){
         intakeIn = true;
-        intakeMotor.set(0);
+        intakeMotor.set(0);  //turns motor off
     }
 
     public void moveMotorIntakeOut(){
         intakeIn = false;
-        intakeMotor.set(.4);
+        intakeMotor.set(motordirection);  //turns motor on
     }
 
     public void StopMotorIntake(){
@@ -101,12 +104,12 @@ public class Intake extends Subsystem {
     }
 
     public void toggleMotorIntake(){
-        intakeIn = !intakeIn;
-         
-        if (!intakeIn)
-            moveMotorIntakeOut();
+        motordirection *= -1;
+
+        if (intakeIn)
+            intakeMotor.set(0);  //turns motor off
         else
-            moveMotorIntakeIn();
+            moveMotorIntakeOut();
     }
 
     @Override

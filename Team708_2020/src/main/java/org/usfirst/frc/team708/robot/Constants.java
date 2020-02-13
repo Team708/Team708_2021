@@ -98,6 +98,7 @@ public final class Constants {
 
 	public static final double  kHOODANGLE_CLOSESHOT		= 10000;
 	public static final double  kHOODANGLE_FARSHOT		    = 500;
+	public static final double  kHOODANGLE_LONGSHOT		    = 120; //inches
 
 	public static final double	kSHOOTER_WHEELSPEED_LONG	= 4000.0;  //RPM or encode counts?
 	public static final double	kSHOOTER_WHEELSPEED_SHORT	= 2000.0;  //RPM or encode counts?
@@ -109,11 +110,13 @@ public final class Constants {
 	public static final int kTurretSafeTolerance = 2;
 	public static final double TURRET_ROTATION_MAX_SPEED = 2664; //counts/100ms on 775w/gearbox
 
+	public static final int kHOPPER_SPEED = 1;
+
 /*
  * Intake
  */
 
-	public static final double BALL_IN 				= 1.0;
+	public static final double INTAKE_MOTOR_SPEED	= 1.0;
 
 	public static final int	INTAKE_HATCH_OPEN		=  1;
 	public static final int	INTAKE_HATCH_CLOSE		=  0;

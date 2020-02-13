@@ -53,13 +53,13 @@ public void SpinMotor(double speed) {
 // }
 
 public void spinnerRotateOneColor() {
-    spinnerSolenoid.set(true);
+    pistonExtend();
     resetSpinnerEncoder();
     spinnerPID.setReference(Constants.kSPIN_ONE_COLOR, ControlType.kPosition);
 }
 
 public void spinnerRotateThreeTimes() {
-    spinnerSolenoid.set(true);
+    pistonExtend();
     resetSpinnerEncoder();
     spinnerPID.setReference(Constants.kSPIN_THREE_TIMES, ControlType.kPosition);
 }
@@ -98,13 +98,14 @@ public void pistonRetract() {
     public void sendToDashboard() {
         SmartDashboard.putNumber("SpinnerEncoder", getSpinMotorCount());
 
-        SmartDashboard.putString("Target Color for Spinner", Robot.wheelTargetColor);
+        SmartDashboard.putString("SpinnerTargetColor", Robot.wheelTargetColor);
+        SmartDashboard.putBoolean("SpinnerPistion", pistonExtend);
 
         //puts colors to dashboard
-        SmartDashboard.putBoolean("Blue",   Robot.colors[0]);
-        SmartDashboard.putBoolean("Green",  Robot.colors[1]);
-        SmartDashboard.putBoolean("Red",    Robot.colors[2]);
-        SmartDashboard.putBoolean("Yellow", Robot.colors[3]);
+        SmartDashboard.putBoolean("SpinnerBlue",   Robot.colors[0]);
+        SmartDashboard.putBoolean("SpinnerGreen",  Robot.colors[1]);
+        SmartDashboard.putBoolean("SpinnerRed",    Robot.colors[2]);
+        SmartDashboard.putBoolean("SpinnerYellow", Robot.colors[3]);
     }
 
 }

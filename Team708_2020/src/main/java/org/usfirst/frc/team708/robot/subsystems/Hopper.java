@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -14,7 +15,7 @@ public class Hopper extends Subsystem {
 
     public CANSparkMax hopperMotor;
 
-    private int hopperForward = 1;
+    private int hopperspeed = Constants.kHOPPER_SPEED; //speed of Hooper
 
     public Hopper(){
         hopperMotor = new CANSparkMax(RobotMap.khopperMotor, MotorType.kBrushless);
@@ -22,7 +23,7 @@ public class Hopper extends Subsystem {
     }
 
     public void moveMotor(){
-        hopperMotor.set(hopperForward * .4);
+        hopperMotor.set(hopperspeed);
     }
 
     public void stopMotor(){
@@ -31,7 +32,7 @@ public class Hopper extends Subsystem {
 
     //uses same speed as above, sets it to negative
     public void reverseMotor(){
-        hopperForward *= -1;
+        hopperspeed *= -1;
         moveMotor();
     }
 

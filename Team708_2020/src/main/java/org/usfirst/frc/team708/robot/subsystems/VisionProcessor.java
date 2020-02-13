@@ -75,7 +75,7 @@ public class VisionProcessor extends Subsystem {
 		return getNTInfo("tx");
 	}
 
-	public void findTarget() {
+	public void findTarget() {  //drivetrain vision processing 
 		double angle = getRotate();
 		if (Math.abs(angle) > 1.0) {
 			Swerve.getInstance().rotateDegreesfromPosition(angle);

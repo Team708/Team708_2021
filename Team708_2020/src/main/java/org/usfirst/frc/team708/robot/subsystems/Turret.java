@@ -29,7 +29,6 @@ public class Turret extends Subsystem {
     public boolean useLimelight = true;
     
     int turretEncoderReverseFactor = 1;
-    int[] adjusted = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int nextsample = 0;
     int samplerate = 3;
     boolean ignorePigeon = false;
@@ -74,9 +73,9 @@ public class Turret extends Subsystem {
         double robotAngle  = Robot.swerve.getPigeonRotation();   //Angle in degrees robot is at
 
         double rotateToTarget = turretAngle - cameraAngle;       //calc numberof degrees to target
-        double toEncoderCount = rotateToTarget * onedegree;      //calc number of encoder tickets for degrees
+        double toEncoderCount = (rotateToTarget * onedegree) % 360;      //calc number of encoder tickets for degrees
 
-        if (Robot.visionprocessor.seesTarget()  && Math.abs(turretAngle) < TURRET_MAX_ROTATION )
+        if (Robot.visionprocessor.seesTarget()) //  && Math.abs(turretAngle) < TURRET_MAX_ROTATION )
             turretMotor.set(ControlMode.MotionMagic, toEncoderCount);  //turn turret to encoder value to find target
         else
             turretMotor.set(ControlMode.MotionMagic, robotAngle * onedegree);

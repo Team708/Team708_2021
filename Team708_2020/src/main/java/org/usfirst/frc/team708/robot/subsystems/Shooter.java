@@ -33,7 +33,7 @@ public class Shooter extends Subsystem {
     public boolean  shooterSet = false;
     public boolean  hoodUp     = false;
 
-    private double  feederMotorSpeed   = Constants.kFEEDERMOTORSPEED;
+    private double  feederMotorSpeed       = Constants.kFEEDERMOTORSPEED;
 	        int turretEncoderReverseFactor = 1;
 
     public Shooter(){
@@ -67,52 +67,30 @@ public class Shooter extends Subsystem {
         feederMotor.set(0);
     }
 
-    public void shootManual(double speed){
-        setTargetSpeed(speed*Constants.kSHOOTER_MAXSPEED);
-        shooterMotor.set(-speed);
+    public void stopShooter() {
+        shooterMotor.stopMotor();
     }
 
     private void setTargetSpeed(double speed) {
         targetSpeed=speed;
     }
-
-    public void stopShooter() {
-        shooterMotor.stopMotor();
-    }
-
-    
-    public double adjustAnglePosition(boolean extended, double distance){
-        double angle;
-        if(extended){
-            angle = 25;
-        }else{
-            angle = 45;
-        }
-        double angleInRadians=angle*Math.PI/180;
-        //angleInRadians = Math.atan2(1,(distance / (2 * (Constants.kGOALHEIGHT-Constants.kCAMERAHEIGHT))));
-        return angleInRadians;
-    }
-
     
     public double determineShooterSpeed(double distance){
-        distance = distance / 12;
-        double angle = adjustAnglePosition(getHoodPosition(), distance);
-        
-        // double p1 = (32.2 * Math.pow(distance, 2));
-        // double p2 = (2 * (Math.pow(Math.cos(angle) , 2)));
-        // double p3 = -1*(Constants.kGOALHEIGHT-Constants.kSHOOTERHEIGHT)/12 + distance * Math.tan(angle);
-        
-        // double velocity = Math.sqrt(p1 / (p2 * p3));
-        
-        // double RPM = (velocity) / (4 * FlyWheelEffeciency * 2) * 60 * Math.PI; //change 4 to cnst.
-        // return RPM;
-        return 3500;
+       if (distance >= Constants.kHOODANGLE_LONGSHOT) {
+           moveHoodUp();
+           return(Constants.kSHOOTER_WHEELSPEED_LONG);
+        }
+        else
+        {
+           moveHoodDown();
+           return(Constants.kSHOOTER_WHEELSPEED_SHORT);
+        }
     }
 
     public void shootAuto(){
         double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
         setTargetSpeed(RPM); //setTargetSpeed(RPM);
-        shooterPIDController.setReference((-RPM-100), ControlType.kVelocity);
+        shooterPIDController.setReference((-RPM), ControlType.kVelocity);  //was -RPM-100
     }
 
     public boolean isShooterAtSpeed(){
@@ -120,7 +98,6 @@ public class Shooter extends Subsystem {
             return true;
         else
             return false;
-
     }
 
     public boolean getHoodPosition(){
@@ -141,6 +118,7 @@ public class Shooter extends Subsystem {
         hoodUp = !hoodUp;
         hoodSolenoid.set(hoodUp);
     }
+    
     public void sendToDashboard() {
         
         // SmartDashboard.putNumber("Theor. RPM", ((determineShooterSpeed(Robot.visionprocessor.getDistance())*Constants.kSHOOTER_MAXSPEED)));
@@ -150,8 +128,6 @@ public class Shooter extends Subsystem {
         SmartDashboard.putNumber("RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
         SmartDashboard.putNumber("velocity", shooterEncoder.getVelocity());
         SmartDashboard.putNumber("target speed", targetSpeed);
-        
-
     }
 
     @Override
