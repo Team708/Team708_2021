@@ -25,13 +25,13 @@ public final class Constants {
 	public static final int  	kDT_DRIVETRAIN_WHEEL_DIAMETER 				=   4; 
 
 	//Swerve Calculations Constants
-	public static final double kDT_WHEELBASE_LENGTH = 24 / 12.0; //feet
-    public static final double kDT_WHEELBASE_WIDTH  = 24 / 12.0; //feet
+	public static final double kDT_WHEELBASE_LENGTH = 17.5 / 12.0; //feet
+    public static final double kDT_WHEELBASE_WIDTH  = 17.5 / 12.0; //feet
     public static final double kDT_SWERVE_DIAGONAL = Math.hypot(kDT_WHEELBASE_LENGTH, kDT_WHEELBASE_WIDTH);
 	
 	//Physical Robot Dimensions
-	public static final double ROBOT_WIDTH = 17.50 / 12.0;
-	public static final double ROBOT_LENGTH = 17.5 / 12.0;
+	public static final double ROBOT_WIDTH = 24 / 12.0;
+	public static final double ROBOT_LENGTH = 24 / 12.0;
 	public static final double ROBOT_HALF_WIDTH = ROBOT_WIDTH / 2.0;
 	public static final double ROBOT_HALF_LENGTH = ROBOT_LENGTH / 2.0;
 	public static final double ROBOT_INTAKE_EXTRUSION = 11.0/12.0;
@@ -84,7 +84,7 @@ public final class Constants {
  * Hanger
  */
 	public static final double 	kHANGER_MAX_SPEED_UP		=   1.0;
-	public static final double 	kHANGER_MAX_SPPEED_DOWN		=  -1.0;
+	public static final double 	kHANGER_MAX_SPEED_DOWN		=  -1.0;
 	public static final double	kHANGER_JOYSTICK_DEAD_ZONE	=  .5;   //min power needed to move motor
 	public static final double 	kHANGER_ADJUST_ANGLE_SPEED	=   .4;
 
@@ -100,7 +100,7 @@ public final class Constants {
 	public static final double  kHOODANGLE_FARSHOT		    = 500;
 	public static final double  kHOODANGLE_LONGSHOT		    = 120; //inches
 
-	public static final double	kSHOOTER_WHEELSPEED_LONG	= 4000.0;  //RPM or encode counts?
+	public static final double	kSHOOTER_WHEELSPEED_LONG	= 3600.0;  //RPM or encode counts?
 	public static final double	kSHOOTER_WHEELSPEED_SHORT	= 2000.0;  //RPM or encode counts?
 
 	public static final int TURRET_ENCODER_STARTING_POS  = 550+2048;  // turret offset

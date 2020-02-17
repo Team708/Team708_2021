@@ -15,16 +15,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Spinner extends Subsystem {
 
-    private CANSparkMax     spinnerMotor;
-    private CANEncoder      spinnerEncoder; 
-    private Solenoid        spinnerSolenoid;
-    public CANPIDController spinnerPID;
+    public CANSparkMax      spinnerMotor;
+    private CANEncoder       spinnerEncoder; 
+    private Solenoid         spinnerSolenoid;
+    public  CANPIDController spinnerPID;
 
     private boolean pistonExtend;
     private double  spinnerMotorSpeed = .3;
-    public boolean spinnerRotateStop;
 
-    public Solenoid  deployColorWheel;
+    // public  boolean spinnerRotateStop;
+    // public Solenoid  deployColorWheel;
 
 public Spinner() {
     spinnerMotor = new CANSparkMax(RobotMap.kspinnerMotor, MotorType.kBrushless);

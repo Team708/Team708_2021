@@ -24,7 +24,7 @@ public class ThreeBallAuto extends CommandGroup {
     public ThreeBallAuto() {
         
         addSequential(new WaitCommand(1));
-        addSequential(new DriveStraightCommand(0, .5));
+        addSequential(new DriveStraightCommand(180, .5));
         addSequential(new StopAtDistanceCommand(20, 10));
         addSequential(new WaitCommand(1));
         addSequential(new FindTargetCommand());

@@ -164,6 +164,7 @@ public class Robot extends TimedRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        turret.updateAngle();
         sendStatistics();
     }
 
@@ -253,8 +254,10 @@ public class Robot extends TimedRobot {
         }
         else if (operator.startButton.wasPressed())
             spinner.spinnerRotateThreeTimes();
-        else if(operator.yButton.wasPressed())
-            speed += 0.1;
+        // else if(operator.yButton.wasPressed())
+        //     speed += 0.1;
+        // else if(operator.aButton.wasPressed())
+        //     speed -= 0.1;
         else if (operator.bButton.wasPressed()){
             spinner.spinnerRotateOneColor();
             operator.rumble(1.0, 1.0);
@@ -267,8 +270,6 @@ public class Robot extends TimedRobot {
             intake.toIntake();            
         else if(operator.POV270.wasPressed())
             intake.toColorFromHanger();
-        else if(operator.aButton.wasPressed())
-            speed -= 0.1;
         else if(operator.backButton.wasPressed())
             hopper.stopMotor();
         else if(operator.xButton.wasPressed())
@@ -344,6 +345,7 @@ public class Robot extends TimedRobot {
         autonomousMode.addOption("Three Ball Auto", new ThreeBallAuto());
         autonomousMode.addOption("Five  Ball Auto", new FiveBallAuto());
         autonomousMode.addOption("Eight Ball Auto", new EightBallAuto());
+        autonomousMode.addOption("Steal 2    Auto", new TakeTwoAuto());
         autonomousMode.addOption("Drive off line",  new DriveOffLineAuto());
         autonomousMode.addOption("Testing",         new DriveStraightAuto());
         // autonomousMode.addOption("Tests Every Motor", new EverythingAuto());

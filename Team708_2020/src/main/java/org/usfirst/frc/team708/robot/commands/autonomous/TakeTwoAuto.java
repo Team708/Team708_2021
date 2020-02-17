@@ -21,28 +21,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Drives Off Line
  */
-public class EightBallAuto extends CommandGroup {
+public class TakeTwoAuto extends CommandGroup {
 
-    public EightBallAuto() {
+    public TakeTwoAuto() {
         
-        addSequential(new DriveStraightCommand(180, 0.45));
-        addSequential(new StopAtDistanceCommand(140, 5.0));
+        addSequential(new DriveStraightCommand(180, 1.0));
+        addSequential(new StopAtDistanceCommand(170, 3.0));
         
         addSequential(new WaitCommand(1.0));
-        addSequential(new shootAutoCommand());
-        // addSequential(new WaitCommand(1.0));
-        
-        // addSequential(new RotateinPlaceCommand(10)); //clockwise
-        // addSequential(new WaitCommand(1.0));
-        
-        addSequential(new DriveStraightCommand(180, 0.45));
-        addSequential(new StopAtDistanceCommand(110, 2.0));
 
-        // addSequential(new RotateinPlaceCommand(-8));  //counter clockwise
-        addSequential(new WaitCommand(1.0));
-        
-        addSequential(new DriveStraightCommand(5, 0.45));
-        addSequential(new StopAtDistanceCommand(80, 3.0));
+        addSequential(new DriveStraightCommand(0, 1.0));
+        addSequential(new StopAtDistanceCommand(70, 3.0));
 
         addSequential(new WaitCommand(1.0));
         addSequential(new shootAutoCommand());

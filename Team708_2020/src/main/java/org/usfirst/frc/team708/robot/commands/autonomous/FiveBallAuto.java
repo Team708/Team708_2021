@@ -25,8 +25,8 @@ public class FiveBallAuto extends CommandGroup {
 
     public FiveBallAuto() {
         
-        addSequential(new DriveStraightCommand(170, 0.45));
-        addSequential(new StopAtDistanceCommand(120, 5.0));
+        addSequential(new DriveStraightCommand(180, 0.45));
+        addSequential(new StopAtDistanceCommand(140, 5.0));
         
         addSequential(new WaitCommand(1.0));
         addSequential(new shootAutoCommand());

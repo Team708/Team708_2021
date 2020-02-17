@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANEncoder;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
@@ -14,10 +15,12 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Intake extends Subsystem {
 
-    public CANSparkMax intakeMotor;
+    public  CANSparkMax    intakeMotor;
+
     public DoubleSolenoid  camSolenoid;
     public DoubleSolenoid  pivotSolenoid;
 
@@ -27,17 +30,27 @@ public class Intake extends Subsystem {
     private boolean intakeIn = true;
     public boolean inHangerPosition = false;
     
-    private double motordirection = 1;  //start with motor spinning forward
+    private double motordirection = 1; //intake Motor speed
+                                       //start with motor spinning forward
+    private DigitalInput hangerExtended;
+    private DigitalInput hangerRetracted;
 
     public Intake(){
         intakeMotor = new CANSparkMax(RobotMap.kintakeMotor, MotorType.kBrushless);
         intakeMotor.setInverted(false);
         
+        intakeMotor.follow(Robot.spinner.spinnerMotor);
+
         camSolenoid   = new DoubleSolenoid(RobotMap.armCam0, RobotMap.armCam1);
         pivotSolenoid = new DoubleSolenoid(RobotMap.armPivot0, RobotMap.armPivot1);
 
         shifterHanger = new Solenoid(RobotMap.hangerEngage);
-        lockHanger    = new Solenoid(RobotMap.hangerLock);
+        // lockHanger    = new Solenoid(RobotMap.hangerLock);
+
+        hangerExtended 	= new DigitalInput(0);
+        hangerRetracted	= new DigitalInput(1);
+
+        toColorFromIntake();
     }
 
     public void toIntake(){
@@ -65,7 +78,7 @@ public class Intake extends Subsystem {
     }
     public void toColorFromHanger(){
         camSolenoid.set(DoubleSolenoid.Value.kReverse);   // O
-        pivotSolenoid.set(DoubleSolenoid.Value.kForward); // O
+        pivotSolenoid.set(DoubleSolenoid.Value.kReverse); // O
         StopMotorIntake();
         inHangerPosition = false;
     }
@@ -77,12 +90,25 @@ public class Intake extends Subsystem {
             shifterHanger.set(false);
     }
 
+    private boolean notExtended(){
+        return hangerExtended.get();
+    }
+
+    private boolean notRetracted(){
+        return hangerRetracted.get();
+    }
+
     public void moveHanger(double Y){
-        intakeMotor.set(Y);
+        if (inHangerPosition){
+            if ((Y>0 && notExtended() ) || 
+                (Y<0 && notRetracted())
+               )
+              Robot.spinner.spinnerMotor.set(Y);
+        }
     }
 
     public void lockHanger(){
-        lockHanger.set(true);
+        shifterHanger.set(false);
     }
 
     public boolean getIntakePosition(){
@@ -91,23 +117,23 @@ public class Intake extends Subsystem {
 
     public void moveMotorIntakeIn(){
         intakeIn = true;
-        intakeMotor.set(0);  //turns motor off
+        Robot.spinner.spinnerMotor.set(0);  //turns motor off
     }
 
     public void moveMotorIntakeOut(){
         intakeIn = false;
-        intakeMotor.set(motordirection);  //turns motor on
+        Robot.spinner.spinnerMotor.set(motordirection);  //turns motor on
     }
 
     public void StopMotorIntake(){
-        intakeMotor.set(0);
+        Robot.spinner.spinnerMotor.set(0);
     }
 
     public void toggleMotorIntake(){
         motordirection *= -1;
 
         if (intakeIn)
-            intakeMotor.set(0);  //turns motor off
+            Robot.spinner.spinnerMotor.set(0);  //turns motor off
         else
             moveMotorIntakeOut();
     }

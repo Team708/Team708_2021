@@ -72,7 +72,8 @@ public class VisionProcessor extends Subsystem {
 	}
 
 	public double getRotate() {	
-		return getNTInfo("tx");
+		// return getNTInfo("tx");
+		return -getNTInfo("ty");
 	}
 
 	public void findTarget() {  //drivetrain vision processing 
@@ -86,13 +87,17 @@ public class VisionProcessor extends Subsystem {
 	}
 
 	public double getDistance(){
-			return 74/Math.tan(Math.PI*((getNTInfo("ty")+20)/180));  //target 98.25" - camera height 24.25" 
-															    	 //ty =  camera angle + Ty
+		if (seesTarget())
+		//  return 74/Math.tan(Math.PI*((getNTInfo("ty")+20)/180));
+			return 74/Math.tan(Math.PI*((getNTInfo("tx")+20)/180));  //target 94" - camera height 20" 
+																	 //ty =  camera angle + Ty
+		else
+		    return 0;
 	}  
 	
 	public void sendToDashboard() {
 		// SmartDashboard.putBoolean("Has Target", targetFound);
-		// SmartDashboard.putNumber("Distance to Target", getDistance());
+		SmartDashboard.putNumber("Vision_Distance ", getDistance());
 		// SmartDashboard.putNumber("tx", getRotate());
 	}
 

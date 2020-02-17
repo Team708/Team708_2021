@@ -18,11 +18,12 @@ import org.usfirst.frc.team708.robot.RobotMap;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+
 
 public class Shooter extends Subsystem {
 
-    
-    public CANSparkMax shooterMotor, feederMotor;
+    public CANSparkMax shooterMotor, shooterMotor2, feederMotor;
     public CANEncoder  shooterEncoder;
     private CANPIDController shooterPIDController;
 
@@ -38,10 +39,17 @@ public class Shooter extends Subsystem {
 
     public Shooter(){
 
-        shooterMotor = new CANSparkMax(RobotMap.kshooterShootMotor, MotorType.kBrushless);
-        feederMotor  = new CANSparkMax(RobotMap.kfeederFeedMotor, MotorType.kBrushless);
+        shooterMotor  = new CANSparkMax(RobotMap.kshooterShootMotor,  MotorType.kBrushless);
+        shooterMotor2 = new CANSparkMax(RobotMap.kshooterShootMotor2, MotorType.kBrushless);
+        feederMotor   = new CANSparkMax(RobotMap.kfeederFeedMotor,    MotorType.kBrushless);
+
         shooterMotor.setInverted(true);
+        shooterMotor2.setInverted(true);
+
+        shooterMotor2.follow(shooterMotor);
+        
         feederMotor.setIdleMode(IdleMode.kBrake);
+
         shooterEncoder = new CANEncoder(shooterMotor);
         shooterPIDController = shooterMotor.getPIDController();
         shooterPIDController.setP(5e-4);
