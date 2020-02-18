@@ -89,7 +89,7 @@ public class VisionProcessor extends Subsystem {
 	public double getDistance(){
 		if (seesTarget())
 		//  return 74/Math.tan(Math.PI*((getNTInfo("ty")+20)/180));
-			return 74/Math.tan(Math.PI*((getNTInfo("tx")+20)/180));  //target 94" - camera height 20" 
+			return 73/Math.tan(Math.PI*((getNTInfo("tx")+40)/180));  //target 94" - camera height 21" 
 																	 //ty =  camera angle + Ty
 		else
 		    return 0;
