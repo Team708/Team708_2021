@@ -34,7 +34,7 @@ public class Turret extends Subsystem {
     boolean ignorePigeon = false;
     double onedegree = Constants.TURRET_ENCODER_COUNT / 360;
     double normalized = 0;
-    double TURRET_MAX_ROTATION = 260;
+    double TURRET_MAX_ROTATION = 360;
     
     public Turret() {
 
@@ -82,11 +82,12 @@ public class Turret extends Subsystem {
 
         // turretMotor.set(ControlMode.MotionMagic, angle / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));
         // turretMotor.set(ControlMode.MotionMagic, ((Robot.swerve.getPigeonRotation() + normalized) * onedegree));
-        
-        SmartDashboard.putNumber("turret_Angle", turretAngle);
-        SmartDashboard.putNumber("turret_Camera", cameraAngle);
-        SmartDashboard.putNumber("turret_Robot_Angle", robotAngle);
-        SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
+
+
+        // SmartDashboard.putNumber("turret_Angle", turretAngle);
+        // SmartDashboard.putNumber("turret_Camera", cameraAngle);
+        // SmartDashboard.putNumber("turret_Robot_Angle", robotAngle);
+        // SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
     }
 
     // public void updateTarget(){
@@ -135,11 +136,12 @@ public class Turret extends Subsystem {
 
     }
 
+
     public void sendToDashboard() {
         // SmartDashboard.putNumber("turret_error", getError());
-        // SmartDashboard.putNumber("turret_angle", getAngle().getDegrees());
-        // SmartDashboard.putNumber("Turret Encoder count", turretMotor.getSelectedSensorPosition(0));
-        // SmartDashboard.putNumber("turret_setpoint", getSetpoint());
+        SmartDashboard.putNumber("turret_angle", getAngle().getDegrees());
+        SmartDashboard.putNumber("Turret Encoder count", turretMotor.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("turret_setpoint", getSetpoint());
         // SmartDashboard.putBoolean("turret_fwd_limit", getForwardLimitSwitch());
         // SmartDashboard.putBoolean("turret_rev_limit", getReverseLimitSwitch());
         // SmartDashboard.putBoolean("turret_on_target", isOnTarget());

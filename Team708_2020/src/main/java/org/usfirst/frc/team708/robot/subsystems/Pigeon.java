@@ -40,7 +40,7 @@ public class Pigeon {
 	public Rotation2d getAngle(){
 		double [] ypr = new double[3];
 		pigeon.getYawPitchRoll(ypr);
-		return Rotation2d.fromDegrees(/*-pigeon.getFusedHeading(fusionStatus)*/-ypr[0]);
+		return Rotation2d.fromDegrees(/*-pigeon.getFusedHeading(fusionStatus)*/-ypr[0]); 
 	}
 	
 	public double getRawAngle(){
@@ -55,8 +55,8 @@ public class Pigeon {
 	
 	public void outputToSmartDashboard(){
 		SmartDashboard.putBoolean("Pigeon Good", isGood());
-		// SmartDashboard.putNumber("Pigeon Temp", pigeon.getTemp());
-		// SmartDashboard.putNumber("Pigeon Compass", pigeon.getAbsoluteCompassHeading());
-		// SmartDashboard.putNumber("Yaw", getAngle().getDegrees());
+		SmartDashboard.putNumber("Pigeon Temp", pigeon.getTemp());
+		SmartDashboard.putNumber("Pigeon Compass", pigeon.getAbsoluteCompassHeading());
+		SmartDashboard.putNumber("Pigeon Yaw", getAngle().getDegrees());
 	}
 }

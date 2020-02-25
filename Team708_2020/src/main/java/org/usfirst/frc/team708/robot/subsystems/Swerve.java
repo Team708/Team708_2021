@@ -472,10 +472,10 @@ public class Swerve extends Subsystem{
 	}
 
 	public void sendToDashboard() {
-		// modules.forEach((m) -> m.outputToSmartDashboard());
+		modules.forEach((m) -> m.outputToSmartDashboard());
 		pigeon.outputToSmartDashboard();
-		// SmartDashboard.putString("Swerve State", currentState.toString());
-		// SmartDashboard.putNumber("GetDistance", getDistanceInches());
-		// SmartDashboard.putNumber("Times Called", timesCalled);
+		SmartDashboard.putString("Swerve State", currentState.toString());
+		SmartDashboard.putNumber("GetDistance", getDistanceInches());
+		SmartDashboard.putNumber("Times Called", timesCalled);
 	}
 }
