@@ -55,19 +55,19 @@ public class Shooter extends Subsystem {
 
         shooterEncoder = new CANEncoder(shooterMotor);
         shooterPIDController = shooterMotor.getPIDController();
-        shooterPIDController.setP(5e-4);
-        shooterPIDController.setI(0);
-        shooterPIDController.setD(6e-5);
-        shooterPIDController.setFF(2e-4);
+        shooterPIDController.setP(.0005);
+        shooterPIDController.setI(0.0000002);
+        shooterPIDController.setD(0); //.00006
+        shooterPIDController.setFF(.0002);
         shooterPIDController.setIZone(0);
         shooterPIDController.setOutputRange(-1, 1);
 
         shooterEncoder2 = new CANEncoder(shooterMotor2);
         shooterPIDController2 = shooterMotor2.getPIDController();
-        shooterPIDController2.setP(5e-4);
-        shooterPIDController2.setI(0);
-        shooterPIDController2.setD(6e-5);
-        shooterPIDController2.setFF(2e-4);
+        shooterPIDController2.setP(.0005);
+        shooterPIDController2.setI(0.0000002);
+        shooterPIDController2.setD(0); //.00006
+        shooterPIDController2.setFF(.0002);
         shooterPIDController2.setIZone(0);
         shooterPIDController2.setOutputRange(-1, 1);
 
@@ -76,8 +76,8 @@ public class Shooter extends Subsystem {
     }
     
     public void feederOn(double speed){
-        double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
-        setTargetSpeed(RPM); //setTargetSpeed(RPM);
+        // double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
+        // setTargetSpeed(RPM); //setTargetSpeed(RPM);
 
         if (isShooterAtSpeed())
             feederMotor.set(feederMotorSpeed);   // set feeder motor power
@@ -117,14 +117,14 @@ public class Shooter extends Subsystem {
         double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
         setTargetSpeed(RPM); //setTargetSpeed(RPM);
 
-        shooterMotor.set(.95);        
-        shooterMotor2.set(.95); 
-        // shooterPIDController.setReference(-(RPM), ControlType.kVelocity);  //was -RPM-100
-        // shooterPIDController2.setReference((RPM), ControlType.kVelocity);  //was -RPM-100
+        // shooterMotor.set(.95);        
+        // shooterMotor2.set(.95); 
+        shooterPIDController.setReference(RPM, ControlType.kVelocity);
+        shooterPIDController2.setReference(RPM, ControlType.kVelocity);
     }
 
     public boolean isShooterAtSpeed(){
-        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.80) && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
+        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.80))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
             return true;
         else
             return false;

@@ -31,6 +31,7 @@ public class Intake extends Subsystem {
 
     private boolean intakeIn = true;
     public boolean inHangerPosition = false;
+    public boolean inIntakePosition = false;
     public boolean stopHanger = false;
 
     private double motordirection = .5; //intake Motor speed
@@ -50,21 +51,23 @@ public class Intake extends Subsystem {
         shifterHanger = new Solenoid(RobotMap.hangerEngage);
         // lockHanger    = new Solenoid(RobotMap.hangerLock);
 
-        hangerExtended 	= new DigitalInput(0);
-        hangerRetracted	= new DigitalInput(1);
-        lockHanger();
+        // hangerExtended 	= new DigitalInput(0);
+        // hangerRetracted	= new DigitalInput(1);
+        unlockHanger();
 
         toColorFromIntake();
         // toIntake();
     }
 
     public void toIntake(){
+        unlockHanger();
         Robot.spinner.pistonRetract();
         camSolenoid.set(DoubleSolenoid.Value.kForward);   // I
         pivotSolenoid.set(DoubleSolenoid.Value.kReverse); // O
         moveMotorIntakeOut();
         Robot.hopper.moveMotor();
         inHangerPosition = false;
+        inIntakePosition = true;
     }
 
     public void toHanger(){
@@ -73,8 +76,9 @@ public class Intake extends Subsystem {
             Robot.spinner.pistonRetract();
             camSolenoid.set(DoubleSolenoid.Value.kForward);   // I
             pivotSolenoid.set(DoubleSolenoid.Value.kForward); // I
-            shiftToHanger();
+            lockHanger();
             inHangerPosition = true;
+            inIntakePosition = false;
             Robot.spinner.resetSpinnerEncoder();
         }
     }
@@ -82,25 +86,27 @@ public class Intake extends Subsystem {
     public void toColorFromIntake(){
         camSolenoid.set(DoubleSolenoid.Value.kReverse);   // O
         pivotSolenoid.set(DoubleSolenoid.Value.kForward); // I
-        lockHanger();
+        unlockHanger();
         StopMotorIntake();
         Robot.spinner.resetSpinnerEncoder();
         Robot.hopper.stopMotor();
         inHangerPosition = false;
+        inIntakePosition = false;
     }
     public void toColorFromHanger(){
         camSolenoid.set(DoubleSolenoid.Value.kReverse);   // O
         pivotSolenoid.set(DoubleSolenoid.Value.kReverse); // O
-        lockHanger();
+        unlockHanger();
         StopMotorIntake();
         inHangerPosition = false;
+        inIntakePosition = false;
     }
 
     public void shiftToHanger(){
         if(inHangerPosition)
-            shifterHanger.set(true);
-        else
             shifterHanger.set(false);
+        else
+            shifterHanger.set(true);
     }
 
     private boolean notExtended(){
@@ -133,7 +139,9 @@ public class Intake extends Subsystem {
     public void lockHanger(){
         shifterHanger.set(false);
     }
-
+    public void unlockHanger(){
+        shifterHanger.set(true);
+    }
     public boolean getIntakePosition(){
         return intakeIn;
     }
@@ -174,5 +182,6 @@ public class Intake extends Subsystem {
         SmartDashboard.putBoolean("Hanger extended",!notExtended());
         SmartDashboard.putBoolean("Hanger retracted",!notRetracted());
         SmartDashboard.putNumber("FMS Match Time", Timer.getMatchTime());
+        SmartDashboard.putNumber("Hanger Get Reference", Robot.spinner.spinnerEncoder.getPosition());
     }
 }

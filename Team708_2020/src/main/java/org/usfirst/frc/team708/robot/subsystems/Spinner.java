@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Spinner extends Subsystem {
 
     public CANSparkMax      spinnerMotor;
-    private CANEncoder       spinnerEncoder; 
+    public CANEncoder       spinnerEncoder; 
     private Solenoid         spinnerSolenoid;
     public  CANPIDController spinnerPID;
 
@@ -33,16 +33,27 @@ public Spinner() {
 
     spinnerSolenoid = new Solenoid(RobotMap.littlePecker);
 
-    spinnerEncoder.setPosition(0);
     spinnerPID = spinnerMotor.getPIDController();
+    
     spinnerPID.setP(0.1);
     spinnerPID.setI(0);
     spinnerPID.setD(0);
     spinnerPID.setFF(0.1);
     spinnerPID.setIZone(0);
     spinnerPID.setOutputRange(-0.45, 0.45);
-
+    
+    // spinnerPID.setP(.00008);
+    // spinnerPID.setI(0);
+    // spinnerPID.setD(0);
+    // spinnerPID.setIZone(0);
+    // spinnerPID.setFF(.00015);  //.1
+    // spinnerPID.setOutputRange(-1,1); 
+    
     spinnerMotor.setIdleMode(IdleMode.kBrake);
+    
+    spinnerEncoder.setPosition(0);
+
+    spinnerMotor.setInverted(false);
 
     spinnerSolenoid.set(false);
 }

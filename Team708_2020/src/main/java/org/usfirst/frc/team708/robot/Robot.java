@@ -308,6 +308,7 @@ public class Robot extends TimedRobot {
             driver.rumble(1.0, 1.0);
             swerve.temporarilyDisableHeadingController();
             swerve.zeroSensors(new RigidTransform2d(new Translation2d(Constants.ROBOT_HALF_LENGTH, Constants.kAutoStartingCorner.y() + Constants.ROBOT_HALF_WIDTH), Rotation2d.fromDegrees(0)));
+            // turret.resetTurret();
         }
         else if(driver.leftBumper.wasPressed()) {
             driver.rumble(1.0, 1.0);
@@ -325,6 +326,7 @@ public class Robot extends TimedRobot {
         sendStatistics();
     }
 
+    
     /**
      * Sends data from each subsystem periodically as set by sendStatsIntervalSec
      */
@@ -335,6 +337,7 @@ public class Robot extends TimedRobot {
         shooter.sendToDashboard();
         turret.sendToDashboard();
         intake.sendToDashboard();
+        hopper.sendToDashboard();
         spinner.sendToDashboard();
         visionprocessor.sendToDashboard();
     }
@@ -366,6 +369,7 @@ public class Robot extends TimedRobot {
        SmartDashboard.putData(shooter);
        SmartDashboard.putData(turret);
        SmartDashboard.putData(intake);
+       SmartDashboard.putData(hopper);
        SmartDashboard.putData(spinner);
     }
 }

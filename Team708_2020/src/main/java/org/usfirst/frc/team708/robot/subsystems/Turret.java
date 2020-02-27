@@ -68,26 +68,31 @@ public class Turret extends Subsystem {
 
     public synchronized void updateAngle() {
         //calcuate the angle of the turret and add it to Tx
-        double turretAngle = turretMotor.getSelectedSensorPosition(0) / onedegree; // turret is at this degree
+        // double turretPos  = (turretMotor.getSelectedSensorPosition(0)) / onedegree; // turret is at this degree
         double cameraAngle = Robot.visionprocessor.getRotate();  //target is Tx degrees
         double robotAngle  = Robot.swerve.getPigeonRotation();   //Angle in degrees robot is at
+        double turretAngle = (turretMotor.getSelectedSensorPosition(0)) / onedegree; // turret is at this degree
 
-        double rotateToTarget = turretAngle - cameraAngle;       //calc numberof degrees to target
-        double toEncoderCount = (rotateToTarget * onedegree) % 360;      //calc number of encoder tickets for degrees
+        double rotateToTarget = (turretAngle - cameraAngle);       //calc numberof degrees to target
+        double toEncoderCount = (rotateToTarget * onedegree); //% 360     //calc number of encoder tickets for degrees
 
+        if (Robot.intake.inIntakePosition)
         if (Robot.visionprocessor.seesTarget()) //  && Math.abs(turretAngle) < TURRET_MAX_ROTATION )
-            turretMotor.set(ControlMode.MotionMagic, toEncoderCount);  //turn turret to encoder value to find target
+            if (!(rotateToTarget > 270 || rotateToTarget < -90))
+              turretMotor.set(ControlMode.MotionMagic, toEncoderCount);  //turn turret to encoder value to find target
         else
-            turretMotor.set(ControlMode.MotionMagic, robotAngle * onedegree);
+            if (Math.abs(robotAngle) <= 15)
+                turretMotor.set(ControlMode.MotionMagic, (robotAngle * onedegree)+Constants.TURRET_ENCODER_STARTING_POS);
 
         // turretMotor.set(ControlMode.MotionMagic, angle / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));
         // turretMotor.set(ControlMode.MotionMagic, ((Robot.swerve.getPigeonRotation() + normalized) * onedegree));
 
-
-        // SmartDashboard.putNumber("turret_Angle", turretAngle);
-        // SmartDashboard.putNumber("turret_Camera", cameraAngle);
-        // SmartDashboard.putNumber("turret_Robot_Angle", robotAngle);
-        // SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
+        SmartDashboard.putBoolean("turret_SeesTarget", Robot.visionprocessor.seesTarget());
+        SmartDashboard.putNumber("turret_toEncoderCount", toEncoderCount);
+        SmartDashboard.putNumber("turret_Angle", turretAngle);
+        SmartDashboard.putNumber("turret_Camera", cameraAngle);
+        SmartDashboard.putNumber("turret_Robot_Angle", robotAngle);
+        SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
     }
 
     // public void updateTarget(){
@@ -100,6 +105,10 @@ public class Turret extends Subsystem {
 
     //     turretMotor.set(ControlMode.MotionMagic, ((Robot.swerve.getPigeonRotation() + adjusted[0]) * onedegree));
     // }
+
+    public synchronized void resetTurret(){
+        turretMotor.set(ControlMode.MotionMagic, Constants.TURRET_ENCODER_STARTING_POS);
+    }
 
     synchronized void reset(Rotation2d actual_rotation) {
         turretMotor.set(ControlMode.MotionMagic, actual_rotation.getRadians() / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));
@@ -139,9 +148,9 @@ public class Turret extends Subsystem {
 
     public void sendToDashboard() {
         // SmartDashboard.putNumber("turret_error", getError());
-        SmartDashboard.putNumber("turret_angle", getAngle().getDegrees());
-        SmartDashboard.putNumber("Turret Encoder count", turretMotor.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("turret_setpoint", getSetpoint());
+        // SmartDashboard.putNumber("turret_angle", getAngle().getDegrees());
+        SmartDashboard.putNumber("turret Encoder count", turretMotor.getSelectedSensorPosition(0));
+        // SmartDashboard.putNumber("turret_setpoint", getSetpoint());
         // SmartDashboard.putBoolean("turret_fwd_limit", getForwardLimitSwitch());
         // SmartDashboard.putBoolean("turret_rev_limit", getReverseLimitSwitch());
         // SmartDashboard.putBoolean("turret_on_target", isOnTarget());
