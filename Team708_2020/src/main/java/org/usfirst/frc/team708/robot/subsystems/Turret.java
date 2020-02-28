@@ -87,12 +87,12 @@ public class Turret extends Subsystem {
         // turretMotor.set(ControlMode.MotionMagic, angle / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));
         // turretMotor.set(ControlMode.MotionMagic, ((Robot.swerve.getPigeonRotation() + normalized) * onedegree));
 
-        SmartDashboard.putBoolean("turret_SeesTarget", Robot.visionprocessor.seesTarget());
-        SmartDashboard.putNumber("turret_toEncoderCount", toEncoderCount);
-        SmartDashboard.putNumber("turret_Angle", turretAngle);
-        SmartDashboard.putNumber("turret_Camera", cameraAngle);
-        SmartDashboard.putNumber("turret_Robot_Angle", robotAngle);
-        SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
+        // SmartDashboard.putBoolean("turret_SeesTarget", Robot.visionprocessor.seesTarget());
+        // SmartDashboard.putNumber("turret_toEncoderCount", toEncoderCount);
+        // SmartDashboard.putNumber("turret_Angle", turretAngle);
+        // SmartDashboard.putNumber("turret_Camera", cameraAngle);
+        // SmartDashboard.putNumber("turret_Robot_Angle", robotAngle);
+        // SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
     }
 
     // public void updateTarget(){

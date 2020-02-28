@@ -7,6 +7,7 @@ import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistanceCommand;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
+import org.usfirst.frc.team708.robot.commands.intake.ExtendIntakeCommand;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
@@ -25,11 +26,14 @@ public class FiveBallAuto extends CommandGroup {
 
     public FiveBallAuto() {
         
-        addSequential(new DriveStraightCommand(180, 0.45));
+        addSequential(new ExtendIntakeCommand());
+        addSequential(new WaitCommand(1));
+        
+        addParallel(new DriveStraightCommand(180, 0.8));
         addSequential(new StopAtDistanceCommand(140, 5.0));
         
-        addSequential(new WaitCommand(1.0));
         addSequential(new shootAutoCommand());
+        // addSequential(new WaitCommand(1.0));
     }
 
     // Called just before this Command runs the first time

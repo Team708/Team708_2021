@@ -164,7 +164,7 @@ public class Robot extends TimedRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        turret.updateAngle();
+        // turret.updateAngle();
         sendStatistics();
     }
 
@@ -250,7 +250,9 @@ public class Robot extends TimedRobot {
             operator.rumble(1.0, 1.0);
         }
         else if (operator.leftBumper.wasPressed()) {
-            intake.toggleMotorIntake();
+            shooter.stopShooter();
+            shooter.feederOff();
+            hopper.stopMotor();
             operator.rumble(1.0, 1.0);
         }
         else if (operator.startButton.wasPressed()){
@@ -275,20 +277,20 @@ public class Robot extends TimedRobot {
             hopper.stopMotor();
         else if(operator.xButton.wasPressed())
             // hopper.moveMotor();
-            hopper.reverseMotor();
-        else if(operator.aButton.wasPressed())
-            shooter.stopShooter();
+            hopper.moveMotorClockwise();
+        // else if(operator.aButton.wasPressed())
+        //     shooter.stopShooter();
         else if(operator.rightTrigger.isBeingPressed())
             shooter.shootAuto();
         else if(operator.rightBumper.isBeingPressed())
-            shooter.feederOn(speed);
+            shooter.feederOn();
         else if (Math.abs(operator.getY(Hand.kLeft)) >= .3)
             intake.moveHanger(operator.getY(Hand.kLeft));
         else {
             if (intake.stopHanger) intake.stopHanger();
-            shooter.stopShooter();
-            shooter.feederOff();
-            }
+            // shooter.stopShooter();
+            // shooter.feederOff();
+         }
         
         driver.update();
 
@@ -340,6 +342,13 @@ public class Robot extends TimedRobot {
         hopper.sendToDashboard();
         spinner.sendToDashboard();
         visionprocessor.sendToDashboard();
+
+        //code for sending colors to dashboard - LFH
+        SmartDashboard.putBoolean("Bue", colors[0]);
+        SmartDashboard.putBoolean("Green", colors[1]);
+        SmartDashboard.putBoolean("Red", colors[2]);
+        SmartDashboard.putBoolean("Yellow", colors[3]);
+
     }
 
     /**

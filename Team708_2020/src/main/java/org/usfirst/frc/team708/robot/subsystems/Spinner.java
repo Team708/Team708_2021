@@ -40,7 +40,7 @@ public Spinner() {
     spinnerPID.setD(0);
     spinnerPID.setFF(0.1);
     spinnerPID.setIZone(0);
-    spinnerPID.setOutputRange(-0.45, 0.45);
+    spinnerPID.setOutputRange(-0.42, 0.42);
     
     // spinnerPID.setP(.00008);
     // spinnerPID.setI(0);

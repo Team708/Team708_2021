@@ -75,21 +75,27 @@ public class Shooter extends Subsystem {
         hoodSolenoid.set(hoodUp); //Starts with hood down
     }
     
-    public void feederOn(double speed){
+    public void feederOn(){
         // double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
         // setTargetSpeed(RPM); //setTargetSpeed(RPM);
-
-        if (isShooterAtSpeed())
-            feederMotor.set(feederMotorSpeed);   // set feeder motor power
+        Robot.hopper.moveMotorClockwise();
+        if (isShooterAtSpeed()){
+            feederMotor.set(feederMotorSpeed);
+            Robot.hopper.moveMotorCounterClockwise();
+           }   // set feeder motor power
         // else
             // feederMotor.set(0);
             // shooterMotor.set(-speed);        
             // shooterMotor2.set(speed);        
         }
 
-    public void feederOff(){
-        feederMotor.set(0);
-    }
+        public void feederOff(){
+            feederMotor.set(0);
+        }
+        
+        public void feederSlow(){
+            feederMotor.set(-.17);
+        }
 
     public void stopShooter() {
         feederOff();
@@ -116,7 +122,9 @@ public class Shooter extends Subsystem {
     public void shootAuto(){
         double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
         setTargetSpeed(RPM); //setTargetSpeed(RPM);
-
+        // Robot.intake.StopMotorIntake();
+        // Robot.hopper.stopMotor();
+        // Robot.hopper.moveMotorCounterClockwise();
         // shooterMotor.set(.95);        
         // shooterMotor2.set(.95); 
         shooterPIDController.setReference(RPM, ControlType.kVelocity);
@@ -153,9 +161,9 @@ public class Shooter extends Subsystem {
         
         // SmartDashboard.putNumber("Theor. RPM", ((determineShooterSpeed(Robot.visionprocessor.getDistance())*Constants.kSHOOTER_MAXSPEED)));
         // SmartDashboard.putNumber("Theor. RPM %", ((determineShooterSpeed(Robot.visionprocessor.getDistance()))));
+        SmartDashboard.putNumber("Shooter RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
         SmartDashboard.putBoolean("Shooter Target Speed Achieved", isShooterAtSpeed());
         SmartDashboard.putBoolean("Shooter Hood up", hoodUp);
-        SmartDashboard.putNumber("Shooter RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
         SmartDashboard.putNumber("Shooter1 velocity", shooterEncoder.getVelocity());
         SmartDashboard.putNumber("Shooter2 velocity", shooterEncoder2.getVelocity());
         SmartDashboard.putNumber("Shooter target speed", targetSpeed);

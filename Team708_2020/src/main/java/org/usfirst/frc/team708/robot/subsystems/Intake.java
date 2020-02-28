@@ -65,7 +65,7 @@ public class Intake extends Subsystem {
         camSolenoid.set(DoubleSolenoid.Value.kForward);   // I
         pivotSolenoid.set(DoubleSolenoid.Value.kReverse); // O
         moveMotorIntakeOut();
-        Robot.hopper.moveMotor();
+        // Robot.hopper.moveMotorClockwise();
         inHangerPosition = false;
         inIntakePosition = true;
     }

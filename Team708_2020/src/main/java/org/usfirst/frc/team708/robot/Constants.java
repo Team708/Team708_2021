@@ -103,7 +103,7 @@ public final class Constants {
 	public static final double	kSHOOTER_WHEELSPEED_LONG	= 3900.0;  //3700//RPM or encode counts?
 	public static final double	kSHOOTER_WHEELSPEED_SHORT	= 1850.0;  //RPM or encode counts?
 
-	public static final double kFEEDERMOTORSPEED = .85;
+	public static final double kFEEDERMOTORSPEED = 1.0;
 
 	public static final int TURRET_ENCODER_STARTING_POS  = -4197; //7889; //2636 * 8; //550+2048;  // turret offset
 	public static final int TURRET_ENCODER_COUNT = 32768;  // 4096 * 8;
@@ -118,7 +118,7 @@ public final class Constants {
  * Color Wheel
  */
 	public static final double kSPIN_ONE_COLOR			= 3;//5  //one color = 4096
-	public static final double kSPIN_THREE_TIMES		= 50; //70// <encoder * ratio * 3.25 = 106500
+	public static final double kSPIN_THREE_TIMES		= 60; //70// <encoder * ratio * 3.25 = 106500
 
 
 /*

@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import org.usfirst.frc.team708.robot.Constants;
+import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,7 +23,7 @@ public class Hopper extends Subsystem {
     private CANPIDController hopperPIDController;
 
     // private double hopperspeed = Constants.kHOPPER_SPEED; //speed of Hooper
-    private double hopperspeed = 2500; //speed of Hooper
+    private double hopperspeed = 3000; //speed of Hooper
 
     public Hopper(){
         hopperMotor = new CANSparkMax(RobotMap.khopperMotor, MotorType.kBrushless);
@@ -40,20 +41,24 @@ public class Hopper extends Subsystem {
 
     }
 
-    public void moveMotor(){
-        hopperMotor.set(0);  
-        // hopperPIDController.setReference(hopperspeed, ControlType.kVelocity);
+    public void moveMotorClockwise(){
+        // hopperMotor.set(0);  
+        hopperPIDController.setReference(hopperspeed*-1, ControlType.kVelocity);
+        Robot.shooter.feederSlow();
     }
-
+    public void moveMotorCounterClockwise(){
+        // hopperMotor.set(0);  
+        hopperPIDController.setReference(hopperspeed, ControlType.kVelocity);
+    }
     public void stopMotor(){
         hopperMotor.set(0.0);
     }
 
     //uses same speed as above, sets it to negative
-    public void reverseMotor(){
-        hopperspeed *= -1;
-        moveMotor();
-    }
+    // public void reverseMotor(){
+    //     hopperspeed *= -1;
+    //     moveMotor();
+    // }
 
     @Override
     protected void initDefaultCommand() {

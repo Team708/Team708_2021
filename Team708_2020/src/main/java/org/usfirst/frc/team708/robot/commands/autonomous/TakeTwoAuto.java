@@ -7,6 +7,7 @@ import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistanceCommand;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
+import org.usfirst.frc.team708.robot.commands.intake.ExtendIntakeCommand;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
@@ -25,16 +26,22 @@ public class TakeTwoAuto extends CommandGroup {
 
     public TakeTwoAuto() {
         
+        addSequential(new ExtendIntakeCommand());
+        addSequential(new WaitCommand(1));
+        
         addSequential(new DriveStraightCommand(180, 1.0));
-        addSequential(new StopAtDistanceCommand(170, 3.0));
+        addSequential(new StopAtDistanceCommand(130, 3.0));
         
         addSequential(new WaitCommand(1.0));
 
-        addSequential(new DriveStraightCommand(0, 1.0));
-        addSequential(new StopAtDistanceCommand(70, 3.0));
-
+        addSequential(new DriveStraightCommand(-60, 1.0));
+        addSequential(new StopAtDistanceCommand(170, 3.0));
         addSequential(new WaitCommand(1.0));
+
         addSequential(new shootAutoCommand());
+
+        // addSequential(new WaitCommand(1.0));
+        // addSequential(new shootAutoCommand());
     }
 
     // Called just before this Command runs the first time
