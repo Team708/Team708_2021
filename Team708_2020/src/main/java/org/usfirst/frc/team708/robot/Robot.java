@@ -99,6 +99,8 @@ public class Robot extends TimedRobot {
         colors[3] = false; //Yellow
         // colors[4] = false; //Null
     
+        // Robot.spinner.resetSpinnerEncoder();
+
         sendDashboardSubsystems(); // Sends each subsystem's cmds to Smart Dashboard
         queueAutonomousModes();    // Adds autonomous modes to the selection box
     }
@@ -164,7 +166,7 @@ public class Robot extends TimedRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        // turret.updateAngle();
+        turret.updateAngle();
         sendStatistics();
     }
 

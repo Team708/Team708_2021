@@ -34,8 +34,8 @@ public class TakeTwoAuto extends CommandGroup {
         
         addSequential(new WaitCommand(1.0));
 
-        addSequential(new DriveStraightCommand(-60, 1.0));
-        addSequential(new StopAtDistanceCommand(170, 3.0));
+        addSequential(new DriveStraightCommand(-65, 1.0));
+        addSequential(new StopAtDistanceCommand(200, 3.0));
         addSequential(new WaitCommand(1.0));
 
         addSequential(new shootAutoCommand());

@@ -1,65 +1,19 @@
 {
   "tabPane": [
     {
-      "title": "SmartDashboard",
-      "autoPopulate": true,
-      "autoPopulatePrefix": "SmartDashboard/",
+      "title": "Driver",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
       "widgetPane": {
-        "gridSize": 32.0,
+        "gridSize": 40.0,
         "showGrid": true,
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "3,3": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Pigeon Compass",
-              "_title": "Pigeon Compass"
-            }
-          },
-          "6,3": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 1 Angle",
-              "_title": "Module 1 Angle"
-            }
-          },
-          "12,3": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 2 raw value",
-              "_title": "Module 2 raw value"
-            }
-          },
-          "3,0": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Target Speed Achieved",
-              "_title": "Target Speed Achieved",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "9,0": {
+          "0,0": {
             "size": [
               4,
-              3
+              2
             ],
             "content": {
               "_type": "ComboBox Chooser",
@@ -67,221 +21,10 @@
               "_title": "Autonomous Selection"
             }
           },
-          "9,7": {
+          "0,21": {
             "size": [
-              3,
+              2,
               2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 1 Inches Driven",
-              "_title": "Module 1 Inches Driven"
-            }
-          },
-          "15,7": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 0 Pulse Width",
-              "_title": "Module 0 Pulse Width"
-            }
-          },
-          "18,7": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 2 Pulse Width",
-              "_title": "Module 2 Pulse Width"
-            }
-          },
-          "21,7": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/RPM",
-              "_title": "RPM"
-            }
-          },
-          "21,5": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/velocity",
-              "_title": "velocity"
-            }
-          },
-          "18,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Distance to Target",
-              "_title": "Distance to Target"
-            }
-          },
-          "0,0": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Intake is in",
-              "_title": "Intake is in",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "12,7": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 0 Angle",
-              "_title": "Module 0 Angle"
-            }
-          },
-          "12,5": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Swerve State",
-              "_title": "Swerve State"
-            }
-          },
-          "0,3": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Theor. RPM",
-              "_title": "Theor. RPM"
-            }
-          },
-          "15,5": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 3 raw value",
-              "_title": "Module 3 raw value"
-            }
-          },
-          "9,5": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Times Called",
-              "_title": "Times Called"
-            }
-          },
-          "6,7": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Yaw",
-              "_title": "Yaw"
-            }
-          },
-          "15,3": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter Speed",
-              "_title": "Shooter Speed"
-            }
-          },
-          "6,9": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 0 Inches Driven",
-              "_title": "Module 0 Inches Driven"
-            }
-          },
-          "9,9": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Has Target",
-              "_title": "Modules Used"
-            }
-          },
-          "12,9": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 0 raw value",
-              "_title": "Module 0 raw value"
-            }
-          },
-          "15,9": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 3 Angle",
-              "_title": "Module 3 Angle"
-            }
-          },
-          "18,9": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Theor. RPM %",
-              "_title": "Theor. RPM %"
-            }
-          },
-          "6,0": {
-            "size": [
-              3,
-              3
             ],
             "content": {
               "_type": "Boolean Box",
@@ -291,92 +34,63 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "18,5": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 3 Inches Driven",
-              "_title": "Module 3 Inches Driven"
-            }
-          },
-          "0,7": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 1 Pulse Width",
-              "_title": "Module 1 Pulse Width"
-            }
-          },
-          "9,3": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 3 Pulse Width",
-              "_title": "Module 3 Pulse Width"
-            }
-          },
-          "19,11": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Target Color for Spinner",
-              "_title": "Target Color for Spinner"
-            }
-          },
-          "3,9": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Pigeon Temp",
-              "_title": "Pigeon Temp"
-            }
-          },
-          "18,3": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 1 raw value",
-              "_title": "Module 1 raw value"
-            }
-          },
-          "21,3": {
+          "0,11": {
             "size": [
               2,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 2 Angle",
-              "_title": "Module 2 Angle"
+              "_source0": "network_table:///FMSInfo/GameSpecificMessage",
+              "_title": "Game Color"
             }
           },
-          "3,7": {
+          "0,3": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter target speed",
+              "_title": "SmartDashboard/Shooter target speed"
+            }
+          },
+          "19,12": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Hanger extended",
+              "_title": "SmartDashboard/Hanger extended",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "19,15": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Hanger retracted",
+              "_title": "SmartDashboard/Hanger retracted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,0": {
             "size": [
               3,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/SpinnerEncoder",
-              "_title": "SpinnerEncoder"
+              "_source0": "network_table:///SmartDashboard/FMS Match Time",
+              "_title": "FMS Match Time"
             }
           },
           "0,5": {
@@ -386,442 +100,230 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/GetDistance",
-              "_title": "GetDistance"
+              "_source0": "network_table:///SmartDashboard/Shooter1 velocity",
+              "_title": "SmartDashboard/Shooter1 velocity"
             }
           },
-          "6,5": {
+          "0,7": {
             "size": [
               3,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/target speed",
-              "_title": "target speed"
+              "_source0": "network_table:///SmartDashboard/Shooter2 velocity",
+              "_title": "SmartDashboard/Shooter2 velocity"
             }
           },
-          "21,9": {
+          "10,0": {
+            "size": [
+              12,
+              10
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://limelight",
+              "_title": "limelight",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
+            }
+          },
+          "7,6": {
             "size": [
               3,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Module 2 Inches Driven",
-              "_title": "Module 2 Inches Driven"
+              "_source0": "network_table:///SmartDashboard/Vision_Distance ",
+              "_title": "SmartDashboard/Vision_Distance "
             }
           },
-          "0,9": {
+          "8,11": {
             "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///FMSInfo/GameSpecificMessage",
-              "_title": "FMSInfo/GameSpecificMessage"
-            }
-          },
-          "3,13": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Has Target",
-              "_title": "Has Target",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "6,13": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Intake Motor spin in",
-              "_title": "Intake Motor spin in",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "9,13": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Hood up",
-              "_title": "Hood up",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "12,13": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Basic Subsystem",
-              "_source0": "network_table:///SmartDashboard/Vision Processor",
-              "_title": "Vision Processor"
-            }
-          },
-          "24,4": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Blue",
-              "_title": "Blue",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "24,7": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Green",
-              "_title": "Green",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,13": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Red",
-              "_title": "Red",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "17,13": {
-            "size": [
-              3,
+              2,
               3
             ],
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Yellow",
-              "_title": "Yellow",
+              "_title": "SmartDashboard/Yellow",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "13,0": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Modules Used",
-              "_title": "Modules Used"
-            }
-          },
-          "0,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Basic Subsystem",
-              "_source0": "network_table:///SmartDashboard/Intake",
-              "_title": "Intake"
-            }
-          },
-          "5,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Basic Subsystem",
-              "_source0": "network_table:///SmartDashboard/Shooter",
-              "_title": "Shooter"
-            }
-          },
-          "10,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Basic Subsystem",
-              "_source0": "network_table:///SmartDashboard/Swerve",
-              "_title": "Swerve"
-            }
-          },
-          "20,13": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Basic Subsystem",
-              "_source0": "network_table:///SmartDashboard/Spinner",
-              "_title": "Spinner"
-            }
-          },
-          "16,0": {
+          "6,11": {
             "size": [
               2,
-              2
+              3
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/tx",
-              "_title": "tx"
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Red",
+              "_title": "SmartDashboard/Red",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           },
-          "22,0": {
+          "2,11": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Bue",
+              "_title": "SmartDashboard/Bue",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,11": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Green",
+              "_title": "SmartDashboard/Green",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,3": {
             "size": [
               3,
               3
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Has Target",
-              "_title": "SmartDashboard/Has Target",
+              "_source0": "network_table:///SmartDashboard/Shooter Hood up",
+              "_title": "SmartDashboard/Shooter Hood up",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "25,0": {
+          "4,3": {
             "size": [
-              2,
-              1
+              3,
+              3
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
-              "_title": "limelight_PipelineName"
-            }
-          },
-          "27,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Interface",
-              "_title": "limelight_Interface"
-            }
-          },
-          "29,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Stream",
-              "_title": "limelight_Stream"
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Shooter Target Speed Achieved",
+              "_title": "SmartDashboard/Shooter Target Speed Achieved",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
       }
     },
     {
-      "title": "LiveWindow",
-      "autoPopulate": true,
-      "autoPopulatePrefix": "LiveWindow/",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {
-          "0,0": {
-            "size": [
-              6,
-              11
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/SwerveDriveModule",
-              "_title": "SwerveDriveModule",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "6,0": {
-            "size": [
-              6,
-              11
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Vision Processor",
-              "_title": "Vision Processor",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "12,0": {
-            "size": [
-              6,
-              11
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Spinner",
-              "_title": "Spinner",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "18,0": {
-            "size": [
-              6,
-              5
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Swerve",
-              "_title": "Swerve",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Subsystem Layout",
-                  "_source0": "network_table:///LiveWindow/SwerveDriveModule",
-                  "_title": "LiveWindow/SwerveDriveModule",
-                  "Layout/Label position": "BOTTOM",
-                  "_children": []
-                }
-              ]
-            }
-          },
-          "18,5": {
-            "size": [
-              8,
-              5
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[0]/Value",
-              "_title": "Ungrouped/AnalogInput[0]/Value"
-            }
-          },
-          "18,10": {
-            "size": [
-              6,
-              2
-            ],
-            "content": {
-              "_type": "Voltage View",
-              "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[0]",
-              "_title": "Ungrouped/AnalogInput[0]",
-              "Range/Min": 0.0,
-              "Range/Max": 5.0,
-              "Range/Center": 0.0,
-              "Visuals/Orientation": "HORIZONTAL",
-              "Visuals/Number of tick marks": 5
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Color Accessing",
+      "title": "Diagnostics",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
-        "gridSize": 64.0,
+        "gridSize": 50.0,
         "showGrid": true,
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "5,0": {
+          "9,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Module 0 Angle",
+              "_title": "SmartDashboard/Module 0 Angle"
+            }
+          },
+          "11,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Module 1 Angle",
+              "_title": "SmartDashboard/Module 1 Angle"
+            }
+          },
+          "11,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Module 3 Angle",
+              "_title": "SmartDashboard/Module 3 Angle"
+            }
+          },
+          "9,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Module 2 Angle",
+              "_title": "SmartDashboard/Module 2 Angle"
+            }
+          },
+          "9,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Hopper Motor Temp",
+              "_title": "SmartDashboard/Hopper Motor Temp"
+            }
+          },
+          "9,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/turret Encoder count",
+              "_title": "SmartDashboard/turret Encoder count"
+            }
+          },
+          "14,0": {
             "size": [
               3,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Target Color for Spinner",
-              "_title": "/SmartDashboard/Target Color for Spinner"
+              "_source0": "network_table:///SmartDashboard/SpinnerEncoder",
+              "_title": "SmartDashboard/SpinnerEncoder"
             }
           },
-          "8,0": {
+          "14,2": {
             "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///FMSInfo/GameSpecificMessage",
-              "_title": "/FMSInfo/GameSpecificMessage"
-            }
-          },
-          "4,2": {
-            "size": [
-              2,
+              3,
               2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Red",
-              "_title": "/SmartDashboard/Red",
-              "Colors/Color when true": "#FF0000FF",
-              "Colors/Color when false": "#000000FF"
-            }
-          },
-          "6,2": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Green",
-              "_title": "/SmartDashboard/Green",
-              "Colors/Color when true": "#00FF00FF",
-              "Colors/Color when false": "#000000FF"
-            }
-          },
-          "6,4": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Blue",
-              "_title": "/SmartDashboard/Blue",
-              "Colors/Color when true": "#0000FFFF",
-              "Colors/Color when false": "#000000FF"
-            }
-          },
-          "8,2": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Yellow",
-              "_title": "/SmartDashboard/Yellow",
-              "Colors/Color when true": "#FFFF00FF",
-              "Colors/Color when false": "#000000FF"
+              "_source0": "network_table:///SmartDashboard/SpinnerPistion",
+              "_title": "SmartDashboard/SpinnerPistion",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -829,9 +331,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 1272.6666259765625,
-    "y": -7.333333492279053,
-    "width": 1294.6666259765625,
-    "height": 734.6666870117188
+    "x": -6.0,
+    "y": -720.0,
+    "width": 1292.0,
+    "height": 1409.3333740234375
   }
 }
