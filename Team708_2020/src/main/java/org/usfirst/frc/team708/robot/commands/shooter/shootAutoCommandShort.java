@@ -11,21 +11,21 @@ import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import java.lang.*;
 
-public class shootAutoCommand extends Command {
+public class shootAutoCommandShort extends Command {
 
     private double speed;
     private double timeout;
 
     // private Translation2d driveVector;
 
-    public shootAutoCommand() {
+    public shootAutoCommandShort() {
     
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
 
-        // this.timeout = 11;
+        this.timeout = 5;
 
         // Robot.intake.unlockHanger();
         // Robot.spinner.pistonRetract();
@@ -36,22 +36,19 @@ public class shootAutoCommand extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
-        // Robot.shooter.feederOn();
-        // Robot.shooter.moveHoodUp();
+        Robot.shooter.feederOn();
+        Robot.shooter.moveHoodUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        // return (this.timeSinceInitialized()>=timeout);
-
-        return true;
+        return (this.timeSinceInitialized()>=timeout);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        // Robot.shooter.stopShooter();
-        // Robot.intake.toIntake();
+        Robot.shooter.stopShooter();
+        Robot.intake.toIntake();
     }
 
     // Called when another command which requires one or more of the same

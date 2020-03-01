@@ -48,7 +48,7 @@ public final class Constants {
 	
 	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1402+2048;  // mod 0   -1078
 	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 3058-2048;  // mod 1  1693 1010
-	public static final int REAR_LEFT_ENCODER_STARTING_POS   = 3976-2048;  // mod 2  1250 1928
+	public static final int REAR_LEFT_ENCODER_STARTING_POS   = -3879; //+2048;  // mod 2  1250 1928
 	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 270+2048;   // mod 3  -1545
 
 	//Swerve Module Positions
