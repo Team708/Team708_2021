@@ -24,8 +24,8 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 public class Shooter extends Subsystem {
 
     public CANSparkMax shooterMotor, shooterMotor2, feederMotor;
-    public CANEncoder  shooterEncoder, shooterEncoder2, feederEncoder;
-    private CANPIDController shooterPIDController, shooterPIDController2, feederPIDController;
+    public CANEncoder  shooterEncoder;
+    private CANPIDController shooterPIDController;
 
     public TalonSRX turretMotor;
     public double   targetSpeed;
@@ -35,9 +35,7 @@ public class Shooter extends Subsystem {
     public boolean  hoodUp     = false;
 
     private double  feederMotorSpeed       = Constants.kFEEDERMOTORSPEED;
-    // private double  feederMotorSpeed       = Constants.kFEEDERMOTORSPEED;
-            
-            int turretEncoderReverseFactor = 1;
+	        int turretEncoderReverseFactor = 1;
 
     public Shooter(){
 
@@ -45,12 +43,11 @@ public class Shooter extends Subsystem {
         shooterMotor2 = new CANSparkMax(RobotMap.kshooterShootMotor2, MotorType.kBrushless);
         feederMotor   = new CANSparkMax(RobotMap.kfeederFeedMotor,    MotorType.kBrushless);
 
-        shooterMotor.setInverted(false);
+        shooterMotor.setInverted(true);
         shooterMotor2.setInverted(true);
 
-        shooterMotor.setIdleMode(IdleMode.kCoast);
-        shooterMotor2.setIdleMode(IdleMode.kCoast);
-
+        shooterMotor2.follow(shooterMotor);
+        
         feederMotor.setIdleMode(IdleMode.kBrake);
 
         shooterEncoder = new CANEncoder(shooterMotor);
@@ -62,6 +59,7 @@ public class Shooter extends Subsystem {
         shooterPIDController.setIZone(0);
         shooterPIDController.setOutputRange(-1, 1);
 
+<<<<<<< HEAD
         shooterEncoder2 = new CANEncoder(shooterMotor2);
         shooterPIDController2 = shooterMotor2.getPIDController();
         shooterPIDController2.setP(.0005);
@@ -71,10 +69,13 @@ public class Shooter extends Subsystem {
         shooterPIDController2.setIZone(0);
         shooterPIDController2.setOutputRange(-1, 1);
 
+=======
+>>>>>>> parent of ae3b25d... almost working
         hoodSolenoid = new Solenoid(RobotMap.hoodSolenoid);
         hoodSolenoid.set(hoodUp); //Starts with hood down
     }
     
+<<<<<<< HEAD
     public void feederOn(){
         // double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
         // setTargetSpeed(RPM); //setTargetSpeed(RPM);
@@ -87,6 +88,14 @@ public class Shooter extends Subsystem {
             // feederMotor.set(0);
             // shooterMotor.set(-speed);        
             // shooterMotor2.set(speed);        
+=======
+    public void feederOn(double speed){
+        if (isShooterAtSpeed())
+            feederMotor.set(feederMotorSpeed);   // set feeder motor power
+        else
+            feederMotor.set(0);
+        shooterMotor.set(-speed);        
+>>>>>>> parent of ae3b25d... almost working
     }
 
     public void feederOff(){
@@ -98,9 +107,7 @@ public class Shooter extends Subsystem {
     }
 
     public void stopShooter() {
-        feederOff();
         shooterMotor.stopMotor();
-        shooterMotor2.stopMotor();
     }
 
     private void setTargetSpeed(double speed) {
@@ -137,6 +144,7 @@ public class Shooter extends Subsystem {
     public void shootAuto(){
         double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
         setTargetSpeed(RPM); //setTargetSpeed(RPM);
+<<<<<<< HEAD
         // Robot.intake.StopMotorIntake();
         // Robot.hopper.stopMotor();
         // Robot.hopper.moveMotorCounterClockwise();
@@ -148,6 +156,13 @@ public class Shooter extends Subsystem {
 
     public boolean isShooterAtSpeed(){
         if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.85))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
+=======
+        shooterPIDController.setReference((-RPM), ControlType.kVelocity);  //was -RPM-100
+    }
+
+    public boolean isShooterAtSpeed(){
+        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.95) && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.05)
+>>>>>>> parent of ae3b25d... almost working
             return true;
         else
             return false;
@@ -176,12 +191,20 @@ public class Shooter extends Subsystem {
         
         // SmartDashboard.putNumber("Theor. RPM", ((determineShooterSpeed(Robot.visionprocessor.getDistance())*Constants.kSHOOTER_MAXSPEED)));
         // SmartDashboard.putNumber("Theor. RPM %", ((determineShooterSpeed(Robot.visionprocessor.getDistance()))));
+<<<<<<< HEAD
         SmartDashboard.putNumber("Shooter RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
         SmartDashboard.putBoolean("Shooter Target Speed Achieved", isShooterAtSpeed());
         SmartDashboard.putBoolean("Shooter Hood up", hoodUp);
         SmartDashboard.putNumber("Shooter1 velocity", shooterEncoder.getVelocity());
         SmartDashboard.putNumber("Shooter2 velocity", shooterEncoder2.getVelocity());
         SmartDashboard.putNumber("Shooter target speed", targetSpeed);
+=======
+        SmartDashboard.putBoolean("Target Speed Achieved", isShooterAtSpeed());
+        SmartDashboard.putBoolean("Hood up", hoodUp);
+        SmartDashboard.putNumber("RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
+        SmartDashboard.putNumber("velocity", shooterEncoder.getVelocity());
+        SmartDashboard.putNumber("target speed", targetSpeed);
+>>>>>>> parent of ae3b25d... almost working
     }
 
     @Override

@@ -89,16 +89,16 @@ public class VisionProcessor extends Subsystem {
 	public double getDistance(){
 		if (seesTarget())
 		//  return 74/Math.tan(Math.PI*((getNTInfo("ty")+20)/180));
-			return 72.5/Math.tan(Math.PI*((getNTInfo("tx")+40)/180));  //target 94" - camera height 21.5" 
+			return 73/Math.tan(Math.PI*((getNTInfo("tx")+40)/180));  //target 94" - camera height 21" 
 																	 //ty =  camera angle + Ty
 		else
 		    return 0;
 	}  
 	
 	public void sendToDashboard() {
-		SmartDashboard.putBoolean("Vision Has Target", targetFound);
+		// SmartDashboard.putBoolean("Has Target", targetFound);
 		SmartDashboard.putNumber("Vision_Distance ", getDistance());
-		SmartDashboard.putNumber("Vision tx", getRotate());
+		// SmartDashboard.putNumber("tx", getRotate());
 	}
 
 	public void initDefaultCommand() {

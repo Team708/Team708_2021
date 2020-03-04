@@ -29,7 +29,7 @@ public class RobotMap {
 // Motor Controler Device IDS
 
 // Drivetrain
-	 public static final int kdrivetrainFrontRightDrive	= 11; 
+	public static final int kdrivetrainFrontRightDrive	= 11; 
 	 public static final int kdrivetrainFrontLeftDrive	= 12; 
 	 public static final int kdrivetrainRearLeftDrive  	= 13;
 	 public static final int kdrivetrainRearRightDrive 	= 14;

@@ -4,7 +4,6 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
-import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
@@ -40,6 +39,7 @@ public Spinner() {
     spinnerPID.setD(0);
     spinnerPID.setFF(0.1);
     spinnerPID.setIZone(0);
+<<<<<<< HEAD
     spinnerPID.setOutputRange(-0.42, 0.42);
     
     // spinnerPID.setP(.00008);
@@ -54,6 +54,9 @@ public Spinner() {
     spinnerEncoder.setPosition(0);
 
     spinnerMotor.setInverted(false);
+=======
+    spinnerPID.setOutputRange(-0.5, 0.5);
+>>>>>>> parent of ae3b25d... almost working
 
     spinnerSolenoid.set(false);
 }
@@ -69,13 +72,13 @@ public void SpinMotor(double speed) {
 public void spinnerRotateOneColor() {
     pistonExtend();
     resetSpinnerEncoder();
-    spinnerPID.setReference(-Constants.kSPIN_ONE_COLOR, ControlType.kPosition);
+    spinnerPID.setReference(Constants.kSPIN_ONE_COLOR, ControlType.kPosition);
 }
 
 public void spinnerRotateThreeTimes() {
     pistonExtend();
     resetSpinnerEncoder();
-    spinnerPID.setReference(-Constants.kSPIN_THREE_TIMES, ControlType.kPosition);
+    spinnerPID.setReference(Constants.kSPIN_THREE_TIMES, ControlType.kPosition);
 }
 
 public void spinnerMotorStop() {
@@ -116,10 +119,10 @@ public void pistonRetract() {
         SmartDashboard.putBoolean("SpinnerPistion", pistonExtend);
 
         //puts colors to dashboard
-        // SmartDashboard.putBoolean("SpinnerBlue",   Robot.colors[0]);
-        // SmartDashboard.putBoolean("SpinnerGreen",  Robot.colors[1]);
-        // SmartDashboard.putBoolean("SpinnerRed",    Robot.colors[2]);
-        // SmartDashboard.putBoolean("SpinnerYellow", Robot.colors[3]);
+        SmartDashboard.putBoolean("SpinnerBlue",   Robot.colors[0]);
+        SmartDashboard.putBoolean("SpinnerGreen",  Robot.colors[1]);
+        SmartDashboard.putBoolean("SpinnerRed",    Robot.colors[2]);
+        SmartDashboard.putBoolean("SpinnerYellow", Robot.colors[3]);
     }
 
 }
