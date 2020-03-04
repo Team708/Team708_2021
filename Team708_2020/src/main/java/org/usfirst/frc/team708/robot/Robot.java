@@ -263,6 +263,7 @@ public class Robot extends TimedRobot {
             operator.rumble(1.0, 1.0);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         else if(operator.yButton.wasPressed()){
             shooter.shootShort();
             operator.rumble(1.0, 1.0);
@@ -273,6 +274,10 @@ public class Robot extends TimedRobot {
         // else if(operator.aButton.wasPressed())
         //     speed -= 0.1;
 >>>>>>> parent of ae3b25d... almost working
+=======
+        // else if(operator.yButton.wasPressed())
+        //     intake.moveColorWheel();
+>>>>>>> parent of 882a475... ohmy-crap after HH
 =======
         // else if(operator.yButton.wasPressed())
         //     intake.moveColorWheel();
@@ -294,6 +299,10 @@ public class Robot extends TimedRobot {
         else if(operator.xButton.wasPressed())
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            // hopper.moveMotor();
+>>>>>>> parent of 882a475... ohmy-crap after HH
 =======
             // hopper.moveMotor();
 >>>>>>> parent of 882a475... ohmy-crap after HH
