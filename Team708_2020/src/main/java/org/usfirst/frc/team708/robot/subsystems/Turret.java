@@ -35,13 +35,9 @@ public class Turret extends Subsystem {
     double onedegree = Constants.TURRET_ENCODER_COUNT / 360;
     double normalized = 0;
 <<<<<<< HEAD
-<<<<<<< HEAD
     double TURRET_MAX_ROTATION = 360;
     double requestedAngleInEnc = 0;
     double requestedAngleInDegress = 0;
-=======
-    double TURRET_MAX_ROTATION = 260;
->>>>>>> parent of ae3b25d... almost working
 =======
     double TURRET_MAX_ROTATION = 260;
 >>>>>>> parent of ae3b25d... almost working
@@ -122,7 +118,6 @@ public class Turret extends Subsystem {
         // turretMotor.set(ControlMode.MotionMagic, angle / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));
         // turretMotor.set(ControlMode.MotionMagic, ((Robot.swerve.getPigeonRotation() + normalized) * onedegree));
 <<<<<<< HEAD
-<<<<<<< HEAD
 
         // SmartDashboard.putBoolean("turret_SeesTarget", Robot.visionprocessor.seesTarget());
         // SmartDashboard.putNumber("turret_toEncoderCount", toEncoderCount);
@@ -131,16 +126,11 @@ public class Turret extends Subsystem {
         // SmartDashboard.putNumber("turret_Robot_Angle", robotAngle);
         // SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
 =======
-=======
->>>>>>> parent of ae3b25d... almost working
         
         SmartDashboard.putNumber("turret_Angle", turretAngle);
         SmartDashboard.putNumber("turret_Camera", cameraAngle);
         SmartDashboard.putNumber("turret_Robot_Angle", robotAngle);
         SmartDashboard.putNumber("turret_Rotateto", rotateToTarget);
-<<<<<<< HEAD
->>>>>>> parent of ae3b25d... almost working
-=======
 >>>>>>> parent of ae3b25d... almost working
     }
 
@@ -198,11 +188,7 @@ public class Turret extends Subsystem {
         // SmartDashboard.putNumber("turret_error", getError());
         // SmartDashboard.putNumber("turret_angle", getAngle().getDegrees());
 <<<<<<< HEAD
-<<<<<<< HEAD
         SmartDashboard.putNumber("turret Encoder count", turretMotor.getSelectedSensorPosition(0));
-=======
-        // SmartDashboard.putNumber("Turret Encoder count", turretMotor.getSelectedSensorPosition(0));
->>>>>>> parent of ae3b25d... almost working
 =======
         // SmartDashboard.putNumber("Turret Encoder count", turretMotor.getSelectedSensorPosition(0));
 >>>>>>> parent of ae3b25d... almost working
