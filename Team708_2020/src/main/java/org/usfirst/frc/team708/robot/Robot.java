@@ -80,12 +80,12 @@ public class Robot extends TimedRobot {
         swerve = Swerve.getInstance();
         Robot.swerve.zeroSensors();
         
-        hopper = new Hopper();
         spinner = new Spinner();
         intake = new Intake();
         turret = new Turret();
         shooter = new Shooter();
         visionprocessor = new VisionProcessor();
+        hopper = new Hopper();
         
         
         driver.setDeadband(0.2);
@@ -205,7 +205,6 @@ public class Robot extends TimedRobot {
         sendStatistics();
 
         ds = DriverStation.getInstance();
-        
         ColorWheelStage3 = ds.getGameSpecificMessage();
         if(ColorWheelStage3.length() > 0){
             switch(ColorWheelStage3.charAt(0)){
@@ -258,14 +257,21 @@ public class Robot extends TimedRobot {
             intake.StopMotorIntake();
             operator.rumble(1.0, 1.0);
         }
-        else if (operator.startButton.wasPressed()){
+        else if (operator.startButton.wasPressed())
             spinner.spinnerRotateThreeTimes();
+<<<<<<< HEAD
             operator.rumble(1.0, 1.0);
         }
         else if(operator.yButton.wasPressed()){
             shooter.shootShort();
             operator.rumble(1.0, 1.0);
         }
+=======
+        // else if(operator.yButton.wasPressed())
+        //     speed += 0.1;
+        // else if(operator.aButton.wasPressed())
+        //     speed -= 0.1;
+>>>>>>> parent of ae3b25d... almost working
         else if (operator.bButton.wasPressed()){
             spinner.spinnerRotateOneColor();
             operator.rumble(1.0, 1.0);
@@ -281,6 +287,7 @@ public class Robot extends TimedRobot {
         else if(operator.backButton.wasPressed())
             hopper.stopMotor();
         else if(operator.xButton.wasPressed())
+<<<<<<< HEAD
             hopper.moveMotorClockwise();
         else if(operator.aButton.wasPressed())
             intake.toggleMotorIntake();
@@ -296,6 +303,20 @@ public class Robot extends TimedRobot {
         else {
             if (intake.stopHanger) intake.stopHanger();
          }
+=======
+            hopper.reverseMotor();
+        else if(operator.rightTrigger.isBeingPressed())
+            shooter.shootAuto();
+        else if(operator.rightBumper.isBeingPressed())
+            shooter.feederOn(speed);
+        else {
+            if (Math.abs(operator.getY(Hand.kLeft)) >= .5)
+                intake.moveHanger(operator.getY(Hand.kLeft));
+                
+            shooter.stopShooter();
+            shooter.feederOff();
+        }
+>>>>>>> parent of ae3b25d... almost working
         
         driver.update();
 
@@ -320,10 +341,10 @@ public class Robot extends TimedRobot {
             // turret.resetTurret();
         }
         else if(driver.leftBumper.wasPressed()) {
-            driver.rumble(1.0, 1.0);
             if (Math.abs(Pigeon.getInstance().getAngle().getDegrees())>60) {
                 swerve.rotate(0);
             }
+            driver.rumble(1.0, 1.0);
             visionprocessor.findTarget();
         }
     }
