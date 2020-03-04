@@ -7,9 +7,7 @@ import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistanceCommand;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
-import org.usfirst.frc.team708.robot.commands.intake.ExtendIntakeCommand;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
-import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommandShort;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 import org.usfirst.frc.team254.lib.util.math.*;
@@ -26,35 +24,27 @@ import edu.wpi.first.wpilibj.command.Command;
 public class EightBallAuto extends CommandGroup {
 
     public EightBallAuto() {
-    
-        addSequential(new ExtendIntakeCommand());
-        // addSequential(new WaitCommand(1));
         
-        addSequential(new DriveStraightCommand(180, 0.7));
-        addSequential(new StopAtDistanceCommand(120, 5.0));
+        addSequential(new DriveStraightCommand(180, 0.45));
+        addSequential(new StopAtDistanceCommand(140, 5.0));
         
-        addSequential(new FindTargetCommand());
-
-        addSequential(new WaitCommand(.5));
-        addSequential(new shootAutoCommandShort());
+        addSequential(new WaitCommand(1.0));
+        addSequential(new shootAutoCommand());
         // addSequential(new WaitCommand(1.0));
         
         // addSequential(new RotateinPlaceCommand(10)); //clockwise
         // addSequential(new WaitCommand(1.0));
-        addSequential(new RotateinPlaceCommand(0));  //clockwise
-
-        addSequential(new DriveStraightCommand(180, 0.5));
+        
+        addSequential(new DriveStraightCommand(180, 0.45));
         addSequential(new StopAtDistanceCommand(110, 2.0));
 
         // addSequential(new RotateinPlaceCommand(-8));  //counter clockwise
-        addSequential(new WaitCommand(0.5));
+        addSequential(new WaitCommand(1.0));
         
-        addSequential(new DriveStraightCommand(5, 0.8));
-        addSequential(new StopAtDistanceCommand(145, 3.0));
+        addSequential(new DriveStraightCommand(5, 0.45));
+        addSequential(new StopAtDistanceCommand(80, 3.0));
 
-        addSequential(new FindTargetCommand());
-
-        addSequential(new WaitCommand(.5));
+        addSequential(new WaitCommand(1.0));
         addSequential(new shootAutoCommand());
     }
 

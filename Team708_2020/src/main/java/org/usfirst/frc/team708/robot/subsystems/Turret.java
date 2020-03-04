@@ -36,13 +36,15 @@ public class Turret extends Subsystem {
     double normalized = 0;
 <<<<<<< HEAD
     double TURRET_MAX_ROTATION = 360;
+<<<<<<< HEAD
     double requestedAngleInEnc = 0;
     double requestedAngleInDegress = 0;
 =======
     double TURRET_MAX_ROTATION = 260;
 >>>>>>> parent of ae3b25d... almost working
+=======
+>>>>>>> parent of 882a475... ohmy-crap after HH
     
-
     public Turret() {
 
         turretMotor = new TalonSRX(RobotMap.kturretMotor);
@@ -83,37 +85,13 @@ public class Turret extends Subsystem {
         double rotateToTarget = (turretAngle - cameraAngle);       //calc numberof degrees to target
         double toEncoderCount = (rotateToTarget * onedegree); //% 360     //calc number of encoder tickets for degrees
 
-        if (Robot.intake.inIntakePosition){
-            
-            if (Robot.intake.inIntakePosition){
-
-
-                if (Robot.visionprocessor.seesTarget()) {//  && Math.abs(turretAngle) < TURRET_MAX_ROTATION )
-                    if (!(rotateToTarget > 270 || rotateToTarget < -90))
-                        turretMotor.set(ControlMode.MotionMagic, toEncoderCount);
-                  }  //turn turret to encoder value to find target
-                    else if (Math.abs(robotAngle) <= 15){
-                        turretMotor.set(ControlMode.MotionMagic, (robotAngle * onedegree)+Constants.TURRET_ENCODER_STARTING_POS);
-                    }
-        
-    
-                // if (Robot.visionprocessor.seesTarget()) //  && Math.abs(turretAngle) < TURRET_MAX_ROTATION )
-                //     requestedAngleInEnc = toEncoderCount;
-                // else
-                //     requestedAngleInEnc = (robotAngle * onedegree)+Constants.TURRET_ENCODER_STARTING_POS;
-
-                // requestedAngleInDegress = requestedAngleInEnc/onedegree;
-
-                // if (requestedAngleInDegress > 270 || requestedAngleInDegress < -90){
-                //     requestedAngleInDegress = (Math.abs(requestedAngleInDegress)-360)*Integer.signum((int)requestedAngleInDegress);
-                //     requestedAngleInEnc     = requestedAngleInDegress * onedegree;
-                // }
-
-                // turretMotor.set(ControlMode.MotionMagic, requestedAngleInEnc);  //turn turret to encoder value to find target
-        
-
-            }
-        }
+        if (Robot.intake.inIntakePosition)
+        if (Robot.visionprocessor.seesTarget()) //  && Math.abs(turretAngle) < TURRET_MAX_ROTATION )
+            if (!(rotateToTarget > 270 || rotateToTarget < -90))
+              turretMotor.set(ControlMode.MotionMagic, toEncoderCount);  //turn turret to encoder value to find target
+        else
+            if (Math.abs(robotAngle) <= 15)
+                turretMotor.set(ControlMode.MotionMagic, (robotAngle * onedegree)+Constants.TURRET_ENCODER_STARTING_POS);
 
         // turretMotor.set(ControlMode.MotionMagic, angle / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));
         // turretMotor.set(ControlMode.MotionMagic, ((Robot.swerve.getPigeonRotation() + normalized) * onedegree));
