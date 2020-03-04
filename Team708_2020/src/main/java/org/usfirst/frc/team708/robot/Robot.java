@@ -167,7 +167,7 @@ public class Robot extends TimedRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        // turret.updateAngle();
+        turret.updateAngle();
         sendStatistics();
     }
 
@@ -239,7 +239,7 @@ public class Robot extends TimedRobot {
         }
         
         swerve.sendInput(driver.getX(Hand.kLeft), -driver.getY(Hand.kLeft), driver.getX(Hand.kRight), false, driver.leftTrigger.isBeingPressed());
-        // turret.updateAngle();
+        turret.updateAngle();
 
         operator.update();
 
@@ -255,7 +255,6 @@ public class Robot extends TimedRobot {
             shooter.stopShooter();
             shooter.feederOff();
             hopper.stopMotor();
-            intake.StopMotorIntake();
             operator.rumble(1.0, 1.0);
         }
         else if (operator.startButton.wasPressed())
@@ -263,6 +262,7 @@ public class Robot extends TimedRobot {
 <<<<<<< HEAD
             operator.rumble(1.0, 1.0);
         }
+<<<<<<< HEAD
         else if(operator.yButton.wasPressed()){
             shooter.shootShort();
             operator.rumble(1.0, 1.0);
@@ -273,6 +273,10 @@ public class Robot extends TimedRobot {
         // else if(operator.aButton.wasPressed())
         //     speed -= 0.1;
 >>>>>>> parent of ae3b25d... almost working
+=======
+        // else if(operator.yButton.wasPressed())
+        //     intake.moveColorWheel();
+>>>>>>> parent of 882a475... ohmy-crap after HH
         else if (operator.bButton.wasPressed()){
             spinner.spinnerRotateOneColor();
             operator.rumble(1.0, 1.0);
@@ -289,20 +293,23 @@ public class Robot extends TimedRobot {
             hopper.stopMotor();
         else if(operator.xButton.wasPressed())
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            // hopper.moveMotor();
+>>>>>>> parent of 882a475... ohmy-crap after HH
             hopper.moveMotorClockwise();
-        else if(operator.aButton.wasPressed())
-            intake.toggleMotorIntake();
-        else if(operator.rightTrigger.isBeingPressed()){
-            shooter.shootLong();
-            operator.rumble(1.0, 1.0);
-            // shooter.shootAuto();
-        }
+        // else if(operator.aButton.wasPressed())
+        //     shooter.stopShooter();
+        else if(operator.rightTrigger.isBeingPressed())
+            shooter.shootAuto();
         else if(operator.rightBumper.isBeingPressed())
             shooter.feederOn();
         else if (Math.abs(operator.getY(Hand.kLeft)) >= .3)
             intake.moveHanger(operator.getY(Hand.kLeft));
         else {
             if (intake.stopHanger) intake.stopHanger();
+            // shooter.stopShooter();
+            // shooter.feederOff();
          }
 =======
             hopper.reverseMotor();
@@ -329,8 +336,6 @@ public class Robot extends TimedRobot {
 			swerve.rotate(180);
         else if(driver.xButton.wasPressed())
             swerve.rotate(270);
-        else if(driver.rightBumper.wasPressed())
-            swerve.rotate(77);
         else if(driver.startButton.wasPressed()){
             swerve.wheelBrake();
             driver.rumble(1.0, 1.0);

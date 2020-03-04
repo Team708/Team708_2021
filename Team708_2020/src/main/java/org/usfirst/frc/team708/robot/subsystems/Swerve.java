@@ -176,14 +176,10 @@ public class Swerve extends Subsystem{
 	
 	public void wheelBrake(){
 		setState(ControlState.POSITION);
-		// frontLeft.setModuleAngle(-45);
-		// frontRight.setModuleAngle(45);
-		// rearRight.setModuleAngle(-45);
-		// rearLeft.setModuleAngle(45);
-		frontLeft.setModuleAngle(0);
-		frontRight.setModuleAngle(0);
-		rearRight.setModuleAngle(0);
-		rearLeft.setModuleAngle(0);
+		frontLeft.setModuleAngle(-45);
+		frontRight.setModuleAngle(45);
+		rearRight.setModuleAngle(-45);
+		rearLeft.setModuleAngle(45);
 	}
 
 	public void rotate(double goalHeading){

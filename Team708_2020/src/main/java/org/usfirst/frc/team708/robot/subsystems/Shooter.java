@@ -79,15 +79,16 @@ public class Shooter extends Subsystem {
     public void feederOn(){
         // double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
         // setTargetSpeed(RPM); //setTargetSpeed(RPM);
-        // Robot.hopper.moveMotorClockwise();
-        // if (isShooterAtSpeed()){
+        Robot.hopper.moveMotorClockwise();
+        if (isShooterAtSpeed()){
             feederMotor.set(feederMotorSpeed);
             Robot.hopper.moveMotorCounterClockwise();
-        //    }   // set feeder motor power
+           }   // set feeder motor power
         // else
             // feederMotor.set(0);
             // shooterMotor.set(-speed);        
             // shooterMotor2.set(speed);        
+<<<<<<< HEAD
 =======
     public void feederOn(double speed){
         if (isShooterAtSpeed())
@@ -97,14 +98,17 @@ public class Shooter extends Subsystem {
         shooterMotor.set(-speed);        
 >>>>>>> parent of ae3b25d... almost working
     }
+=======
+        }
+>>>>>>> parent of 882a475... ohmy-crap after HH
 
-    public void feederOff(){
-        feederMotor.set(0);
-    }
+        public void feederOff(){
+            feederMotor.set(0);
+        }
         
-    public void feederSlow(){
-        feederMotor.set(-.17);
-    }
+        public void feederSlow(){
+            feederMotor.set(-.17);
+        }
 
     public void stopShooter() {
         shooterMotor.stopMotor();
@@ -112,33 +116,18 @@ public class Shooter extends Subsystem {
 
     private void setTargetSpeed(double speed) {
         targetSpeed=speed;
-        feederMotorSpeed=speed;
     }
     
     public double determineShooterSpeed(double distance){
        if (distance >= Constants.kHOODANGLE_LONGSHOT) {
-        //    moveHoodUp();
+           moveHoodUp();
            return(Constants.kSHOOTER_WHEELSPEED_LONG);
         }
         else
         {
-        //    moveHoodDown();
+           moveHoodDown();
            return(Constants.kSHOOTER_WHEELSPEED_SHORT);
         }
-    }
-
-    public void shootLong(){
-        setTargetSpeed(Constants.kSHOOTER_WHEELSPEED_LONG);
-        moveHoodUp();
-        shooterPIDController.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
-        shooterPIDController2.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
-    }
-
-    public void shootShort(){
-        setTargetSpeed(Constants.kSHOOTER_WHEELSPEED_SHORT);
-        shooterPIDController.setReference(Constants.kSHOOTER_WHEELSPEED_SHORT, ControlType.kVelocity);
-        shooterPIDController2.setReference(Constants.kSHOOTER_WHEELSPEED_SHORT, ControlType.kVelocity);
-        moveHoodDown();
     }
 
     public void shootAuto(){
@@ -150,11 +139,12 @@ public class Shooter extends Subsystem {
         // Robot.hopper.moveMotorCounterClockwise();
         // shooterMotor.set(.95);        
         // shooterMotor2.set(.95); 
-        shooterPIDController.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
-        shooterPIDController2.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
+        shooterPIDController.setReference(RPM, ControlType.kVelocity);
+        shooterPIDController2.setReference(RPM, ControlType.kVelocity);
     }
 
     public boolean isShooterAtSpeed(){
+<<<<<<< HEAD
         if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.85))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
 =======
         shooterPIDController.setReference((-RPM), ControlType.kVelocity);  //was -RPM-100
@@ -163,6 +153,9 @@ public class Shooter extends Subsystem {
     public boolean isShooterAtSpeed(){
         if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.95) && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.05)
 >>>>>>> parent of ae3b25d... almost working
+=======
+        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.80))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
+>>>>>>> parent of 882a475... ohmy-crap after HH
             return true;
         else
             return false;
