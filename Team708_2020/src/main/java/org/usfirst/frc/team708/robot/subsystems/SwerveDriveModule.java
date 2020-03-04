@@ -91,10 +91,17 @@ public class SwerveDriveModule extends Subsystem{
     	rotationMotor.configMotionCruiseVelocity((int)(Constants.SWERVE_ROTATION_MAX_SPEED*1.0), 10);//0.8  jnp
     	rotationMotor.selectProfileSlot(0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
     	rotationMotor.config_kP(0, 4.0, 10);//1
     	rotationMotor.config_kI(0, 0.0, 10);
     	rotationMotor.config_kD(0, 80.0, 10);//10 
     	rotationMotor.config_kF(0, 0.75 * (1023.0/Constants.SWERVE_ROTATION_MAX_SPEED), 10);
+=======
+    	rotationMotor.config_kP(0, 4.0, 10);//4
+    	rotationMotor.config_kI(0, 0.0, 10);
+    	rotationMotor.config_kD(0, 120.0, 10);//80
+    	rotationMotor.config_kF(0, 1023.0/Constants.SWERVE_ROTATION_MAX_SPEED, 10);
+>>>>>>> parent of ae3b25d... almost working
 =======
     	rotationMotor.config_kP(0, 4.0, 10);//4
     	rotationMotor.config_kI(0, 0.0, 10);

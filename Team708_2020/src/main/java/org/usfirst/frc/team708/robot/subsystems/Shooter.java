@@ -60,6 +60,7 @@ public class Shooter extends Subsystem {
         shooterPIDController.setOutputRange(-1, 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         shooterEncoder2 = new CANEncoder(shooterMotor2);
         shooterPIDController2 = shooterMotor2.getPIDController();
         shooterPIDController2.setP(.0005);
@@ -71,10 +72,13 @@ public class Shooter extends Subsystem {
 
 =======
 >>>>>>> parent of ae3b25d... almost working
+=======
+>>>>>>> parent of ae3b25d... almost working
         hoodSolenoid = new Solenoid(RobotMap.hoodSolenoid);
         hoodSolenoid.set(hoodUp); //Starts with hood down
     }
     
+<<<<<<< HEAD
 <<<<<<< HEAD
     public void feederOn(){
         // double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
@@ -89,12 +93,17 @@ public class Shooter extends Subsystem {
             // shooterMotor.set(-speed);        
             // shooterMotor2.set(speed);        
 =======
+=======
+>>>>>>> parent of ae3b25d... almost working
     public void feederOn(double speed){
         if (isShooterAtSpeed())
             feederMotor.set(feederMotorSpeed);   // set feeder motor power
         else
             feederMotor.set(0);
         shooterMotor.set(-speed);        
+<<<<<<< HEAD
+>>>>>>> parent of ae3b25d... almost working
+=======
 >>>>>>> parent of ae3b25d... almost working
     }
 
@@ -145,6 +154,7 @@ public class Shooter extends Subsystem {
         double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
         setTargetSpeed(RPM); //setTargetSpeed(RPM);
 <<<<<<< HEAD
+<<<<<<< HEAD
         // Robot.intake.StopMotorIntake();
         // Robot.hopper.stopMotor();
         // Robot.hopper.moveMotorCounterClockwise();
@@ -157,11 +167,16 @@ public class Shooter extends Subsystem {
     public boolean isShooterAtSpeed(){
         if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.85))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
 =======
+=======
+>>>>>>> parent of ae3b25d... almost working
         shooterPIDController.setReference((-RPM), ControlType.kVelocity);  //was -RPM-100
     }
 
     public boolean isShooterAtSpeed(){
         if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.95) && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.05)
+<<<<<<< HEAD
+>>>>>>> parent of ae3b25d... almost working
+=======
 >>>>>>> parent of ae3b25d... almost working
             return true;
         else
@@ -192,6 +207,7 @@ public class Shooter extends Subsystem {
         // SmartDashboard.putNumber("Theor. RPM", ((determineShooterSpeed(Robot.visionprocessor.getDistance())*Constants.kSHOOTER_MAXSPEED)));
         // SmartDashboard.putNumber("Theor. RPM %", ((determineShooterSpeed(Robot.visionprocessor.getDistance()))));
 <<<<<<< HEAD
+<<<<<<< HEAD
         SmartDashboard.putNumber("Shooter RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
         SmartDashboard.putBoolean("Shooter Target Speed Achieved", isShooterAtSpeed());
         SmartDashboard.putBoolean("Shooter Hood up", hoodUp);
@@ -199,11 +215,16 @@ public class Shooter extends Subsystem {
         SmartDashboard.putNumber("Shooter2 velocity", shooterEncoder2.getVelocity());
         SmartDashboard.putNumber("Shooter target speed", targetSpeed);
 =======
+=======
+>>>>>>> parent of ae3b25d... almost working
         SmartDashboard.putBoolean("Target Speed Achieved", isShooterAtSpeed());
         SmartDashboard.putBoolean("Hood up", hoodUp);
         SmartDashboard.putNumber("RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
         SmartDashboard.putNumber("velocity", shooterEncoder.getVelocity());
         SmartDashboard.putNumber("target speed", targetSpeed);
+<<<<<<< HEAD
+>>>>>>> parent of ae3b25d... almost working
+=======
 >>>>>>> parent of ae3b25d... almost working
     }
 

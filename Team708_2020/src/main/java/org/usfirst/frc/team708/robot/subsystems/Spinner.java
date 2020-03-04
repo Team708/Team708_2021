@@ -40,6 +40,7 @@ public Spinner() {
     spinnerPID.setFF(0.1);
     spinnerPID.setIZone(0);
 <<<<<<< HEAD
+<<<<<<< HEAD
     spinnerPID.setOutputRange(-0.42, 0.42);
     
     // spinnerPID.setP(.00008);
@@ -54,6 +55,9 @@ public Spinner() {
     spinnerEncoder.setPosition(0);
 
     spinnerMotor.setInverted(false);
+=======
+    spinnerPID.setOutputRange(-0.5, 0.5);
+>>>>>>> parent of ae3b25d... almost working
 =======
     spinnerPID.setOutputRange(-0.5, 0.5);
 >>>>>>> parent of ae3b25d... almost working
