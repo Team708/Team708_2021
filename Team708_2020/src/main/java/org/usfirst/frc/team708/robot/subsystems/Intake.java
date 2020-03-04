@@ -37,12 +37,16 @@ public class Intake extends Subsystem {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private double intakeMotorSpeed;     //start with motor spinning forward
 =======
     
     private double motordirection = 1; //intake Motor speed
                                        //start with motor spinning forward
 >>>>>>> parent of ae3b25d... almost working
+=======
+                                       //start with motor spinning forward
+>>>>>>> parent of 882a475... ohmy-crap after HH
 =======
                                        //start with motor spinning forward
 >>>>>>> parent of 882a475... ohmy-crap after HH
@@ -89,10 +93,14 @@ public class Intake extends Subsystem {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         Robot.hopper.moveMotorClockwise();
         Robot.shooter.feederSlow();
 =======
 >>>>>>> parent of ae3b25d... almost working
+=======
+        // Robot.hopper.moveMotorClockwise();
+>>>>>>> parent of 882a475... ohmy-crap after HH
 =======
         // Robot.hopper.moveMotorClockwise();
 >>>>>>> parent of 882a475... ohmy-crap after HH
