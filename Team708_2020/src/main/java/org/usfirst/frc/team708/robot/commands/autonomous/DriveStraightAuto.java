@@ -29,20 +29,20 @@ public class DriveStraightAuto extends CommandGroup {
         // addSequential(new WaitCommand(1));
         // addSequential(new RotateinPlasceCommand(14));  //clockwise
 
-        // addSequential(new WaitCommand(1));
-        // addSequential(new DriveStraightCommand(0, .5));
-        // addSequential(new StopAtDistanceCommand(20, 2));
+        addSequential(new WaitCommand(1));
+        addSequential(new DriveStraightCommand(0, .5));
+        addSequential(new StopAtDistanceCommand(60, 2));
         
         // addSequential(new WaitCommand(1));
         // addSequential(new RotateinPlaceCommand(90));
         
         addSequential(new WaitCommand(1));
-        addSequential(new DriveStraightCommand(100, .5));  //+ is counterclockwise
-        addSequential(new StopAtDistanceCommand(30, 2));
+        addSequential(new DriveStraightCommand(90, .5));  //+ is counterclockwise
+        addSequential(new StopAtDistanceCommand(36, 2));
         
-        // addSequential(new WaitCommand(1));
-        // addSequential(new DriveStraightCommand(170, .5));
-        // addSequential(new StopAtDistanceCommand(20, 2));
+        addSequential(new WaitCommand(1));
+        addSequential(new DriveStraightCommand(270, .5));
+        addSequential(new StopAtDistanceCommand(24, 2));
         
     }
 
