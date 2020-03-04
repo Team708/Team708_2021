@@ -38,11 +38,14 @@ public class Turret extends Subsystem {
     double TURRET_MAX_ROTATION = 360;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     double requestedAngleInEnc = 0;
     double requestedAngleInDegress = 0;
 =======
     double TURRET_MAX_ROTATION = 260;
 >>>>>>> parent of ae3b25d... almost working
+=======
+>>>>>>> parent of 882a475... ohmy-crap after HH
 =======
 >>>>>>> parent of 882a475... ohmy-crap after HH
 =======

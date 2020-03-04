@@ -90,6 +90,7 @@ public class Shooter extends Subsystem {
             // shooterMotor2.set(speed);        
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     public void feederOn(double speed){
         if (isShooterAtSpeed())
@@ -99,6 +100,9 @@ public class Shooter extends Subsystem {
         shooterMotor.set(-speed);        
 >>>>>>> parent of ae3b25d... almost working
     }
+=======
+        }
+>>>>>>> parent of 882a475... ohmy-crap after HH
 =======
         }
 >>>>>>> parent of 882a475... ohmy-crap after HH
@@ -150,6 +154,7 @@ public class Shooter extends Subsystem {
     public boolean isShooterAtSpeed(){
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.85))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
 =======
         shooterPIDController.setReference((-RPM), ControlType.kVelocity);  //was -RPM-100
@@ -158,6 +163,9 @@ public class Shooter extends Subsystem {
     public boolean isShooterAtSpeed(){
         if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.95) && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.05)
 >>>>>>> parent of ae3b25d... almost working
+=======
+        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.80))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
+>>>>>>> parent of 882a475... ohmy-crap after HH
 =======
         if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.80))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
 >>>>>>> parent of 882a475... ohmy-crap after HH
