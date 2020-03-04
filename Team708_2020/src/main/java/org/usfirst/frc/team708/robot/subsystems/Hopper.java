@@ -4,11 +4,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 <<<<<<< HEAD
-<<<<<<< HEAD
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
-=======
->>>>>>> parent of ae3b25d... almost working
 =======
 >>>>>>> parent of ae3b25d... almost working
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -25,12 +22,8 @@ public class Hopper extends Subsystem {
     public CANSparkMax hopperMotor;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
     // private double hopperspeed = Constants.kHOPPER_SPEED; //speed of Hooper
     private double hopperspeed = 3000; //speed of Hooper
-=======
-    private int hopperspeed = Constants.kHOPPER_SPEED; //speed of Hooper
->>>>>>> parent of ae3b25d... almost working
 =======
     private int hopperspeed = Constants.kHOPPER_SPEED; //speed of Hooper
 >>>>>>> parent of ae3b25d... almost working
@@ -38,7 +31,6 @@ public class Hopper extends Subsystem {
     public Hopper(){
         hopperMotor = new CANSparkMax(RobotMap.khopperMotor, MotorType.kBrushless);
         hopperMotor.setInverted(false);
-<<<<<<< HEAD
 <<<<<<< HEAD
 
         hopperEncoder = new CANEncoder(hopperMotor);
@@ -52,15 +44,10 @@ public class Hopper extends Subsystem {
         hopperPIDController.setOutputRange(-1,1);
 
 =======
-=======
->>>>>>> parent of ae3b25d... almost working
     }
 
     public void moveMotor(){
         hopperMotor.set(hopperspeed);
-<<<<<<< HEAD
->>>>>>> parent of ae3b25d... almost working
-=======
 >>>>>>> parent of ae3b25d... almost working
     }
 

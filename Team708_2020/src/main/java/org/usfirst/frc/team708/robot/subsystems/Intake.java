@@ -30,15 +30,12 @@ public class Intake extends Subsystem {
     private boolean intakeIn = true;
     public boolean inHangerPosition = false;
 <<<<<<< HEAD
-<<<<<<< HEAD
     public boolean inIntakePosition = false;
     public boolean stopHanger = false;
 
     private double motordirection = .5; //intake Motor speed
     private double intakeMotorSpeed;     //start with motor spinning forward
 =======
-=======
->>>>>>> parent of ae3b25d... almost working
     
     private double motordirection = 1; //intake Motor speed
                                        //start with motor spinning forward
@@ -65,9 +62,6 @@ public class Intake extends Subsystem {
 =======
         hangerExtended 	= new DigitalInput(0);
         hangerRetracted	= new DigitalInput(1);
-<<<<<<< HEAD
->>>>>>> parent of ae3b25d... almost working
-=======
 >>>>>>> parent of ae3b25d... almost working
 
         toColorFromIntake();
@@ -80,11 +74,8 @@ public class Intake extends Subsystem {
         pivotSolenoid.set(DoubleSolenoid.Value.kReverse); // O
         moveMotorIntakeOut();
 <<<<<<< HEAD
-<<<<<<< HEAD
         Robot.hopper.moveMotorClockwise();
         Robot.shooter.feederSlow();
-=======
->>>>>>> parent of ae3b25d... almost working
 =======
 >>>>>>> parent of ae3b25d... almost working
         inHangerPosition = false;
@@ -92,7 +83,6 @@ public class Intake extends Subsystem {
     }
 
     public void toHanger(){
-<<<<<<< HEAD
 <<<<<<< HEAD
         if (Timer.getMatchTime() <= 35){
             StopMotorIntake();
@@ -105,17 +95,12 @@ public class Intake extends Subsystem {
             Robot.spinner.resetSpinnerEncoder();
         }
 =======
-=======
->>>>>>> parent of ae3b25d... almost working
         Robot.spinner.pistonRetract();
         camSolenoid.set(DoubleSolenoid.Value.kForward);   // I
         pivotSolenoid.set(DoubleSolenoid.Value.kForward); // I
         StopMotorIntake();
         shiftToHanger();
         inHangerPosition = true;
-<<<<<<< HEAD
->>>>>>> parent of ae3b25d... almost working
-=======
 >>>>>>> parent of ae3b25d... almost working
     }
 
@@ -123,10 +108,7 @@ public class Intake extends Subsystem {
         camSolenoid.set(DoubleSolenoid.Value.kReverse);   // O
         pivotSolenoid.set(DoubleSolenoid.Value.kForward); // I
 <<<<<<< HEAD
-<<<<<<< HEAD
         unlockHanger();
-=======
->>>>>>> parent of ae3b25d... almost working
 =======
 >>>>>>> parent of ae3b25d... almost working
         StopMotorIntake();
@@ -137,10 +119,7 @@ public class Intake extends Subsystem {
         camSolenoid.set(DoubleSolenoid.Value.kReverse);   // O
         pivotSolenoid.set(DoubleSolenoid.Value.kReverse); // O
 <<<<<<< HEAD
-<<<<<<< HEAD
         unlockHanger();
-=======
->>>>>>> parent of ae3b25d... almost working
 =======
 >>>>>>> parent of ae3b25d... almost working
         StopMotorIntake();
@@ -166,7 +145,6 @@ public class Intake extends Subsystem {
     public void moveHanger(double Y){
         if (inHangerPosition){
 <<<<<<< HEAD
-<<<<<<< HEAD
             if (Y<0 && notExtended())
                 Robot.spinner.spinnerMotor.set(-Y);
                 // Robot.spinner.spinnerPID.setReference(50, ControlType.kPosition); //169 max
@@ -183,15 +161,10 @@ public class Intake extends Subsystem {
               Robot.spinner.spinnerMotor.set(0.0);
               stopHanger = false;
 =======
-=======
->>>>>>> parent of ae3b25d... almost working
             if ((Y>0 && notExtended() ) || 
                 (Y<0 && notRetracted())
                )
               Robot.spinner.spinnerMotor.set(Y);
-<<<<<<< HEAD
->>>>>>> parent of ae3b25d... almost working
-=======
 >>>>>>> parent of ae3b25d... almost working
         }
     }
@@ -245,14 +218,10 @@ public class Intake extends Subsystem {
 
     public void sendToDashboard() {
 <<<<<<< HEAD
-<<<<<<< HEAD
         SmartDashboard.putBoolean("Hanger extended",!notExtended());
         SmartDashboard.putBoolean("Hanger retracted",!notRetracted());
         SmartDashboard.putNumber("FMS Match Time", Timer.getMatchTime());
         SmartDashboard.putNumber("Hanger Get Reference", Robot.spinner.spinnerEncoder.getPosition());
-=======
-        // SmartDashboard.putBoolean("Intake is in",intakeIn);
->>>>>>> parent of ae3b25d... almost working
 =======
         // SmartDashboard.putBoolean("Intake is in",intakeIn);
 >>>>>>> parent of ae3b25d... almost working
