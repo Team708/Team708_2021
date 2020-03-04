@@ -25,19 +25,19 @@ public final class Constants {
 	public static final int  	kDT_DRIVETRAIN_WHEEL_DIAMETER 				=   4; 
 
 	//Swerve Calculations Constants
-	public static final double kDT_WHEELBASE_LENGTH = 17.5 / 12.0; //feet
-    public static final double kDT_WHEELBASE_WIDTH  = 17.5 / 12.0; //feet
+	public static final double kDT_WHEELBASE_LENGTH = 26.5 / 12.0; //feet  17.5=test  26.5=prod
+    public static final double kDT_WHEELBASE_WIDTH  = 20.5 / 12.0; //feet  17.5=test 20=prod
     public static final double kDT_SWERVE_DIAGONAL = Math.hypot(kDT_WHEELBASE_LENGTH, kDT_WHEELBASE_WIDTH);
 	
 	//Physical Robot Dimensions
-	public static final double ROBOT_WIDTH = 24 / 12.0;
-	public static final double ROBOT_LENGTH = 24 / 12.0;
+	public static final double ROBOT_WIDTH = 26.5 / 12.0;  // 24=test 26.5=prod
+	public static final double ROBOT_LENGTH = 33 / 12.0;  // 24=test 33=prod
 	public static final double ROBOT_HALF_WIDTH = ROBOT_WIDTH / 2.0;
 	public static final double ROBOT_HALF_LENGTH = ROBOT_LENGTH / 2.0;
-	public static final double ROBOT_INTAKE_EXTRUSION = 11.0/12.0;
+	public static final double ROBOT_INTAKE_EXTRUSION = 11.5/12.0;
 
     //Swerve Speed Constants
-    public static final double SWERVE_ROTATION_MAX_SPEED = 1250.0;
+    public static final double SWERVE_ROTATION_MAX_SPEED = 1992.0; //1250
     public static final double SWERVE_DRIVE_MAX_SPEED    = 5432.0;
 	
     //Swerve Module Wheel Offsets
@@ -46,17 +46,10 @@ public final class Constants {
 	// public static final int REAR_LEFT_ENCODER_STARTING_POS   = 2600-2048; // mod 2  2600
 	// public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 550+2048;  // mod 3  500
 	
-<<<<<<< HEAD
 	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1402+2048;  // mod 0   -1078
 	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 3058-2048;  // mod 1  1693 1010
-	public static final int REAR_LEFT_ENCODER_STARTING_POS   = 3976-2048;  // mod 2  1250 1928
+	public static final int REAR_LEFT_ENCODER_STARTING_POS   = -3879; //+2048;  // mod 2  1250 1928
 	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 270+2048;   // mod 3  -1545
-=======
-	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 1693;   // mod 0   1478 
-	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = -1078;  // mod 1   1451
-	public static final int REAR_LEFT_ENCODER_STARTING_POS   = 1250;   // mod 2  2600
-	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = -1545;  // mod 3  500
->>>>>>> parent of ae3b25d... almost working
 
 	//Swerve Module Positions
 	public static final Translation2d kVehicleToModuleOne = new Translation2d(kDT_WHEELBASE_LENGTH/2, kDT_WHEELBASE_WIDTH/2);
@@ -110,7 +103,6 @@ public final class Constants {
 	public static final double	kSHOOTER_WHEELSPEED_LONG	= 3900.0;  //3700//RPM or encode counts?
 	public static final double	kSHOOTER_WHEELSPEED_SHORT	= 1850.0;  //RPM or encode counts?
 
-<<<<<<< HEAD
 	public static final double kFEEDERMOTORSPEED = 1.0;
 
 	public static final int TURRET_ENCODER_STARTING_POS  = -4197; //7889; //2636 * 8; //550+2048;  // turret offset
@@ -120,36 +112,13 @@ public final class Constants {
 	public static final double TURRET_ROTATION_MAX_SPEED = 1500; //17694; //2664 * 8; //counts/100ms on 775w/gearbox
 // 13000 / 40 = 325/min  5.4/sec 
 	public static final double kHOPPER_SPEED = .25;
-=======
-	public static final int TURRET_ENCODER_STARTING_POS  = 550+2048;  // turret offset
-	public static final double kFEEDERMOTORSPEED = .84;
-	public static final int TURRET_ENCODER_COUNT = 4096;
-	public static final int kTurretOnTargetTolerance = 1;
-	public static final int kTurretSafeTolerance = 2;
-	public static final double TURRET_ROTATION_MAX_SPEED = 2664; //counts/100ms on 775w/gearbox
 
-	public static final int kHOPPER_SPEED = 1;
 
-/*
- * Intake
- */
->>>>>>> parent of ae3b25d... almost working
-
-	public static final double INTAKE_MOTOR_SPEED	= 1.0;
-
-	public static final int	INTAKE_HATCH_OPEN		=  1;
-	public static final int	INTAKE_HATCH_CLOSE		=  0;
-	
 /*
  * Color Wheel
  */
-<<<<<<< HEAD
 	public static final double kSPIN_ONE_COLOR			= 3;//5  //one color = 4096
 	public static final double kSPIN_THREE_TIMES		= 60; //70// <encoder * ratio * 3.25 = 106500
-=======
-	public static final double kSPIN_ONE_COLOR			= 300;  //one color
-	public static final double kSPIN_THREE_TIMES		= 1000; // <encoder * ratio * 3.25 
->>>>>>> parent of ae3b25d... almost working
 
 
 /*
