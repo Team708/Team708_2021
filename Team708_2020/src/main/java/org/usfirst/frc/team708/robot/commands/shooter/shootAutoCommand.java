@@ -25,33 +25,28 @@ public class shootAutoCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 
-        // this.timeout = 11;
+        this.timeout = 11;
 
         // Robot.intake.unlockHanger();
         // Robot.spinner.pistonRetract();
-        // Robot.turret.updateAngle();
-        Robot.shooter.moveHoodUp();
+        Robot.turret.updateAngle();
         Robot.shooter.shootAuto();
     }
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
-        // Robot.shooter.feederOn();
-        // Robot.shooter.moveHoodUp();
+        Robot.shooter.feederOn();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        // return (this.timeSinceInitialized()>=timeout);
-
-        return true;
+        return (this.timeSinceInitialized()>=timeout);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        // Robot.shooter.stopShooter();
-        // Robot.intake.toIntake();
+        Robot.shooter.stopShooter();
+        Robot.intake.toIntake();
     }
 
     // Called when another command which requires one or more of the same

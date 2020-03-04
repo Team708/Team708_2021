@@ -7,8 +7,6 @@ import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
-import org.usfirst.frc.team708.robot.commands.shooter.feedAutoCommand;
-import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommandShort;
 import org.usfirst.frc.team708.robot.commands.intake.*;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 import org.usfirst.frc.team254.lib.util.math.*;
@@ -29,21 +27,13 @@ public class ThreeBallAuto extends CommandGroup {
         // addSequential(new WaitCommand(1));
         addSequential(new ExtendIntakeCommand());
         addSequential(new WaitCommand(1));
-
         addSequential(new DriveStraightCommand(180, .5));
         addSequential(new StopAtDistanceCommand(50, 10));
-
         // addSequential(new WaitCommand(1));
         // addSequential(new DriveStraightCommand(20, .5));
         // addSequential(new StopAtDistanceCommand(20, 10));
-        addSequential(new WaitCommand(.5));
-        addSequential(new FindTargetCommand());
-
+        addSequential(new WaitCommand(1));
         addSequential(new shootAutoCommand());
-        addSequential(new WaitCommand(2.0));
-        addSequential(new feedAutoCommand());
-
-
     }
 
     // Called just before this Command runs the first time
