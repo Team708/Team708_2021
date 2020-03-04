@@ -47,15 +47,21 @@ public final class Constants {
 	// public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 550+2048;  // mod 3  500
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = 1402+2048;  // mod 0   -1078
 	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 3058-2048;  // mod 1  1693 1010
 	public static final int REAR_LEFT_ENCODER_STARTING_POS   = -3879; //+2048;  // mod 2  1250 1928
 	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = 270+2048;   // mod 3  -1545
 =======
+=======
+>>>>>>> parent of ae3b25d... almost working
 	public static final int FRONT_LEFT_ENCODER_STARTING_POS  = 1693;   // mod 0   1478 
 	public static final int FRONT_RIGHT_ENCODER_STARTING_POS = -1078;  // mod 1   1451
 	public static final int REAR_LEFT_ENCODER_STARTING_POS   = 1250;   // mod 2  2600
 	public static final int REAR_RIGHT_ENCODER_STARTING_POS  = -1545;  // mod 3  500
+<<<<<<< HEAD
+>>>>>>> parent of ae3b25d... almost working
+=======
 >>>>>>> parent of ae3b25d... almost working
 
 	//Swerve Module Positions
@@ -111,6 +117,7 @@ public final class Constants {
 	public static final double	kSHOOTER_WHEELSPEED_SHORT	= 1850.0;  //RPM or encode counts?
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public static final double kFEEDERMOTORSPEED = 1.0;
 
 	public static final int TURRET_ENCODER_STARTING_POS  = -4197; //7889; //2636 * 8; //550+2048;  // turret offset
@@ -129,7 +136,26 @@ public final class Constants {
 	public static final double TURRET_ROTATION_MAX_SPEED = 2664; //counts/100ms on 775w/gearbox
 
 	public static final int kHOPPER_SPEED = 1;
+=======
+	public static final int TURRET_ENCODER_STARTING_POS  = 550+2048;  // turret offset
+	public static final double kFEEDERMOTORSPEED = .84;
+	public static final int TURRET_ENCODER_COUNT = 4096;
+	public static final int kTurretOnTargetTolerance = 1;
+	public static final int kTurretSafeTolerance = 2;
+	public static final double TURRET_ROTATION_MAX_SPEED = 2664; //counts/100ms on 775w/gearbox
 
+	public static final int kHOPPER_SPEED = 1;
+
+/*
+ * Intake
+ */
+
+	public static final double INTAKE_MOTOR_SPEED	= 1.0;
+>>>>>>> parent of ae3b25d... almost working
+
+	public static final int	INTAKE_HATCH_OPEN		=  1;
+	public static final int	INTAKE_HATCH_CLOSE		=  0;
+	
 /*
  * Intake
  */
@@ -144,8 +170,13 @@ public final class Constants {
  * Color Wheel
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public static final double kSPIN_ONE_COLOR			= 3;//5  //one color = 4096
 	public static final double kSPIN_THREE_TIMES		= 60; //70// <encoder * ratio * 3.25 = 106500
+=======
+	public static final double kSPIN_ONE_COLOR			= 300;  //one color
+	public static final double kSPIN_THREE_TIMES		= 1000; // <encoder * ratio * 3.25 
+>>>>>>> parent of ae3b25d... almost working
 =======
 	public static final double kSPIN_ONE_COLOR			= 300;  //one color
 	public static final double kSPIN_THREE_TIMES		= 1000; // <encoder * ratio * 3.25 

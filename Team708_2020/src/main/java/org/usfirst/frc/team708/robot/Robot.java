@@ -261,6 +261,7 @@ public class Robot extends TimedRobot {
         else if (operator.startButton.wasPressed())
             spinner.spinnerRotateThreeTimes();
 <<<<<<< HEAD
+<<<<<<< HEAD
             operator.rumble(1.0, 1.0);
         }
         else if(operator.yButton.wasPressed()){
@@ -268,10 +269,15 @@ public class Robot extends TimedRobot {
             operator.rumble(1.0, 1.0);
         }
 =======
+=======
+>>>>>>> parent of ae3b25d... almost working
         // else if(operator.yButton.wasPressed())
         //     speed += 0.1;
         // else if(operator.aButton.wasPressed())
         //     speed -= 0.1;
+<<<<<<< HEAD
+>>>>>>> parent of ae3b25d... almost working
+=======
 >>>>>>> parent of ae3b25d... almost working
         else if (operator.bButton.wasPressed()){
             spinner.spinnerRotateOneColor();
@@ -288,6 +294,7 @@ public class Robot extends TimedRobot {
         else if(operator.backButton.wasPressed())
             hopper.stopMotor();
         else if(operator.xButton.wasPressed())
+<<<<<<< HEAD
 <<<<<<< HEAD
             hopper.moveMotorClockwise();
         else if(operator.aButton.wasPressed())
@@ -311,12 +318,23 @@ public class Robot extends TimedRobot {
         else if(operator.rightBumper.isBeingPressed())
             shooter.feederOn(speed);
         else {
+=======
+            hopper.reverseMotor();
+        else if(operator.rightTrigger.isBeingPressed())
+            shooter.shootAuto();
+        else if(operator.rightBumper.isBeingPressed())
+            shooter.feederOn(speed);
+        else {
+>>>>>>> parent of ae3b25d... almost working
             if (Math.abs(operator.getY(Hand.kLeft)) >= .5)
                 intake.moveHanger(operator.getY(Hand.kLeft));
                 
             shooter.stopShooter();
             shooter.feederOff();
         }
+<<<<<<< HEAD
+>>>>>>> parent of ae3b25d... almost working
+=======
 >>>>>>> parent of ae3b25d... almost working
         
         driver.update();

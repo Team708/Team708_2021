@@ -58,7 +58,11 @@ public class Pigeon {
 		// SmartDashboard.putNumber("Pigeon Temp", pigeon.getTemp());
 		// SmartDashboard.putNumber("Pigeon Compass", pigeon.getAbsoluteCompassHeading());
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// SmartDashboard.putNumber("Pigeon Yaw", getAngle().getDegrees());
+=======
+		// SmartDashboard.putNumber("Yaw", getAngle().getDegrees());
+>>>>>>> parent of ae3b25d... almost working
 =======
 		// SmartDashboard.putNumber("Yaw", getAngle().getDegrees());
 >>>>>>> parent of ae3b25d... almost working
