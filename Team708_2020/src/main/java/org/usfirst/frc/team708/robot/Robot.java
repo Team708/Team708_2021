@@ -1,7 +1,6 @@
 package org.usfirst.frc.team708.robot;
 
-//  added color back in to master - 2/8 jnp
-// hopefully bACK TO NORMAL 3/4
+// updates 3/6
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -15,11 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-//import edu.wpi.first.cameraserver.CameraServer;
-//import edu.wpi.cscore.UsbCamera;
-
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
-import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
 import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Xbox;

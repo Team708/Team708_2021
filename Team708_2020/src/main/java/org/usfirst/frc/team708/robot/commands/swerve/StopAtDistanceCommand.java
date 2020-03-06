@@ -5,10 +5,6 @@ import org.usfirst.frc.team708.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Timer;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team254.lib.util.math.*;
-import java.lang.*;
-
 public class StopAtDistanceCommand extends Command {
 
     private double timeout;

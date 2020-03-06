@@ -1,40 +1,23 @@
 package org.usfirst.frc.team708.robot.commands.autonomous;
 
-import org.usfirst.frc.team708.robot.Constants;
-import org.usfirst.frc.team708.robot.Robot;
-import org.usfirst.frc.team708.robot.commands.autonomous.*;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
-import edu.wpi.first.wpilibj.shuffleboard.*;
 
-
-
-import edu.wpi.first.wpilibj.command.Command;
-
-/**
- * this does nothing
- */
 public class DoNothing extends CommandGroup {
 
     public DoNothing() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         addSequential(new WaitCommand(2.0));
-        addSequential(new WaitCommand(2.0));
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        
         //Nothing goes here
-
     }
 
     // Make this return true when this Command no longer needs to run execute()

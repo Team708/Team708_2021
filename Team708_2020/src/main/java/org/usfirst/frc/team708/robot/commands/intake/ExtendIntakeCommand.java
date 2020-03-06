@@ -1,31 +1,23 @@
 package org.usfirst.frc.team708.robot.commands.intake;
 
-import org.usfirst.frc.team708.robot.subsystems.Pigeon;
-import org.usfirst.frc.team708.robot.subsystems.Shooter;
-import org.usfirst.frc.team708.robot.subsystems.VisionProcessor;
-import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Timer;
-// import org.usfirst.frc.team254.lib.util.math.*;
-// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-// import java.lang.*;
 
 public class ExtendIntakeCommand extends Command {
 
-    public ExtendIntakeCommand() {
-        
+    public ExtendIntakeCommand() {  
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.intake.unlockHanger();
         Robot.spinner.pistonRetract();
+        
+        Robot.intake.toIntake();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.intake.toIntake();
     }
 
     // Make this return true when this Command no longer needs to run execute()

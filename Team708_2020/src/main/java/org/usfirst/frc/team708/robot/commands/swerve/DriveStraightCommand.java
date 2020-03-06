@@ -3,19 +3,14 @@ import org.usfirst.frc.team708.robot.subsystems.Swerve;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team254.lib.util.math.*;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
-import java.lang.*;
 
 public class DriveStraightCommand extends Command {
 	
     private Translation2d driveVector;
-    private double angle;
-
 	
     public DriveStraightCommand(double angle, double power) {
         this.driveVector = Rotation2d.fromDegrees(angle+90).toTranslation().scale(power);
-        
     }
 
     // Called just before this Command runs the first time

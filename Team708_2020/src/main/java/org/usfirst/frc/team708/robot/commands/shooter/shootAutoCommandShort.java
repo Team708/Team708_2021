@@ -1,25 +1,13 @@
 package org.usfirst.frc.team708.robot.commands.shooter;
 
-import org.usfirst.frc.team708.robot.subsystems.Pigeon;
-import org.usfirst.frc.team708.robot.subsystems.Shooter;
-import org.usfirst.frc.team708.robot.subsystems.VisionProcessor;
-import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Timer;
-// import org.usfirst.frc.team254.lib.util.math.*;
-// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-// import java.lang.*;
 
 public class shootAutoCommandShort extends Command {
 
-    private double speed;
     private double timeout;
 
-    // private Translation2d driveVector;
-
     public shootAutoCommandShort() {
-    
     }
 
     // Called just before this Command runs the first time
