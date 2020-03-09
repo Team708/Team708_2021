@@ -45,17 +45,6 @@
               "_title": "Game Color"
             }
           },
-          "0,3": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter target speed",
-              "_title": "SmartDashboard/Shooter target speed"
-            }
-          },
           "19,12": {
             "size": [
               3,
@@ -93,28 +82,6 @@
               "_title": "FMS Match Time"
             }
           },
-          "0,5": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter1 velocity",
-              "_title": "SmartDashboard/Shooter1 velocity"
-            }
-          },
-          "0,7": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter2 velocity",
-              "_title": "SmartDashboard/Shooter2 velocity"
-            }
-          },
           "10,0": {
             "size": [
               12,
@@ -132,17 +99,6 @@
               "fps": -1,
               "imageWidth": 0,
               "imageHeight": 0
-            }
-          },
-          "7,6": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Vision_Distance ",
-              "_title": "SmartDashboard/Vision_Distance "
             }
           },
           "8,11": {
@@ -210,7 +166,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "4,3": {
+          "7,0": {
             "size": [
               3,
               3
@@ -221,6 +177,41 @@
               "_title": "SmartDashboard/Shooter Target Speed Achieved",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,6": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Feeder Has Ball",
+              "_title": "SmartDashboard/Feeder Has Ball"
+            }
+          },
+          "4,2": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Feeder Preload",
+              "_title": "SmartDashboard/Feeder Preload",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,5": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Feeder Motor Temp",
+              "_title": "SmartDashboard/Feeder Motor Temp"
             }
           }
         }
@@ -333,7 +324,7 @@
   "windowGeometry": {
     "x": -6.666666507720947,
     "y": 0.0,
-    "width": 1202.0,
+    "width": 1293.3333740234375,
     "height": 686.6666870117188
   }
 }

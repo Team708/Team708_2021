@@ -1,7 +1,7 @@
 package org.usfirst.frc.team708.robot.subsystems;
 
 import org.usfirst.frc.team708.robot.Constants;
-import org.usfirst.frc.team708.robot.Robot;
+// import org.usfirst.frc.team708.robot.Robot;
 // import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
 // import org.usfirst.frc.team708.robot.subsystems.Intake;
 // import org.usfirst.frc.team708.robot.util.Math708;
@@ -16,7 +16,7 @@ public class VisionProcessor extends Subsystem {
 	// private static Intake			intake;
 
 	private boolean led 		= false;
-	private boolean isAtY		= false;
+	// private boolean isAtY		= false;
 	public  double  robotSide;
 	public boolean  targetFound = false;
 	// private boolean isCentered 	= false;
@@ -25,8 +25,8 @@ public class VisionProcessor extends Subsystem {
 //	Required Network Table Data 	
 	private boolean seesTarget;	//Get from Network Table
 	private double tv;
-	private double yAngle;
-	private double difference;
+	// private double yAngle;
+	// private double difference;
 
 	// private double xAngle;	//Get from Network Table
 	// private double area;

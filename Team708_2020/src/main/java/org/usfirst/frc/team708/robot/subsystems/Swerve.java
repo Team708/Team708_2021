@@ -40,7 +40,7 @@ public class Swerve extends Subsystem{
 	}
 	boolean ultraSensesWall = false;
 	boolean robotXPassed = false;
-	
+	boolean inBrake = false;
 	Pigeon pigeon;
 	public SwerveHeadingController headingController = new SwerveHeadingController();
 	public void temporarilyDisableHeadingController(){
@@ -68,10 +68,10 @@ public class Swerve extends Subsystem{
 		return hasFinishedPath;
 	}
 	
-	private boolean trackCube = false;
-	public void enableCubeTracking(boolean enable){
-		trackCube = enable;
-	}
+	// private boolean trackCube = false;
+	// public void enableCubeTracking(boolean enable){
+	// 	trackCube = enable;
+	// }
 	
 	private Swerve(){
 		frontRight = new SwerveDriveModule(RobotMap.kdrivetrainFrontRightTurn, RobotMap.kdrivetrainFrontRightDrive,
@@ -176,14 +176,19 @@ public class Swerve extends Subsystem{
 	
 	public void wheelBrake(){
 		setState(ControlState.POSITION);
-		// frontLeft.setModuleAngle(-45);
-		// frontRight.setModuleAngle(45);
-		// rearRight.setModuleAngle(-45);
-		// rearLeft.setModuleAngle(45);
-		frontLeft.setModuleAngle(0);
-		frontRight.setModuleAngle(0);
-		rearRight.setModuleAngle(0);
-		rearLeft.setModuleAngle(0);
+		if (!inBrake){
+			frontLeft.setModuleAngle(-45);
+			frontRight.setModuleAngle(45);
+			rearRight.setModuleAngle(-45);
+			rearLeft.setModuleAngle(45);
+			inBrake = true;
+		} else {
+			frontLeft.setModuleAngle(0);
+			frontRight.setModuleAngle(0);
+			rearRight.setModuleAngle(0);
+			rearLeft.setModuleAngle(0);
+            inBrake = false;
+		}
 	}
 
 	public void rotate(double goalHeading){
@@ -249,7 +254,7 @@ public class Swerve extends Subsystem{
 		
 		ultraSensesWall = false;
 		robotXPassed = false;
-		enableCubeTracking(false);
+		// enableCubeTracking(false);
 	}
 	
 	public synchronized void updatePose(double timestamp){

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team708.robot.subsystems;
 
+import com.revrobotics.CANAnalog;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
@@ -7,10 +8,10 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.StatusFrame;
-import com.ctre.phoenix.motorcontrol.ControlMode;
+// import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+// import com.ctre.phoenix.motorcontrol.NeutralMode;
+// import com.ctre.phoenix.motorcontrol.StatusFrame;
+// import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
@@ -18,14 +19,14 @@ import org.usfirst.frc.team708.robot.RobotMap;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+// import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 
 public class Shooter extends Subsystem {
 
     public CANSparkMax shooterMotor, shooterMotor2, feederMotor;
     public CANEncoder  shooterEncoder, shooterEncoder2, feederEncoder;
-    private CANPIDController shooterPIDController, shooterPIDController2, feederPIDController;
+    private CANPIDController shooterPIDController, shooterPIDController2; // feederPIDController;
 
     public TalonSRX turretMotor;
     public double   targetSpeed;
@@ -34,10 +35,11 @@ public class Shooter extends Subsystem {
     public boolean  shooterSet = false;
     public boolean  hoodUp     = false;
 
-    private double  feederMotorSpeed       = Constants.kFEEDERMOTORSPEED;
     // private double  feederMotorSpeed       = Constants.kFEEDERMOTORSPEED;
             
-            int turretEncoderReverseFactor = 1;
+    int turretEncoderReverseFactor = 1;
+    private CANAnalog analogSensor;
+    boolean preloaded = false;
 
     public Shooter(){
 
@@ -71,41 +73,52 @@ public class Shooter extends Subsystem {
         shooterPIDController2.setIZone(0);
         shooterPIDController2.setOutputRange(-1, 1);
 
+        analogSensor = feederMotor.getAnalog(CANAnalog.AnalogMode.kAbsolute);
+
         hoodSolenoid = new Solenoid(RobotMap.hoodSolenoid);
         hoodSolenoid.set(hoodUp); //Starts with hood down
     }
     
     public void feederOn(){
-        // double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
-        // setTargetSpeed(RPM); //setTargetSpeed(RPM);
-        // Robot.hopper.moveMotorClockwise();
-        // if (isShooterAtSpeed()){
-            feederMotor.set(feederMotorSpeed);
-            Robot.hopper.moveMotorCounterClockwise();
-        //    }   // set feeder motor power
-        // else
-            // feederMotor.set(0);
-            // shooterMotor.set(-speed);        
-            // shooterMotor2.set(speed);        
+            feederMotor.set(1.0);
+            Robot.hopper.moveMotorCounterClockwise();       
     }
 
     public void feederOff(){
         feederMotor.set(0);
     }
         
-    public void feederSlow(){
-        feederMotor.set(-.17);
+    public void feederFast(){
+        feederMotor.set(1.0);
     }
 
+    public void feederUnload(){
+        int i;
+        for (i=1; i<10000; i++)
+            feederMotor.set(-.3);
+        feederMotor.set(0);
+    }
+
+    public void feederPreLoad(){
+        int i;
+        if (analogSensor.getPosition() > 1.3 && preloaded == false){
+            feederMotor.set(0);
+            preloaded = true;
+            for (i=1; i<10000; i++)
+                feederMotor.set(-.3);
+            feederMotor.set(0);
+        }
+        else
+         if (!preloaded) feederMotor.set(0.4);
+           
+    }
     public void stopShooter() {
-        feederOff();
         shooterMotor.stopMotor();
         shooterMotor2.stopMotor();
     }
 
     private void setTargetSpeed(double speed) {
         targetSpeed=speed;
-        feederMotorSpeed=speed;
     }
     
     public double determineShooterSpeed(double distance){
@@ -136,18 +149,14 @@ public class Shooter extends Subsystem {
 
     public void shootAuto(){
         double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
-        setTargetSpeed(RPM); //setTargetSpeed(RPM);
-        // Robot.intake.StopMotorIntake();
-        // Robot.hopper.stopMotor();
-        // Robot.hopper.moveMotorCounterClockwise();
-        // shooterMotor.set(.95);        
-        // shooterMotor2.set(.95); 
+        setTargetSpeed(RPM); 
+
         shooterPIDController.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
         shooterPIDController2.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
     }
 
     public boolean isShooterAtSpeed(){
-        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.85))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
+        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.9))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
             return true;
         else
             return false;
@@ -176,18 +185,22 @@ public class Shooter extends Subsystem {
         
         // SmartDashboard.putNumber("Theor. RPM", ((determineShooterSpeed(Robot.visionprocessor.getDistance())*Constants.kSHOOTER_MAXSPEED)));
         // SmartDashboard.putNumber("Theor. RPM %", ((determineShooterSpeed(Robot.visionprocessor.getDistance()))));
-        SmartDashboard.putNumber("Shooter RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
+        // SmartDashboard.putNumber("Shooter RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
         SmartDashboard.putBoolean("Shooter Target Speed Achieved", isShooterAtSpeed());
         SmartDashboard.putBoolean("Shooter Hood up", hoodUp);
+        SmartDashboard.putBoolean("Feeder Preload", preloaded);
         SmartDashboard.putNumber("Shooter1 velocity", shooterEncoder.getVelocity());
         SmartDashboard.putNumber("Shooter2 velocity", shooterEncoder2.getVelocity());
         SmartDashboard.putNumber("Shooter target speed", targetSpeed);
+        SmartDashboard.putNumber("Feeder Has Ball", analogSensor.getPosition());
+        SmartDashboard.putNumber("Feeder Motor Temp", feederMotor.getMotorTemperature());
+
     }
 
     @Override
     protected void initDefaultCommand() {
-        if (Constants.DEBUG) {
-		}  
+        // if (Constants.DEBUG) {
+		// }  
     }
     
 }

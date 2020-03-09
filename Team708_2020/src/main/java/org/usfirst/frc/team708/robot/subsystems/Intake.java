@@ -1,23 +1,23 @@
 package org.usfirst.frc.team708.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+// import com.ctre.phoenix.motorcontrol.ControlMode;
+// import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.CANEncoder;
+// import com.revrobotics.ControlType;
+// import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+// import com.revrobotics.CANEncoder;
 
-import org.usfirst.frc.team708.robot.Constants;
+// import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
-import org.usfirst.frc.team708.robot.subsystems.*;
+// import org.usfirst.frc.team708.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DigitalInput;
+// import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Intake extends Subsystem {
 
@@ -36,8 +36,8 @@ public class Intake extends Subsystem {
 
     private double motordirection = .5; //intake Motor speed
     private double intakeMotorSpeed;     //start with motor spinning forward
-    private DigitalInput hangerExtended;
-    private DigitalInput hangerRetracted;
+    // private DigitalInput hangerExtended;
+    // private DigitalInput hangerRetracted;
 
     public Intake(){
         // intakeMotor = new CANSparkMax(RobotMap.kintakeMotor, MotorType.kBrushless);
@@ -65,10 +65,13 @@ public class Intake extends Subsystem {
         camSolenoid.set(DoubleSolenoid.Value.kForward);   // I
         pivotSolenoid.set(DoubleSolenoid.Value.kReverse); // O
         moveMotorIntakeOut();
-        Robot.hopper.moveMotorClockwise();
-        Robot.shooter.feederSlow();
+        Robot.hopper.moveMotorCounterClockwise();
+        // Robot.hopper.moveMotorClockwise();
+        // Robot.shooter.feederSlow();
         inHangerPosition = false;
         inIntakePosition = true;
+        Robot.shooter.preloaded = false;
+        Robot.shooter.feederPreLoad();
     }
 
     public void toHanger(){
@@ -115,7 +118,7 @@ public class Intake extends Subsystem {
     }
 
     private boolean notRetracted(){
-        return (Robot.spinner.getSpinMotorCount()>07);
+        return (Robot.spinner.getSpinMotorCount()>05);
     }
 
     public void moveHanger(double Y){
@@ -177,10 +180,10 @@ public class Intake extends Subsystem {
     public void toggleMotorIntake(){
         motordirection *= -1;
         
-        if (intakeIn)
-            Robot.spinner.spinnerMotor.set(motordirection);  //turns motor off
-        else
-            moveMotorIntakeOut();
+        // if (intakeIn)
+            Robot.spinner.spinnerMotor.set(motordirection);
+        // else
+            // moveMotorIntakeOut();
     }
 
     @Override
