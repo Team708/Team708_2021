@@ -97,12 +97,13 @@ public class Turret extends Subsystem {
 
                 requestedAngleInDegress = requestedAngleInEnc/onedegree;
 
-                if (requestedAngleInDegress > 270 || requestedAngleInDegress < -90){
+                if (requestedAngleInDegress > 280 || requestedAngleInDegress < -100){
                     requestedAngleInDegress = (Math.abs(requestedAngleInDegress)-360)*Integer.signum((int)requestedAngleInDegress);
                     requestedAngleInEnc     = requestedAngleInDegress * onedegree;
                 }
 
-                turretMotor.set(ControlMode.MotionMagic, requestedAngleInEnc);  //turn turret to encoder value to find target
+                if (Robot.shooter.findtarget)
+                    turretMotor.set(ControlMode.MotionMagic, requestedAngleInEnc);  //turn turret to encoder value to find target
         }
 
         // turretMotor.set(ControlMode.MotionMagic, angle / (2 * Math.PI * Constants.TURRET_ENCODER_COUNT));

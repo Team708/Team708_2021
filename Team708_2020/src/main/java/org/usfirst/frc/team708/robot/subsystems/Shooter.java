@@ -40,6 +40,8 @@ public class Shooter extends Subsystem {
     int turretEncoderReverseFactor = 1;
     private CANAnalog analogSensor;
     boolean preloaded = false;
+    public boolean shooting = false;
+    public boolean findtarget = false;
 
     public Shooter(){
 
@@ -80,33 +82,29 @@ public class Shooter extends Subsystem {
     }
     
     public void feederOn(){
+            shooting = true;
             feederMotor.set(1.0);
             Robot.hopper.moveMotorCounterClockwise();       
     }
 
     public void feederOff(){
         feederMotor.set(0);
-    }
-        
-    public void feederFast(){
-        feederMotor.set(1.0);
+        shooting = false;
     }
 
     public void feederUnload(){
         int i;
-        for (i=1; i<10000; i++)
+        for (i=1; i<8000; i++)
             feederMotor.set(-.3);
         feederMotor.set(0);
+        shooting = false;
     }
 
     public void feederPreLoad(){
-        int i;
         if (analogSensor.getPosition() > 1.3 && preloaded == false){
             feederMotor.set(0);
             preloaded = true;
-            for (i=1; i<10000; i++)
-                feederMotor.set(-.3);
-            feederMotor.set(0);
+            feederUnload();
         }
         else
          if (!preloaded) feederMotor.set(0.4);
@@ -115,56 +113,69 @@ public class Shooter extends Subsystem {
     public void stopShooter() {
         shooterMotor.stopMotor();
         shooterMotor2.stopMotor();
+        shooting = false;
+        findtarget = false;
     }
 
-    private void setTargetSpeed(double speed) {
-        targetSpeed=speed;
+    public void feederAutoShoot(){
+        if (isShooterAtSpeed()) {
+            shooting = true;
+            feederMotor.set(1.0);
+            Robot.hopper.moveMotorCounterClockwise();
+        }    
     }
+
+    // private void setTargetSpeed(double speed) {
+    //     targetSpeed=speed;
+    // }
     
-    public double determineShooterSpeed(double distance){
-       if (distance >= Constants.kHOODANGLE_LONGSHOT) {
-        //    moveHoodUp();
-           return(Constants.kSHOOTER_WHEELSPEED_LONG);
-        }
-        else
-        {
-        //    moveHoodDown();
-           return(Constants.kSHOOTER_WHEELSPEED_SHORT);
-        }
-    }
+    // public double determineShooterSpeed(double distance){
+    //    if (distance >= Constants.kHOODANGLE_LONGSHOT) {
+    //     //    moveHoodUp();
+    //        return(Constants.kSHOOTER_WHEELSPEED_LONG);
+    //     }
+    //     else
+    //     {
+    //     //    moveHoodDown();
+    //        return(Constants.kSHOOTER_WHEELSPEED_SHORT);
+    //     }
+    // }
 
     public void shootLong(){
-        setTargetSpeed(Constants.kSHOOTER_WHEELSPEED_LONG);
+        targetSpeed = Constants.kSHOOTER_WHEELSPEED_LONG;
         moveHoodUp();
+        findtarget = true;
         shooterPIDController.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
         shooterPIDController2.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
     }
 
     public void shootShort(){
-        setTargetSpeed(Constants.kSHOOTER_WHEELSPEED_SHORT);
+        targetSpeed = Constants.kSHOOTER_WHEELSPEED_SHORT;
+        moveHoodDown();
+        findtarget = true;
         shooterPIDController.setReference(Constants.kSHOOTER_WHEELSPEED_SHORT, ControlType.kVelocity);
         shooterPIDController2.setReference(Constants.kSHOOTER_WHEELSPEED_SHORT, ControlType.kVelocity);
-        moveHoodDown();
     }
 
-    public void shootAuto(){
-        double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
-        setTargetSpeed(RPM); 
+    // public void shootAutoLong(){
+    //     double RPM = determineShooterSpeed(Robot.visionprocessor.getDistance());
+    //     setTargetSpeed(RPM); 
+    //     findtarget = true;
 
-        shooterPIDController.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
-        shooterPIDController2.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
-    }
+    //     shooterPIDController.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
+    //     shooterPIDController2.setReference(Constants.kSHOOTER_WHEELSPEED_LONG, ControlType.kVelocity);
+    // }
 
     public boolean isShooterAtSpeed(){
-        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.9))// && Math.abs(shooterEncoder.getVelocity())<(targetSpeed)*1.20)
+        if ((Math.abs(shooterEncoder.getVelocity())>(targetSpeed)*0.9))
             return true;
         else
             return false;
     }
 
-    public boolean getHoodPosition(){
-        return hoodUp;
-    }
+    // public boolean getHoodPosition(){
+    //     return hoodUp;
+    // }
 
     public void moveHoodUp(){
         hoodUp = true;
@@ -176,31 +187,29 @@ public class Shooter extends Subsystem {
         hoodSolenoid.set(hoodUp);
     }
 
-    public void toggleHood(){
-        hoodUp = !hoodUp;
-        hoodSolenoid.set(hoodUp);
-    }
+    // public void toggleHood(){
+    //     hoodUp = !hoodUp;
+    //     hoodSolenoid.set(hoodUp);
+    // }
     
     public void sendToDashboard() {
         
         // SmartDashboard.putNumber("Theor. RPM", ((determineShooterSpeed(Robot.visionprocessor.getDistance())*Constants.kSHOOTER_MAXSPEED)));
         // SmartDashboard.putNumber("Theor. RPM %", ((determineShooterSpeed(Robot.visionprocessor.getDistance()))));
         // SmartDashboard.putNumber("Shooter RPM", determineShooterSpeed(Robot.visionprocessor.getDistance()));
+        // SmartDashboard.putBoolean("Shooter Hood up", hoodUp);
+        // SmartDashboard.putNumber("Shooter1 velocity", shooterEncoder.getVelocity());
+        // SmartDashboard.putNumber("Shooter2 velocity", shooterEncoder2.getVelocity());
+        // SmartDashboard.putNumber("Shooter target speed", targetSpeed);
+        // SmartDashboard.putNumber("Feeder Has Ball", analogSensor.getPosition());
+        // SmartDashboard.putNumber("Feeder Motor Temp", feederMotor.getMotorTemperature());
         SmartDashboard.putBoolean("Shooter Target Speed Achieved", isShooterAtSpeed());
-        SmartDashboard.putBoolean("Shooter Hood up", hoodUp);
         SmartDashboard.putBoolean("Feeder Preload", preloaded);
-        SmartDashboard.putNumber("Shooter1 velocity", shooterEncoder.getVelocity());
-        SmartDashboard.putNumber("Shooter2 velocity", shooterEncoder2.getVelocity());
-        SmartDashboard.putNumber("Shooter target speed", targetSpeed);
-        SmartDashboard.putNumber("Feeder Has Ball", analogSensor.getPosition());
-        SmartDashboard.putNumber("Feeder Motor Temp", feederMotor.getMotorTemperature());
 
     }
 
     @Override
     protected void initDefaultCommand() {
-        // if (Constants.DEBUG) {
-		// }  
     }
     
 }

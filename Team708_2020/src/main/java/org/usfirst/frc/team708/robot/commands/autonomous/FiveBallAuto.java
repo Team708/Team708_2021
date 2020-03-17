@@ -3,9 +3,9 @@ package org.usfirst.frc.team708.robot.commands.autonomous;
 import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
 import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistanceCommand;
 import org.usfirst.frc.team708.robot.commands.intake.ExtendIntakeCommand;
-import org.usfirst.frc.team708.robot.commands.shooter.feedAutoCommand;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
+// import org.usfirst.frc.team708.robot.commands.shooter.feedAutoCommand;
+// import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
@@ -20,12 +20,12 @@ public class FiveBallAuto extends CommandGroup {
         addParallel(new DriveStraightCommand(180, 0.7));
         addSequential(new StopAtDistanceCommand(120, 5.0));
         
-        addSequential(new WaitCommand(.5));
-        addSequential(new FindTargetCommand());
+        // addSequential(new WaitCommand(.5));
+        // addSequential(new FindTargetCommand());
 
         addSequential(new shootAutoCommand());
-        addSequential(new WaitCommand(3.0));
-        addSequential(new feedAutoCommand());
+        // addSequential(new WaitCommand(3.0));
+        // addSequential(new feedAutoCommand());
 
     }
 

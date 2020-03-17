@@ -12,20 +12,13 @@ public class shootAutoCommandShort extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-
         this.timeout = 5;
-
-        // Robot.intake.unlockHanger();
-        // Robot.spinner.pistonRetract();
-        // Robot.turret.updateAngle();
-        Robot.shooter.moveHoodUp();
-        Robot.shooter.shootAuto();
+        Robot.shooter.shootLong();
     }
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.shooter.feederOn();
-        Robot.shooter.moveHoodUp();
+        Robot.shooter.feederAutoShoot();
     }
 
     // Make this return true when this Command no longer needs to run execute()

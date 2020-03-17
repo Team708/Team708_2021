@@ -1,12 +1,12 @@
 package org.usfirst.frc.team708.robot.commands.autonomous;
 
 import org.usfirst.frc.team708.robot.commands.swerve.DriveStraightCommand;
-import org.usfirst.frc.team708.robot.commands.swerve.RotateinPlaceCommand;
 import org.usfirst.frc.team708.robot.commands.swerve.StopAtDistanceCommand;
 import org.usfirst.frc.team708.robot.commands.intake.ExtendIntakeCommand;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommand;
 import org.usfirst.frc.team708.robot.commands.shooter.shootAutoCommandShort;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
+// import org.usfirst.frc.team708.robot.commands.swerve.RotateinPlaceCommand;
+// import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
@@ -17,23 +17,22 @@ public class EightBallAuto extends CommandGroup {
 
     public EightBallAuto() {
     
-        //BROKEN NEED TO FIX SHOOT COMMAND!!!!!
         addSequential(new ExtendIntakeCommand());
         addSequential(new WaitCommand(1));
         
         addSequential(new DriveStraightCommand(180, 0.7));
         addSequential(new StopAtDistanceCommand(120, 5.0));
  
-        addSequential(new WaitCommand(.5));
-        addSequential(new FindTargetCommand());
+        // addSequential(new WaitCommand(.5));
+        // addSequential(new FindTargetCommand());
 
-        addSequential(new WaitCommand(.5));
+        // addSequential(new WaitCommand(.5));
         addSequential(new shootAutoCommandShort());
         // addSequential(new WaitCommand(1.0));
         
         // addSequential(new RotateinPlaceCommand(10)); //clockwise
         // addSequential(new WaitCommand(1.0));
-        addSequential(new RotateinPlaceCommand(0));  //clockwise
+        // addSequential(new RotateinPlaceCommand(0));  //clockwise
 
         addSequential(new DriveStraightCommand(180, 0.5));
         addSequential(new StopAtDistanceCommand(110, 2.0));
@@ -44,9 +43,9 @@ public class EightBallAuto extends CommandGroup {
         addSequential(new DriveStraightCommand(5, 0.8));
         addSequential(new StopAtDistanceCommand(145, 3.0));
 
-        addSequential(new FindTargetCommand());
+        // addSequential(new FindTargetCommand());
 
-        addSequential(new WaitCommand(.5));
+        // addSequential(new WaitCommand(.5));
         addSequential(new shootAutoCommand());
     }
 

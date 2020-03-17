@@ -10,11 +10,11 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 // import org.usfirst.frc.team708.robot.Constants;
-import org.usfirst.frc.team708.robot.Robot;
+// import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hopper extends Subsystem {
 
@@ -66,8 +66,6 @@ public class Hopper extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        // TODO Auto-generated method stub
-
     }
     
     public void sendToDashboard() {

@@ -100,7 +100,7 @@ public final class Constants {
 	public static final double  kHOODANGLE_FARSHOT		    = 500;
 	public static final double  kHOODANGLE_LONGSHOT		    = 80; //inches
 
-	public static final double	kSHOOTER_WHEELSPEED_LONG	= 3600.0;  //3700//RPM or encode counts?
+	public static final double	kSHOOTER_WHEELSPEED_LONG	= 3900.0;  //3700//RPM or encode counts?
 	public static final double	kSHOOTER_WHEELSPEED_SHORT	= 1850.0;  //RPM or encode counts?
 
 	public static final double kFEEDERMOTORSPEED = 1.0;

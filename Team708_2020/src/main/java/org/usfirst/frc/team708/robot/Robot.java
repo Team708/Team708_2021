@@ -162,6 +162,8 @@ public class Robot extends TimedRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        shooter.findtarget = true;
+
         turret.updateAngle();
         sendStatistics();
     }
@@ -276,8 +278,7 @@ public class Robot extends TimedRobot {
         else if(operator.POV270.wasPressed())
             intake.toColorFromHanger();
         else if(operator.backButton.wasPressed())
-        // shooter.feederFast();
-        shooter.feederUnload();
+            shooter.feederUnload();
         else if(operator.xButton.wasPressed())
             hopper.moveMotorCounterClockwise();
         else if(operator.aButton.wasPressed())
@@ -297,7 +298,7 @@ public class Robot extends TimedRobot {
             if (intake.stopHanger) intake.stopHanger();
          }
         
-        if (intake.inIntakePosition) shooter.feederPreLoad();
+        if (intake.inIntakePosition && !shooter.shooting) shooter.feederPreLoad();
         driver.update();
 
 		if(driver.yButton.wasPressed())
