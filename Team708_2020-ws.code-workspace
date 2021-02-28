@@ -1,7 +1,11 @@
 {
 	"folders": [
 		{
-			"path": "Team708_2020"
+			"path": "Team708_2020-Imported"
 		}
-	]
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.server.launchMode": "Standard"
+	}
 }
